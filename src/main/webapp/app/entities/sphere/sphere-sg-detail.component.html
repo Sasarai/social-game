@@ -1,0 +1,31 @@
+
+<div *ngIf="sphere">
+    <h2><span jhiTranslate="socialGameApp.sphere.detail.title">Sphere</span> {{sphere.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="socialGameApp.sphere.nom">Nom</span></dt>
+        <dd>
+            <span>{{sphere.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.sphere.evenement">Evenement</span></dt>
+        <dd>
+            <div *ngIf="sphere.evenementId">
+                <a [routerLink]="['/evenement-sg', sphere.evenementId]">{{sphere.evenementId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'sphere-sg/'+ sphere.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,43 @@
+
+<div *ngIf="evenement">
+    <h2><span jhiTranslate="socialGameApp.evenement.detail.title">Evenement</span> {{evenement.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="socialGameApp.evenement.date">Date</span></dt>
+        <dd>
+            <span>{{evenement.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.evenement.lieu">Lieu</span></dt>
+        <dd>
+            <span>{{evenement.lieu}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.evenement.dateFinVote">Date Fin Vote</span></dt>
+        <dd>
+            <span>{{evenement.dateFinVote | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.evenement.nom">Nom</span></dt>
+        <dd>
+            <span>{{evenement.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.evenement.vote">Vote</span></dt>
+        <dd>
+            <div *ngIf="evenement.voteId">
+                <a [routerLink]="['/vote-sg', evenement.voteId]">{{evenement.voteId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'evenement-sg/'+ evenement.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

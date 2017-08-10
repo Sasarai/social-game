@@ -1,0 +1,29 @@
+{
+    "socialGameApp": {
+        "jeu" : {
+            "home": {
+                "title": "Jeus",
+                "createLabel": "Create a new Jeu",
+                "createOrEditLabel": "Create or edit a Jeu",
+                "search": "Search for Jeu"
+            },
+            "created": "A new Jeu is created with identifier {{ param }}",
+            "updated": "A Jeu is updated with identifier {{ param }}",
+            "deleted": "A Jeu is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Jeu {{ id }}?"
+            },
+            "detail": {
+                "title": "Jeu"
+            },
+            "nom": "Nom",
+            "nombreJoueurMin": "Nombre Joueur Min",
+            "nombreJoueurMax": "Nombre Joueur Max",
+            "dureeMoyenne": "Duree Moyenne",
+            "description": "Description",
+            "image": "Image",
+            "genre": "Genre",
+            "vote": "Vote"
+        }
+    }
+}

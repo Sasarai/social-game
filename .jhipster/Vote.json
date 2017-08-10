@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "jeu",
+            "otherEntityName": "jeu",
+            "otherEntityRelationshipName": "vote"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "evenement",
+            "otherEntityName": "evenement",
+            "otherEntityRelationshipName": "vote"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nombreVote",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20170806101542",
+    "entityTableName": "vote",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "angularJSSuffix": "sg"
+}

@@ -1,0 +1,98 @@
+<div>
+    <h2>
+        <span jhiTranslate="socialGameApp.jeu.home.title">Jeus</span>
+        <button class="btn btn-primary float-right jh-create-entity create-jeu-sg" [routerLink]="['/', { outlets: { popup: ['jeu-sg-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="socialGameApp.jeu.home.createLabel">
+            Create new Jeu
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'socialGameApp.jeu.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="jeus">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nom"><span jhiTranslate="socialGameApp.jeu.nom">Nom</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nombreJoueurMin"><span jhiTranslate="socialGameApp.jeu.nombreJoueurMin">Nombre Joueur Min</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nombreJoueurMax"><span jhiTranslate="socialGameApp.jeu.nombreJoueurMax">Nombre Joueur Max</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dureeMoyenne"><span jhiTranslate="socialGameApp.jeu.dureeMoyenne">Duree Moyenne</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="description"><span jhiTranslate="socialGameApp.jeu.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="image"><span jhiTranslate="socialGameApp.jeu.image">Image</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="genre"><span jhiTranslate="socialGameApp.jeu.genre">Genre</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="voteId"><span jhiTranslate="socialGameApp.jeu.vote">Vote</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let jeu of jeus ;trackBy: trackId">
+                <td><a [routerLink]="['../jeu-sg', jeu.id ]">{{jeu.id}}</a></td>
+                <td>{{jeu.nom}}</td>
+                <td>{{jeu.nombreJoueurMin}}</td>
+                <td>{{jeu.nombreJoueurMax}}</td>
+                <td>{{jeu.dureeMoyenne}}</td>
+                <td>{{jeu.description}}</td>
+                <td>
+                    <a *ngIf="jeu.image" (click)="openFile(jeu.imageContentType, jeu.image)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="jeu.image">{{jeu.imageContentType}}, {{byteSize(jeu.image)}}</span>
+                </td>
+                <td jhiTranslate="{{'socialGameApp.GenreJeu.' + jeu.genre}}">{{jeu.genre}}</td>
+                <td>
+                    <div *ngIf="jeu.voteId">
+                        <a [routerLink]="['../vote-sg', jeu.voteId  ]" >{{jeu.voteId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../jeu-sg', jeu.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'jeu-sg/'+ jeu.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'jeu-sg/'+ jeu.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="jeus && jeus.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>

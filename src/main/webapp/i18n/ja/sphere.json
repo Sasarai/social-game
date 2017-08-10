@@ -1,0 +1,23 @@
+{
+    "socialGameApp": {
+        "sphere" : {
+            "home": {
+                "title": "Spheres",
+                "createLabel": "Sphere を追加",
+                "createOrEditLabel": "Sphereを追加または編集",
+                "search": "Search for Sphere"
+            },
+            "created": "A new Sphere is created with identifier {{ param }}",
+            "updated": "A Sphere is updated with identifier {{ param }}",
+            "deleted": "A Sphere is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Sphere {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Sphere"
+            },
+            "nom": "Nom",
+            "evenement": "Evenement"
+        }
+    }
+}

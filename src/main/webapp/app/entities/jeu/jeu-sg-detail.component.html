@@ -1,0 +1,58 @@
+
+<div *ngIf="jeu">
+    <h2><span jhiTranslate="socialGameApp.jeu.detail.title">Jeu</span> {{jeu.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="socialGameApp.jeu.nom">Nom</span></dt>
+        <dd>
+            <span>{{jeu.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.jeu.nombreJoueurMin">Nombre Joueur Min</span></dt>
+        <dd>
+            <span>{{jeu.nombreJoueurMin}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.jeu.nombreJoueurMax">Nombre Joueur Max</span></dt>
+        <dd>
+            <span>{{jeu.nombreJoueurMax}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.jeu.dureeMoyenne">Duree Moyenne</span></dt>
+        <dd>
+            <span>{{jeu.dureeMoyenne}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.jeu.description">Description</span></dt>
+        <dd>
+            <span>{{jeu.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.jeu.image">Image</span></dt>
+        <dd>
+            <div *ngIf="jeu.image">
+                <a (click)="openFile(jeu.imageContentType, jeu.image)" jhiTranslate="entity.action.open">open</a>
+                {{jeu.imageContentType}}, {{byteSize(jeu.image)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.jeu.genre">Genre</span></dt>
+        <dd>
+            <span jhiTranslate="{{'socialGameApp.GenreJeu.' + jeu.genre}}">{{jeu.genre}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.jeu.vote">Vote</span></dt>
+        <dd>
+            <div *ngIf="jeu.voteId">
+                <a [routerLink]="['/vote-sg', jeu.voteId]">{{jeu.voteId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'jeu-sg/'+ jeu.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

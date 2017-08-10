@@ -1,0 +1,29 @@
+{
+    "socialGameApp": {
+        "jeu" : {
+            "home": {
+                "title": "Jeus",
+                "createLabel": "Jeu を追加",
+                "createOrEditLabel": "Jeuを追加または編集",
+                "search": "Search for Jeu"
+            },
+            "created": "A new Jeu is created with identifier {{ param }}",
+            "updated": "A Jeu is updated with identifier {{ param }}",
+            "deleted": "A Jeu is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Jeu {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Jeu"
+            },
+            "nom": "Nom",
+            "nombreJoueurMin": "Nombre Joueur Min",
+            "nombreJoueurMax": "Nombre Joueur Max",
+            "dureeMoyenne": "Duree Moyenne",
+            "description": "Description",
+            "image": "Image",
+            "genre": "Genre",
+            "vote": "Vote"
+        }
+    }
+}

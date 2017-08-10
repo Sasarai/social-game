@@ -1,0 +1,114 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Response } from '@angular/http';
+
+import { Observable } from 'rxjs/Rx';
+import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+
+import { EvenementSg } from './evenement-sg.model';
+import { EvenementSgPopupService } from './evenement-sg-popup.service';
+import { EvenementSgService } from './evenement-sg.service';
+import { VoteSg, VoteSgService } from '../vote';
+import { ResponseWrapper } from '../../shared';
+
+@Component({
+    selector: 'jhi-evenement-sg-dialog',
+    templateUrl: './evenement-sg-dialog.component.html'
+})
+export class EvenementSgDialogComponent implements OnInit {
+
+    evenement: EvenementSg;
+    isSaving: boolean;
+
+    votes: VoteSg[];
+
+    constructor(
+        public activeModal: NgbActiveModal,
+        private alertService: JhiAlertService,
+        private evenementService: EvenementSgService,
+        private voteService: VoteSgService,
+        private eventManager: JhiEventManager
+    ) {
+    }
+
+    ngOnInit() {
+        this.isSaving = false;
+        this.voteService.query()
+            .subscribe((res: ResponseWrapper) => { this.votes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+    }
+
+    clear() {
+        this.activeModal.dismiss('cancel');
+    }
+
+    save() {
+        this.isSaving = true;
+        if (this.evenement.id !== undefined) {
+            this.subscribeToSaveResponse(
+                this.evenementService.update(this.evenement));
+        } else {
+            this.subscribeToSaveResponse(
+                this.evenementService.create(this.evenement));
+        }
+    }
+
+    private subscribeToSaveResponse(result: Observable<EvenementSg>) {
+        result.subscribe((res: EvenementSg) =>
+            this.onSaveSuccess(res), (res: Response) => this.onSaveError(res));
+    }
+
+    private onSaveSuccess(result: EvenementSg) {
+        this.eventManager.broadcast({ name: 'evenementListModification', content: 'OK'});
+        this.isSaving = false;
+        this.activeModal.dismiss(result);
+    }
+
+    private onSaveError(error) {
+        try {
+            error.json();
+        } catch (exception) {
+            error.message = error.text();
+        }
+        this.isSaving = false;
+        this.onError(error);
+    }
+
+    private onError(error) {
+        this.alertService.error(error.message, null, null);
+    }
+
+    trackVoteById(index: number, item: VoteSg) {
+        return item.id;
+    }
+}
+
+@Component({
+    selector: 'jhi-evenement-sg-popup',
+    template: ''
+})
+export class EvenementSgPopupComponent implements OnInit, OnDestroy {
+
+    routeSub: any;
+
+    constructor(
+        private route: ActivatedRoute,
+        private evenementPopupService: EvenementSgPopupService
+    ) {}
+
+    ngOnInit() {
+        this.routeSub = this.route.params.subscribe((params) => {
+            if ( params['id'] ) {
+                this.evenementPopupService
+                    .open(EvenementSgDialogComponent as Component, params['id']);
+            } else {
+                this.evenementPopupService
+                    .open(EvenementSgDialogComponent as Component);
+            }
+        });
+    }
+
+    ngOnDestroy() {
+        this.routeSub.unsubscribe();
+    }
+}

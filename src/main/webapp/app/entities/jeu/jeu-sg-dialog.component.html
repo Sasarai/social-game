@@ -1,0 +1,84 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myJeuLabel" jhiTranslate="socialGameApp.jeu.home.createOrEditLabel">Create or edit a Jeu</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!jeu.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="jeu.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socialGameApp.jeu.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="jeu.nom"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socialGameApp.jeu.nombreJoueurMin" for="field_nombreJoueurMin">Nombre Joueur Min</label>
+            <input type="number" class="form-control" name="nombreJoueurMin" id="field_nombreJoueurMin"
+                [(ngModel)]="jeu.nombreJoueurMin"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socialGameApp.jeu.nombreJoueurMax" for="field_nombreJoueurMax">Nombre Joueur Max</label>
+            <input type="number" class="form-control" name="nombreJoueurMax" id="field_nombreJoueurMax"
+                [(ngModel)]="jeu.nombreJoueurMax"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socialGameApp.jeu.dureeMoyenne" for="field_dureeMoyenne">Duree Moyenne</label>
+            <input type="number" class="form-control" name="dureeMoyenne" id="field_dureeMoyenne"
+                [(ngModel)]="jeu.dureeMoyenne"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socialGameApp.jeu.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="jeu.description"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socialGameApp.jeu.image" for="field_image">Image</label>
+            <div>
+                <div *ngIf="jeu.image" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(jeu.imageContentType, jeu.image)" jhiTranslate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{jeu.imageContentType}}, {{byteSize(jeu.image)}}</span>
+                    <button type="button" (click)="jeu.image=null;jeu.imageContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" (change)="setFileData($event, jeu, 'image', false)" jhiTranslate="entity.action.addblob"/>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                [(ngModel)]="jeu.image"  />
+            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                [(ngModel)]="jeu.imageContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="socialGameApp.jeu.genre" for="field_genre">Genre</label>
+            <select class="form-control" name="genre" [(ngModel)]="jeu.genre" id="field_genre" >
+                <option value="COOPERATION" jhiTranslate="socialGameApp.GenreJeu.COOPERATION">COOPERATION</option>
+                <option value="CHACUN_POUR_SOI" jhiTranslate="socialGameApp.GenreJeu.CHACUN_POUR_SOI">CHACUN_POUR_SOI</option>
+                <option value="EN_EQUIPE" jhiTranslate="socialGameApp.GenreJeu.EN_EQUIPE">EN_EQUIPE</option>
+                <option value="HYBRIDE" jhiTranslate="socialGameApp.GenreJeu.HYBRIDE">HYBRIDE</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="socialGameApp.jeu.vote" for="field_vote">Vote</label>
+            <select class="form-control" id="field_vote" name="vote" [(ngModel)]="jeu.voteId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="voteOption.id" *ngFor="let voteOption of votes; trackBy: trackVoteById">{{voteOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

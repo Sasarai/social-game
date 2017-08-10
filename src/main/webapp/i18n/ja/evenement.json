@@ -1,0 +1,27 @@
+{
+    "socialGameApp": {
+        "evenement" : {
+            "home": {
+                "title": "Evenements",
+                "createLabel": "Evenement を追加",
+                "createOrEditLabel": "Evenementを追加または編集",
+                "search": "Search for Evenement"
+            },
+            "created": "A new Evenement is created with identifier {{ param }}",
+            "updated": "A Evenement is updated with identifier {{ param }}",
+            "deleted": "A Evenement is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Evenement {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Evenement"
+            },
+            "date": "Date",
+            "lieu": "Lieu",
+            "dateFinVote": "Date Fin Vote",
+            "nom": "Nom",
+            "sphere": "Sphere",
+            "vote": "Vote"
+        }
+    }
+}

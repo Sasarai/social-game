@@ -1,0 +1,11 @@
+{
+    "socialGameApp": {
+        "GenreJeu" : {
+            "null": "",
+            "COOPERATION": "COOPERATION",
+            "CHACUN_POUR_SOI": "CHACUN_POUR_SOI",
+            "EN_EQUIPE": "EN_EQUIPE",
+            "HYBRIDE": "HYBRIDE"
+        }
+    }
+}

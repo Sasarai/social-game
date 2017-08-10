@@ -1,0 +1,23 @@
+{
+    "socialGameApp": {
+        "sphere" : {
+            "home": {
+                "title": "Spheres",
+                "createLabel": "Create a new Sphere",
+                "createOrEditLabel": "Create or edit a Sphere",
+                "search": "Search for Sphere"
+            },
+            "created": "A new Sphere is created with identifier {{ param }}",
+            "updated": "A Sphere is updated with identifier {{ param }}",
+            "deleted": "A Sphere is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Sphere {{ id }}?"
+            },
+            "detail": {
+                "title": "Sphere"
+            },
+            "nom": "Nom",
+            "evenement": "Evenement"
+        }
+    }
+}

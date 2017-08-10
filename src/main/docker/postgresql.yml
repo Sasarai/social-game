@@ -1,0 +1,11 @@
+version: '2'
+services:
+    socialgame-postgresql:
+        image: postgres:9.6.2
+        # volumes:
+        #     - ~/volumes/jhipster/socialGame/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=socialGame
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

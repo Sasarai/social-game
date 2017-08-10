@@ -1,0 +1,24 @@
+{
+    "socialGameApp": {
+        "vote" : {
+            "home": {
+                "title": "Votes",
+                "createLabel": "Vote を追加",
+                "createOrEditLabel": "Voteを追加または編集",
+                "search": "Search for Vote"
+            },
+            "created": "A new Vote is created with identifier {{ param }}",
+            "updated": "A Vote is updated with identifier {{ param }}",
+            "deleted": "A Vote is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Vote {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Vote"
+            },
+            "nombreVote": "Nombre Vote",
+            "jeu": "Jeu",
+            "evenement": "Evenement"
+        }
+    }
+}

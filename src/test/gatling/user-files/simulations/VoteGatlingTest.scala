@@ -68,7 +68,7 @@ class VoteGatlingTest extends Simulation {
             .exec(http("Create new vote")
             .post("/api/votes")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "nombreVote":null}""")).asJSON
+            .body(StringBody("""{"id":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_vote_url"))).exitHereIfFailed
             .pause(10)

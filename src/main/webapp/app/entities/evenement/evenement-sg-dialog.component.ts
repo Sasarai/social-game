@@ -9,7 +9,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { EvenementSg } from './evenement-sg.model';
 import { EvenementSgPopupService } from './evenement-sg-popup.service';
 import { EvenementSgService } from './evenement-sg.service';
-import { VoteSg, VoteSgService } from '../vote';
+import { JeuSg, JeuSgService } from '../jeu';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -21,21 +21,21 @@ export class EvenementSgDialogComponent implements OnInit {
     evenement: EvenementSg;
     isSaving: boolean;
 
-    votes: VoteSg[];
+    jeus: JeuSg[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: JhiAlertService,
         private evenementService: EvenementSgService,
-        private voteService: VoteSgService,
+        private jeuService: JeuSgService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.voteService.query()
-            .subscribe((res: ResponseWrapper) => { this.votes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.jeuService.query()
+            .subscribe((res: ResponseWrapper) => { this.jeus = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -78,8 +78,19 @@ export class EvenementSgDialogComponent implements OnInit {
         this.alertService.error(error.message, null, null);
     }
 
-    trackVoteById(index: number, item: VoteSg) {
+    trackJeuById(index: number, item: JeuSg) {
         return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }
 

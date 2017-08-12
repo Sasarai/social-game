@@ -6,6 +6,14 @@
             "otherEntityName": "evenement",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "administrateur",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "sphere"
         }
     ],
     "fields": [
@@ -15,9 +23,9 @@
         }
     ],
     "changelogDate": "20170806101541",
-    "entityTableName": "sphere",
     "dto": "mapstruct",
-    "pagination": "pagination",
     "service": "serviceImpl",
+    "entityTableName": "sphere",
+    "pagination": "pagination",
     "angularJSSuffix": "sg"
 }

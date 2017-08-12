@@ -17,6 +17,10 @@ public class SphereDTO implements Serializable {
 
     private Long evenementId;
 
+    private Long administrateurId;
+
+    private String administrateurLogin;
+
     public Long getId() {
         return id;
     }
@@ -39,6 +43,22 @@ public class SphereDTO implements Serializable {
 
     public void setEvenementId(Long evenementId) {
         this.evenementId = evenementId;
+    }
+
+    public Long getAdministrateurId() {
+        return administrateurId;
+    }
+
+    public void setAdministrateurId(Long userId) {
+        this.administrateurId = userId;
+    }
+
+    public String getAdministrateurLogin() {
+        return administrateurLogin;
+    }
+
+    public void setAdministrateurLogin(String userLogin) {
+        this.administrateurLogin = userLogin;
     }
 
     @Override

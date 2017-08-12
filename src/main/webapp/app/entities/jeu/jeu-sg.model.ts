@@ -18,7 +18,9 @@ export class JeuSg implements BaseEntity {
         public imageContentType?: string,
         public image?: any,
         public genre?: GenreJeu,
-        public voteId?: number,
+        public evenements?: BaseEntity[],
+        public votes?: BaseEntity[],
+        public proprietaireId?: number,
     ) {
     }
 }

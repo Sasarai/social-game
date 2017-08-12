@@ -4,9 +4,21 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="socialGameApp.vote.nombreVote">Nombre Vote</span></dt>
+        <dt><span jhiTranslate="socialGameApp.vote.evenement">Evenement</span></dt>
         <dd>
-            <span>{{vote.nombreVote}}</span>
+            <div *ngIf="vote.evenementId">
+                <a [routerLink]="['/evenement-sg', vote.evenementId]">{{vote.evenementNom}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.vote.user">User</span></dt>
+        <dd>
+            {{vote.userLogin}}
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.vote.jeu">Jeu</span></dt>
+        <dd>
+            <div *ngIf="vote.jeuId">
+                <a [routerLink]="['/jeu-sg', vote.jeuId]">{{vote.jeuNom}}</a>
+            </div>
         </dd>
     </dl>
 

@@ -25,40 +25,31 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="jeus">
+    <div class="table-responsive" *ngIf="jeux">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nom"><span jhiTranslate="socialGameApp.jeu.nom">Nom</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nombreJoueurMin"><span jhiTranslate="socialGameApp.jeu.nombreJoueurMin">Nombre Joueur Min</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nombreJoueurMax"><span jhiTranslate="socialGameApp.jeu.nombreJoueurMax">Nombre Joueur Max</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dureeMoyenne"><span jhiTranslate="socialGameApp.jeu.dureeMoyenne">Duree Moyenne</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="description"><span jhiTranslate="socialGameApp.jeu.description">Description</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="image"><span jhiTranslate="socialGameApp.jeu.image">Image</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="genre"><span jhiTranslate="socialGameApp.jeu.genre">Genre</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="voteId"><span jhiTranslate="socialGameApp.jeu.vote">Vote</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let jeu of jeus ;trackBy: trackId">
-                <td><a [routerLink]="['../jeu-sg', jeu.id ]">{{jeu.id}}</a></td>
-                <td>{{jeu.nom}}</td>
+            <tr *ngFor="let jeu of jeux ;trackBy: trackId">
+                <td><a [routerLink]="['../jeu-sg', jeu.id ]">{{jeu.nom}}</a></td>
                 <td>{{jeu.nombreJoueurMin}}</td>
                 <td>{{jeu.nombreJoueurMax}}</td>
-                <td>{{jeu.dureeMoyenne}}</td>
-                <td>{{jeu.description}}</td>
+                <td>{{jeu.dureeMoyenne}} <span jhiTranslate="commun.minute">minutes</span></td>
                 <td>
-                    <a *ngIf="jeu.image" (click)="openFile(jeu.imageContentType, jeu.image)" jhiTranslate="entity.action.open">open</a>
-                    <span *ngIf="jeu.image">{{jeu.imageContentType}}, {{byteSize(jeu.image)}}</span>
+                    <a *ngIf="jeu.image" (click)="openFile(jeu.imageContentType, jeu.image)">
+                        <img [src]="'data:'+ jeu.imageContentType + ';base64,' + jeu.image" style="max-height: 30px;" alt="jeu image"/>
+                    </a>
                 </td>
                 <td jhiTranslate="{{'socialGameApp.GenreJeu.' + jeu.genre}}">{{jeu.genre}}</td>
-                <td>
-                    <div *ngIf="jeu.voteId">
-                        <a [routerLink]="['../vote-sg', jeu.voteId  ]" >{{jeu.voteId}}</a>
-                    </div>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -87,7 +78,7 @@
             </tbody>
         </table>
     </div>
-        <div *ngIf="jeus && jeus.length">
+        <div *ngIf="jeux && jeux.length">
             <div class="row justify-content-center">
                 <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
             </div>

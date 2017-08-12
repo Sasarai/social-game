@@ -12,19 +12,19 @@
         <dd>
             <span>{{evenement.lieu}}</span>
         </dd>
-        <dt><span jhiTranslate="socialGameApp.evenement.dateFinVote">Date Fin Vote</span></dt>
-        <dd>
-            <span>{{evenement.dateFinVote | date:'medium'}}</span>
-        </dd>
         <dt><span jhiTranslate="socialGameApp.evenement.nom">Nom</span></dt>
         <dd>
             <span>{{evenement.nom}}</span>
         </dd>
-        <dt><span jhiTranslate="socialGameApp.evenement.vote">Vote</span></dt>
+        <dt><span jhiTranslate="socialGameApp.evenement.dateFinVote">Date Fin Vote</span></dt>
         <dd>
-            <div *ngIf="evenement.voteId">
-                <a [routerLink]="['/vote-sg', evenement.voteId]">{{evenement.voteId}}</a>
-            </div>
+            <span>{{evenement.dateFinVote | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.evenement.jeux">Jeux</span></dt>
+        <dd>
+            <span *ngFor="let jeux of evenement.jeuxes; let last = last">
+                <a [routerLink]="['/jeu-sg', jeux?.id ]">{{jeux.nom}}</a>{{last ? '' : ', '}}
+            </span>
         </dd>
     </dl>
 

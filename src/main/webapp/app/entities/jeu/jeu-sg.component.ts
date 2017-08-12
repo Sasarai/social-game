@@ -15,7 +15,7 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 export class JeuSgComponent implements OnInit, OnDestroy {
 
 currentAccount: any;
-    jeus: JeuSg[];
+    jeux: JeuSg[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -151,7 +151,7 @@ currentAccount: any;
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
-        this.jeus = data;
+        this.jeux = data;
     }
     private onError(error) {
         this.alertService.error(error.message, null, null);

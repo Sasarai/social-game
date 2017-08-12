@@ -52,11 +52,11 @@ public class EvenementResourceIntTest {
     private static final String DEFAULT_LIEU = "AAAAAAAAAA";
     private static final String UPDATED_LIEU = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_DATE_FIN_VOTE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_FIN_VOTE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-
     private static final String DEFAULT_NOM = "AAAAAAAAAA";
     private static final String UPDATED_NOM = "BBBBBBBBBB";
+
+    private static final ZonedDateTime DEFAULT_DATE_FIN_VOTE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_DATE_FIN_VOTE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private EvenementRepository evenementRepository;
@@ -106,8 +106,8 @@ public class EvenementResourceIntTest {
         Evenement evenement = new Evenement()
             .date(DEFAULT_DATE)
             .lieu(DEFAULT_LIEU)
-            .dateFinVote(DEFAULT_DATE_FIN_VOTE)
-            .nom(DEFAULT_NOM);
+            .nom(DEFAULT_NOM)
+            .dateFinVote(DEFAULT_DATE_FIN_VOTE);
         return evenement;
     }
 
@@ -135,8 +135,8 @@ public class EvenementResourceIntTest {
         Evenement testEvenement = evenementList.get(evenementList.size() - 1);
         assertThat(testEvenement.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testEvenement.getLieu()).isEqualTo(DEFAULT_LIEU);
-        assertThat(testEvenement.getDateFinVote()).isEqualTo(DEFAULT_DATE_FIN_VOTE);
         assertThat(testEvenement.getNom()).isEqualTo(DEFAULT_NOM);
+        assertThat(testEvenement.getDateFinVote()).isEqualTo(DEFAULT_DATE_FIN_VOTE);
 
         // Validate the Evenement in Elasticsearch
         Evenement evenementEs = evenementSearchRepository.findOne(testEvenement.getId());
@@ -176,8 +176,8 @@ public class EvenementResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(evenement.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))))
             .andExpect(jsonPath("$.[*].lieu").value(hasItem(DEFAULT_LIEU.toString())))
-            .andExpect(jsonPath("$.[*].dateFinVote").value(hasItem(sameInstant(DEFAULT_DATE_FIN_VOTE))))
-            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())));
+            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
+            .andExpect(jsonPath("$.[*].dateFinVote").value(hasItem(sameInstant(DEFAULT_DATE_FIN_VOTE))));
     }
 
     @Test
@@ -193,8 +193,8 @@ public class EvenementResourceIntTest {
             .andExpect(jsonPath("$.id").value(evenement.getId().intValue()))
             .andExpect(jsonPath("$.date").value(sameInstant(DEFAULT_DATE)))
             .andExpect(jsonPath("$.lieu").value(DEFAULT_LIEU.toString()))
-            .andExpect(jsonPath("$.dateFinVote").value(sameInstant(DEFAULT_DATE_FIN_VOTE)))
-            .andExpect(jsonPath("$.nom").value(DEFAULT_NOM.toString()));
+            .andExpect(jsonPath("$.nom").value(DEFAULT_NOM.toString()))
+            .andExpect(jsonPath("$.dateFinVote").value(sameInstant(DEFAULT_DATE_FIN_VOTE)));
     }
 
     @Test
@@ -218,8 +218,8 @@ public class EvenementResourceIntTest {
         updatedEvenement
             .date(UPDATED_DATE)
             .lieu(UPDATED_LIEU)
-            .dateFinVote(UPDATED_DATE_FIN_VOTE)
-            .nom(UPDATED_NOM);
+            .nom(UPDATED_NOM)
+            .dateFinVote(UPDATED_DATE_FIN_VOTE);
         EvenementDTO evenementDTO = evenementMapper.toDto(updatedEvenement);
 
         restEvenementMockMvc.perform(put("/api/evenements")
@@ -233,8 +233,8 @@ public class EvenementResourceIntTest {
         Evenement testEvenement = evenementList.get(evenementList.size() - 1);
         assertThat(testEvenement.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testEvenement.getLieu()).isEqualTo(UPDATED_LIEU);
-        assertThat(testEvenement.getDateFinVote()).isEqualTo(UPDATED_DATE_FIN_VOTE);
         assertThat(testEvenement.getNom()).isEqualTo(UPDATED_NOM);
+        assertThat(testEvenement.getDateFinVote()).isEqualTo(UPDATED_DATE_FIN_VOTE);
 
         // Validate the Evenement in Elasticsearch
         Evenement evenementEs = evenementSearchRepository.findOne(testEvenement.getId());
@@ -296,8 +296,8 @@ public class EvenementResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(evenement.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))))
             .andExpect(jsonPath("$.[*].lieu").value(hasItem(DEFAULT_LIEU.toString())))
-            .andExpect(jsonPath("$.[*].dateFinVote").value(hasItem(sameInstant(DEFAULT_DATE_FIN_VOTE))))
-            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())));
+            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
+            .andExpect(jsonPath("$.[*].dateFinVote").value(hasItem(sameInstant(DEFAULT_DATE_FIN_VOTE))));
     }
 
     @Test

@@ -77,7 +77,7 @@ public class EvenementServiceImpl implements EvenementService{
     @Transactional(readOnly = true)
     public EvenementDTO findOne(Long id) {
         log.debug("Request to get Evenement : {}", id);
-        Evenement evenement = evenementRepository.findOne(id);
+        Evenement evenement = evenementRepository.findOneWithEagerRelationships(id);
         return evenementMapper.toDto(evenement);
     }
 

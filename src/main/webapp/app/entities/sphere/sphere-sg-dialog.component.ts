@@ -10,6 +10,7 @@ import { SphereSg } from './sphere-sg.model';
 import { SphereSgPopupService } from './sphere-sg-popup.service';
 import { SphereSgService } from './sphere-sg.service';
 import { EvenementSg, EvenementSgService } from '../evenement';
+import { User, UserService } from '../../shared';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -23,11 +24,14 @@ export class SphereSgDialogComponent implements OnInit {
 
     evenements: EvenementSg[];
 
+    users: User[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: JhiAlertService,
         private sphereService: SphereSgService,
         private evenementService: EvenementSgService,
+        private userService: UserService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -36,6 +40,8 @@ export class SphereSgDialogComponent implements OnInit {
         this.isSaving = false;
         this.evenementService.query()
             .subscribe((res: ResponseWrapper) => { this.evenements = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.userService.query()
+            .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -79,6 +85,10 @@ export class SphereSgDialogComponent implements OnInit {
     }
 
     trackEvenementById(index: number, item: EvenementSg) {
+        return item.id;
+    }
+
+    trackUserById(index: number, item: User) {
         return item.id;
     }
 }

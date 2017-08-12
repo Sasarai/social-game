@@ -5,6 +5,7 @@ export class SphereSg implements BaseEntity {
         public id?: number,
         public nom?: string,
         public evenementId?: number,
+        public administrateurId?: number,
     ) {
     }
 }

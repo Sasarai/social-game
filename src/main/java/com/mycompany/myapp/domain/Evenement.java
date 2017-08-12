@@ -34,19 +34,28 @@ public class Evenement implements Serializable {
     @Column(name = "lieu")
     private String lieu;
 
-    @Column(name = "date_fin_vote")
-    private ZonedDateTime dateFinVote;
-
     @Column(name = "nom")
     private String nom;
+
+    @Column(name = "date_fin_vote")
+    private ZonedDateTime dateFinVote;
 
     @OneToMany(mappedBy = "evenement")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Sphere> spheres = new HashSet<>();
 
-    @ManyToOne
-    private Vote vote;
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "evenement_jeux",
+               joinColumns = @JoinColumn(name="evenements_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="jeuxes_id", referencedColumnName="id"))
+    private Set<Jeu> jeuxes = new HashSet<>();
+
+    @OneToMany(mappedBy = "evenement")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Vote> votes = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -82,19 +91,6 @@ public class Evenement implements Serializable {
         this.lieu = lieu;
     }
 
-    public ZonedDateTime getDateFinVote() {
-        return dateFinVote;
-    }
-
-    public Evenement dateFinVote(ZonedDateTime dateFinVote) {
-        this.dateFinVote = dateFinVote;
-        return this;
-    }
-
-    public void setDateFinVote(ZonedDateTime dateFinVote) {
-        this.dateFinVote = dateFinVote;
-    }
-
     public String getNom() {
         return nom;
     }
@@ -106,6 +102,19 @@ public class Evenement implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public ZonedDateTime getDateFinVote() {
+        return dateFinVote;
+    }
+
+    public Evenement dateFinVote(ZonedDateTime dateFinVote) {
+        this.dateFinVote = dateFinVote;
+        return this;
+    }
+
+    public void setDateFinVote(ZonedDateTime dateFinVote) {
+        this.dateFinVote = dateFinVote;
     }
 
     public Set<Sphere> getSpheres() {
@@ -133,17 +142,54 @@ public class Evenement implements Serializable {
         this.spheres = spheres;
     }
 
-    public Vote getVote() {
-        return vote;
+    public Set<Jeu> getJeuxes() {
+        return jeuxes;
     }
 
-    public Evenement vote(Vote vote) {
-        this.vote = vote;
+    public Evenement jeuxes(Set<Jeu> jeus) {
+        this.jeuxes = jeus;
         return this;
     }
 
-    public void setVote(Vote vote) {
-        this.vote = vote;
+    public Evenement addJeux(Jeu jeu) {
+        this.jeuxes.add(jeu);
+        jeu.getEvenements().add(this);
+        return this;
+    }
+
+    public Evenement removeJeux(Jeu jeu) {
+        this.jeuxes.remove(jeu);
+        jeu.getEvenements().remove(this);
+        return this;
+    }
+
+    public void setJeuxes(Set<Jeu> jeus) {
+        this.jeuxes = jeus;
+    }
+
+    public Set<Vote> getVotes() {
+        return votes;
+    }
+
+    public Evenement votes(Set<Vote> votes) {
+        this.votes = votes;
+        return this;
+    }
+
+    public Evenement addVotes(Vote vote) {
+        this.votes.add(vote);
+        vote.setEvenement(this);
+        return this;
+    }
+
+    public Evenement removeVotes(Vote vote) {
+        this.votes.remove(vote);
+        vote.setEvenement(null);
+        return this;
+    }
+
+    public void setVotes(Set<Vote> votes) {
+        this.votes = votes;
     }
 
     @Override
@@ -172,8 +218,8 @@ public class Evenement implements Serializable {
             "id=" + getId() +
             ", date='" + getDate() + "'" +
             ", lieu='" + getLieu() + "'" +
-            ", dateFinVote='" + getDateFinVote() + "'" +
             ", nom='" + getNom() + "'" +
+            ", dateFinVote='" + getDateFinVote() + "'" +
             "}";
     }
 }

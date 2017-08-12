@@ -30,14 +30,28 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="nombreVote"><span jhiTranslate="socialGameApp.vote.nombreVote">Nombre Vote</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="evenementNom"><span jhiTranslate="socialGameApp.vote.evenement">Evenement</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="userLogin"><span jhiTranslate="socialGameApp.vote.user">User</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="jeuNom"><span jhiTranslate="socialGameApp.vote.jeu">Jeu</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let vote of votes ;trackBy: trackId">
                 <td><a [routerLink]="['../vote-sg', vote.id ]">{{vote.id}}</a></td>
-                <td>{{vote.nombreVote}}</td>
+                <td>
+                    <div *ngIf="vote.evenementId">
+                        <a [routerLink]="['../evenement-sg', vote.evenementId  ]" >{{vote.evenementNom}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{vote.userLogin}}
+                </td>
+                <td>
+                    <div *ngIf="vote.jeuId">
+                        <a [routerLink]="['../jeu-sg', vote.jeuId  ]" >{{vote.jeuNom}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

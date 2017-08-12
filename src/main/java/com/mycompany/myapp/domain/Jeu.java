@@ -1,11 +1,14 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 import com.mycompany.myapp.domain.enumeration.GenreJeu;
@@ -52,8 +55,18 @@ public class Jeu implements Serializable {
     @Column(name = "genre")
     private GenreJeu genre;
 
+    @ManyToMany(mappedBy = "jeuxes")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Evenement> evenements = new HashSet<>();
+
+    @OneToMany(mappedBy = "jeux")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Vote> votes = new HashSet<>();
+
     @ManyToOne
-    private Vote vote;
+    private User proprietaire;
 
     public Long getId() {
         return id;
@@ -167,17 +180,67 @@ public class Jeu implements Serializable {
         this.genre = genre;
     }
 
-    public Vote getVote() {
-        return vote;
+    public Set<Evenement> getEvenements() {
+        return evenements;
     }
 
-    public Jeu vote(Vote vote) {
-        this.vote = vote;
+    public Jeu evenements(Set<Evenement> evenements) {
+        this.evenements = evenements;
         return this;
     }
 
-    public void setVote(Vote vote) {
-        this.vote = vote;
+    public Jeu addEvenements(Evenement evenement) {
+        this.evenements.add(evenement);
+        evenement.getJeuxes().add(this);
+        return this;
+    }
+
+    public Jeu removeEvenements(Evenement evenement) {
+        this.evenements.remove(evenement);
+        evenement.getJeuxes().remove(this);
+        return this;
+    }
+
+    public void setEvenements(Set<Evenement> evenements) {
+        this.evenements = evenements;
+    }
+
+    public Set<Vote> getVotes() {
+        return votes;
+    }
+
+    public Jeu votes(Set<Vote> votes) {
+        this.votes = votes;
+        return this;
+    }
+
+    public Jeu addVotes(Vote vote) {
+        this.votes.add(vote);
+        vote.setJeu(this);
+        return this;
+    }
+
+    public Jeu removeVotes(Vote vote) {
+        this.votes.remove(vote);
+        vote.setJeu(null);
+        return this;
+    }
+
+    public void setVotes(Set<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public User getProprietaire() {
+        return proprietaire;
+    }
+
+    public Jeu proprietaire(User user) {
+        this.proprietaire = user;
+        return this;
+    }
+
+    public void setProprietaire(User user) {
+        this.proprietaire = user;
     }
 
     @Override

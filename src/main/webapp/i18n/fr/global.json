@@ -90,6 +90,9 @@
         },
         "item-count": "Affichage {{first}} - {{second}} de {{total}} items."
     },
+    "commun": {
+        "minute": "minutes"
+    },
     "entity": {
         "action": {
             "addblob": "Ajouter blob",

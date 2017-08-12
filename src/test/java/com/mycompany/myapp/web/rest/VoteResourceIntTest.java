@@ -3,6 +3,9 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.SocialGameApp;
 
 import com.mycompany.myapp.domain.Vote;
+import com.mycompany.myapp.domain.Evenement;
+import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.domain.Jeu;
 import com.mycompany.myapp.repository.VoteRepository;
 import com.mycompany.myapp.service.VoteService;
 import com.mycompany.myapp.repository.search.VoteSearchRepository;
@@ -40,9 +43,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SocialGameApp.class)
 public class VoteResourceIntTest {
-
-    private static final Double DEFAULT_NOMBRE_VOTE = 1D;
-    private static final Double UPDATED_NOMBRE_VOTE = 2D;
 
     @Autowired
     private VoteRepository voteRepository;
@@ -89,8 +89,22 @@ public class VoteResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Vote createEntity(EntityManager em) {
-        Vote vote = new Vote()
-            .nombreVote(DEFAULT_NOMBRE_VOTE);
+        Vote vote = new Vote();
+        // Add required entity
+        Evenement evenement = EvenementResourceIntTest.createEntity(em);
+        em.persist(evenement);
+        em.flush();
+        vote.setEvenement(evenement);
+        // Add required entity
+        User user = UserResourceIntTest.createEntity(em);
+        em.persist(user);
+        em.flush();
+        vote.setUser(user);
+        // Add required entity
+        Jeu jeu = JeuResourceIntTest.createEntity(em);
+        em.persist(jeu);
+        em.flush();
+        vote.setJeu(jeu);
         return vote;
     }
 
@@ -116,7 +130,6 @@ public class VoteResourceIntTest {
         List<Vote> voteList = voteRepository.findAll();
         assertThat(voteList).hasSize(databaseSizeBeforeCreate + 1);
         Vote testVote = voteList.get(voteList.size() - 1);
-        assertThat(testVote.getNombreVote()).isEqualTo(DEFAULT_NOMBRE_VOTE);
 
         // Validate the Vote in Elasticsearch
         Vote voteEs = voteSearchRepository.findOne(testVote.getId());
@@ -153,8 +166,7 @@ public class VoteResourceIntTest {
         restVoteMockMvc.perform(get("/api/votes?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(vote.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nombreVote").value(hasItem(DEFAULT_NOMBRE_VOTE.doubleValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(vote.getId().intValue())));
     }
 
     @Test
@@ -167,8 +179,7 @@ public class VoteResourceIntTest {
         restVoteMockMvc.perform(get("/api/votes/{id}", vote.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(vote.getId().intValue()))
-            .andExpect(jsonPath("$.nombreVote").value(DEFAULT_NOMBRE_VOTE.doubleValue()));
+            .andExpect(jsonPath("$.id").value(vote.getId().intValue()));
     }
 
     @Test
@@ -189,8 +200,6 @@ public class VoteResourceIntTest {
 
         // Update the vote
         Vote updatedVote = voteRepository.findOne(vote.getId());
-        updatedVote
-            .nombreVote(UPDATED_NOMBRE_VOTE);
         VoteDTO voteDTO = voteMapper.toDto(updatedVote);
 
         restVoteMockMvc.perform(put("/api/votes")
@@ -202,7 +211,6 @@ public class VoteResourceIntTest {
         List<Vote> voteList = voteRepository.findAll();
         assertThat(voteList).hasSize(databaseSizeBeforeUpdate);
         Vote testVote = voteList.get(voteList.size() - 1);
-        assertThat(testVote.getNombreVote()).isEqualTo(UPDATED_NOMBRE_VOTE);
 
         // Validate the Vote in Elasticsearch
         Vote voteEs = voteSearchRepository.findOne(testVote.getId());
@@ -261,8 +269,7 @@ public class VoteResourceIntTest {
         restVoteMockMvc.perform(get("/api/_search/votes?query=id:" + vote.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(vote.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nombreVote").value(hasItem(DEFAULT_NOMBRE_VOTE.doubleValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(vote.getId().intValue())));
     }
 
     @Test

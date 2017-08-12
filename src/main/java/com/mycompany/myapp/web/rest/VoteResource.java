@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class VoteResource {
      */
     @PostMapping("/votes")
     @Timed
-    public ResponseEntity<VoteDTO> createVote(@RequestBody VoteDTO voteDTO) throws URISyntaxException {
+    public ResponseEntity<VoteDTO> createVote(@Valid @RequestBody VoteDTO voteDTO) throws URISyntaxException {
         log.debug("REST request to save Vote : {}", voteDTO);
         if (voteDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new vote cannot already have an ID")).body(null);
@@ -73,7 +74,7 @@ public class VoteResource {
      */
     @PutMapping("/votes")
     @Timed
-    public ResponseEntity<VoteDTO> updateVote(@RequestBody VoteDTO voteDTO) throws URISyntaxException {
+    public ResponseEntity<VoteDTO> updateVote(@Valid @RequestBody VoteDTO voteDTO) throws URISyntaxException {
         log.debug("REST request to update Vote : {}", voteDTO);
         if (voteDTO.getId() == null) {
             return createVote(voteDTO);

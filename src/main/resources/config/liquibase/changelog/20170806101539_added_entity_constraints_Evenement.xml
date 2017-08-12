@@ -8,11 +8,16 @@
     -->
     <changeSet id="20170806101539-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="vote_id"
-                                 baseTableName="evenement"
-                                 constraintName="fk_evenement_vote_id"
+        <addForeignKeyConstraint baseColumnNames="evenements_id"
+                                 baseTableName="evenement_jeux"
+                                 constraintName="fk_evenement_jeux_evenements_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="vote"/>
-
+                                 referencedTableName="evenement"/>
+        <addForeignKeyConstraint baseColumnNames="jeuxes_id"
+                                 baseTableName="evenement_jeux"
+                                 constraintName="fk_evenement_jeux_jeuxes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jeu"/>
+        
     </changeSet>
 </databaseChangeLog>

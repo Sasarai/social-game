@@ -1,6 +1,7 @@
 package com.mycompany.myapp.service.dto;
 
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +14,17 @@ public class VoteDTO implements Serializable {
 
     private Long id;
 
-    private Double nombreVote;
+    private Long evenementId;
+
+    private String evenementNom;
+
+    private Long userId;
+
+    private String userLogin;
+
+    private Long jeuId;
+
+    private String jeuNom;
 
     public Long getId() {
         return id;
@@ -23,12 +34,52 @@ public class VoteDTO implements Serializable {
         this.id = id;
     }
 
-    public Double getNombreVote() {
-        return nombreVote;
+    public Long getEvenementId() {
+        return evenementId;
     }
 
-    public void setNombreVote(Double nombreVote) {
-        this.nombreVote = nombreVote;
+    public void setEvenementId(Long evenementId) {
+        this.evenementId = evenementId;
+    }
+
+    public String getEvenementNom() {
+        return evenementNom;
+    }
+
+    public void setEvenementNom(String evenementNom) {
+        this.evenementNom = evenementNom;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
+    public Long getJeuId() {
+        return jeuId;
+    }
+
+    public void setJeuId(Long jeuId) {
+        this.jeuId = jeuId;
+    }
+
+    public String getJeuNom() {
+        return jeuNom;
+    }
+
+    public void setJeuNom(String jeuNom) {
+        this.jeuNom = jeuNom;
     }
 
     @Override
@@ -56,7 +107,6 @@ public class VoteDTO implements Serializable {
     public String toString() {
         return "VoteDTO{" +
             "id=" + getId() +
-            ", nombreVote='" + getNombreVote() + "'" +
             "}";
     }
 }

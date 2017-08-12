@@ -12,12 +12,43 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="vote.id" readonly />
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="socialGameApp.vote.nombreVote" for="field_nombreVote">Nombre Vote</label>
-            <input type="number" class="form-control" name="nombreVote" id="field_nombreVote"
-                [(ngModel)]="vote.nombreVote"  />
-        </div>
 
+        <div class="form-group">
+            <label jhiTranslate="socialGameApp.vote.evenement" for="field_evenement">Evenement</label>
+            <select class="form-control" id="field_evenement" name="evenement" [(ngModel)]="vote.evenementId"  required>
+                <option [ngValue]="evenementOption.id" *ngFor="let evenementOption of evenements; trackBy: trackEvenementById">{{evenementOption.nom}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.evenement?.dirty && editForm.controls.evenement?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.evenement?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="socialGameApp.vote.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="vote.userId"  required>
+                <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.user?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="socialGameApp.vote.jeu" for="field_jeu">Jeu</label>
+            <select class="form-control" id="field_jeu" name="jeu" [(ngModel)]="vote.jeuId"  required>
+                <option [ngValue]="jeuOption.id" *ngFor="let jeuOption of jeus; trackBy: trackJeuById">{{jeuOption.nom}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.jeu?.dirty && editForm.controls.jeu?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.jeu?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">

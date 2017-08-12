@@ -32,9 +32,8 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="date"><span jhiTranslate="socialGameApp.evenement.date">Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lieu"><span jhiTranslate="socialGameApp.evenement.lieu">Lieu</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="dateFinVote"><span jhiTranslate="socialGameApp.evenement.dateFinVote">Date Fin Vote</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nom"><span jhiTranslate="socialGameApp.evenement.nom">Nom</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="voteId"><span jhiTranslate="socialGameApp.evenement.vote">Vote</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dateFinVote"><span jhiTranslate="socialGameApp.evenement.dateFinVote">Date Fin Vote</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -43,13 +42,8 @@
                 <td><a [routerLink]="['../evenement-sg', evenement.id ]">{{evenement.id}}</a></td>
                 <td>{{evenement.date | date:'medium'}}</td>
                 <td>{{evenement.lieu}}</td>
-                <td>{{evenement.dateFinVote | date:'medium'}}</td>
                 <td>{{evenement.nom}}</td>
-                <td>
-                    <div *ngIf="evenement.voteId">
-                        <a [routerLink]="['../vote-sg', evenement.voteId  ]" >{{evenement.voteId}}</a>
-                    </div>
-                </td>
+                <td>{{evenement.dateFinVote | date:'medium'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

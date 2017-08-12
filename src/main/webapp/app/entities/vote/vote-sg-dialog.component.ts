@@ -9,6 +9,10 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { VoteSg } from './vote-sg.model';
 import { VoteSgPopupService } from './vote-sg-popup.service';
 import { VoteSgService } from './vote-sg.service';
+import { EvenementSg, EvenementSgService } from '../evenement';
+import { User, UserService } from '../../shared';
+import { JeuSg, JeuSgService } from '../jeu';
+import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-vote-sg-dialog',
@@ -19,16 +23,31 @@ export class VoteSgDialogComponent implements OnInit {
     vote: VoteSg;
     isSaving: boolean;
 
+    evenements: EvenementSg[];
+
+    users: User[];
+
+    jeus: JeuSg[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: JhiAlertService,
         private voteService: VoteSgService,
+        private evenementService: EvenementSgService,
+        private userService: UserService,
+        private jeuService: JeuSgService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.evenementService.query()
+            .subscribe((res: ResponseWrapper) => { this.evenements = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.userService.query()
+            .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.jeuService.query()
+            .subscribe((res: ResponseWrapper) => { this.jeus = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -69,6 +88,18 @@ export class VoteSgDialogComponent implements OnInit {
 
     private onError(error) {
         this.alertService.error(error.message, null, null);
+    }
+
+    trackEvenementById(index: number, item: EvenementSg) {
+        return item.id;
+    }
+
+    trackUserById(index: number, item: User) {
+        return item.id;
+    }
+
+    trackJeuById(index: number, item: JeuSg) {
+        return item.id;
     }
 }
 

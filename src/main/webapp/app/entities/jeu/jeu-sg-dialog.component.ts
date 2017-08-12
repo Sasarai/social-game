@@ -9,7 +9,8 @@ import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { JeuSg } from './jeu-sg.model';
 import { JeuSgPopupService } from './jeu-sg-popup.service';
 import { JeuSgService } from './jeu-sg.service';
-import { VoteSg, VoteSgService } from '../vote';
+import { EvenementSg, EvenementSgService } from '../evenement';
+import { User, UserService } from '../../shared';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -21,22 +22,27 @@ export class JeuSgDialogComponent implements OnInit {
     jeu: JeuSg;
     isSaving: boolean;
 
-    votes: VoteSg[];
+    evenements: EvenementSg[];
+
+    users: User[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private dataUtils: JhiDataUtils,
         private alertService: JhiAlertService,
         private jeuService: JeuSgService,
-        private voteService: VoteSgService,
+        private evenementService: EvenementSgService,
+        private userService: UserService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.voteService.query()
-            .subscribe((res: ResponseWrapper) => { this.votes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.evenementService.query()
+            .subscribe((res: ResponseWrapper) => { this.evenements = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.userService.query()
+            .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     byteSize(field) {
@@ -100,8 +106,23 @@ export class JeuSgDialogComponent implements OnInit {
         this.alertService.error(error.message, null, null);
     }
 
-    trackVoteById(index: number, item: VoteSg) {
+    trackEvenementById(index: number, item: EvenementSg) {
         return item.id;
+    }
+
+    trackUserById(index: number, item: User) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }
 

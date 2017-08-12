@@ -2,10 +2,25 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "vote",
+            "relationshipName": "evenements",
+            "otherEntityName": "evenement",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "jeux"
+        },
+        {
+            "relationshipName": "votes",
             "otherEntityName": "vote",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "jeux"
+        },
+        {
+            "relationshipName": "proprietaire",
+            "otherEntityName": "user",
             "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "jeu"
         }
     ],
     "fields": [
@@ -41,9 +56,9 @@
         }
     ],
     "changelogDate": "20170806101540",
-    "entityTableName": "jeu",
     "dto": "mapstruct",
-    "pagination": "pagination",
     "service": "serviceImpl",
+    "entityTableName": "jeu",
+    "pagination": "pagination",
     "angularJSSuffix": "sg"
 }

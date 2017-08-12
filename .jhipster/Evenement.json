@@ -8,10 +8,18 @@
             "otherEntityRelationshipName": "evenement"
         },
         {
-            "relationshipName": "vote",
+            "relationshipName": "jeux",
+            "otherEntityName": "jeu",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "nom",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "evenements"
+        },
+        {
+            "relationshipName": "votes",
             "otherEntityName": "vote",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "evenement"
         }
     ],
     "fields": [
@@ -24,18 +32,18 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "dateFinVote",
-            "fieldType": "ZonedDateTime"
-        },
-        {
             "fieldName": "nom",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "dateFinVote",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "changelogDate": "20170806101539",
-    "entityTableName": "evenement",
     "dto": "mapstruct",
-    "pagination": "pagination",
     "service": "serviceImpl",
+    "entityTableName": "evenement",
+    "pagination": "pagination",
     "angularJSSuffix": "sg"
 }

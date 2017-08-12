@@ -18,10 +18,11 @@
             },
             "date": "Date",
             "lieu": "Lieu",
-            "dateFinVote": "Date Fin Vote",
             "nom": "Nom",
+            "dateFinVote": "Date Fin Vote",
             "sphere": "Sphere",
-            "vote": "Vote"
+            "jeux": "Jeux",
+            "votes": "Votes"
         }
     }
 }

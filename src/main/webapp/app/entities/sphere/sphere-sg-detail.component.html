@@ -14,6 +14,10 @@
                 <a [routerLink]="['/evenement-sg', sphere.evenementId]">{{sphere.evenementId}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="socialGameApp.sphere.administrateur">Administrateur</span></dt>
+        <dd>
+            {{sphere.administrateurLogin}}
+        </dd>
     </dl>
 
     <button type="submit"

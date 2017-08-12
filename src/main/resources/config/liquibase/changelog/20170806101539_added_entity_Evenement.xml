@@ -29,15 +29,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="date_fin_vote" type="timestamp">
-                <constraints nullable="true" />
-            </column>
-
             <column name="nom" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="vote_id" type="bigint">
+            <column name="date_fin_vote" type="timestamp">
                 <constraints nullable="true" />
             </column>
 
@@ -45,6 +41,17 @@
         </createTable>
         <dropDefaultValue tableName="evenement" columnName="jhi_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="evenement" columnName="date_fin_vote" columnDataType="datetime"/>
+        
+        <createTable tableName="evenement_jeux">
+            <column name="jeuxes_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="evenements_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="evenements_id, jeuxes_id" tableName="evenement_jeux"/>
         
     </changeSet>
 </databaseChangeLog>

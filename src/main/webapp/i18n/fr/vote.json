@@ -16,9 +16,9 @@
             "detail": {
                 "title": "Vote"
             },
-            "nombreVote": "Nombre Vote",
-            "jeu": "Jeu",
-            "evenement": "Evenement"
+            "evenement": "Evenement",
+            "user": "User",
+            "jeu": "Jeu"
         }
     }
 }

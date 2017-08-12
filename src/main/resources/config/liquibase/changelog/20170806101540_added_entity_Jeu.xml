@@ -52,7 +52,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="vote_id" type="bigint">
+            <column name="proprietaire_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

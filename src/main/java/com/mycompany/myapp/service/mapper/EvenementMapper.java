@@ -8,14 +8,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Evenement and its DTO EvenementDTO.
  */
-@Mapper(componentModel = "spring", uses = {VoteMapper.class, })
+@Mapper(componentModel = "spring", uses = {JeuMapper.class, })
 public interface EvenementMapper extends EntityMapper <EvenementDTO, Evenement> {
-
-    @Mapping(source = "vote.id", target = "voteId")
-    EvenementDTO toDto(Evenement evenement); 
+    
     @Mapping(target = "spheres", ignore = true)
-
-    @Mapping(source = "voteId", target = "vote")
+    @Mapping(target = "votes", ignore = true)
     Evenement toEntity(EvenementDTO evenementDTO); 
     default Evenement fromId(Long id) {
         if (id == null) {

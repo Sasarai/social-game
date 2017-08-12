@@ -31,7 +31,9 @@ public class JeuDTO implements Serializable {
 
     private GenreJeu genre;
 
-    private Long voteId;
+    private Long proprietaireId;
+
+    private String proprietaireLogin;
 
     public Long getId() {
         return id;
@@ -105,12 +107,20 @@ public class JeuDTO implements Serializable {
         this.genre = genre;
     }
 
-    public Long getVoteId() {
-        return voteId;
+    public Long getProprietaireId() {
+        return proprietaireId;
     }
 
-    public void setVoteId(Long voteId) {
-        this.voteId = voteId;
+    public void setProprietaireId(Long userId) {
+        this.proprietaireId = userId;
+    }
+
+    public String getProprietaireLogin() {
+        return proprietaireLogin;
+    }
+
+    public void setProprietaireLogin(String userLogin) {
+        this.proprietaireLogin = userLogin;
     }
 
     @Override

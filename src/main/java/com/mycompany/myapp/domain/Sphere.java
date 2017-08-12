@@ -30,6 +30,9 @@ public class Sphere implements Serializable {
     @ManyToOne
     private Evenement evenement;
 
+    @ManyToOne
+    private User administrateur;
+
     public Long getId() {
         return id;
     }
@@ -62,6 +65,19 @@ public class Sphere implements Serializable {
 
     public void setEvenement(Evenement evenement) {
         this.evenement = evenement;
+    }
+
+    public User getAdministrateur() {
+        return administrateur;
+    }
+
+    public Sphere administrateur(User user) {
+        this.administrateur = user;
+        return this;
+    }
+
+    public void setAdministrateur(User user) {
+        this.administrateur = user;
     }
 
     @Override

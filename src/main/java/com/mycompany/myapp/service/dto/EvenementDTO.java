@@ -18,11 +18,11 @@ public class EvenementDTO implements Serializable {
 
     private String lieu;
 
-    private ZonedDateTime dateFinVote;
-
     private String nom;
 
-    private Long voteId;
+    private ZonedDateTime dateFinVote;
+
+    private Set<JeuDTO> jeuxes = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -48,14 +48,6 @@ public class EvenementDTO implements Serializable {
         this.lieu = lieu;
     }
 
-    public ZonedDateTime getDateFinVote() {
-        return dateFinVote;
-    }
-
-    public void setDateFinVote(ZonedDateTime dateFinVote) {
-        this.dateFinVote = dateFinVote;
-    }
-
     public String getNom() {
         return nom;
     }
@@ -64,12 +56,20 @@ public class EvenementDTO implements Serializable {
         this.nom = nom;
     }
 
-    public Long getVoteId() {
-        return voteId;
+    public ZonedDateTime getDateFinVote() {
+        return dateFinVote;
     }
 
-    public void setVoteId(Long voteId) {
-        this.voteId = voteId;
+    public void setDateFinVote(ZonedDateTime dateFinVote) {
+        this.dateFinVote = dateFinVote;
+    }
+
+    public Set<JeuDTO> getJeuxes() {
+        return jeuxes;
+    }
+
+    public void setJeuxes(Set<JeuDTO> jeus) {
+        this.jeuxes = jeus;
     }
 
     @Override
@@ -99,8 +99,8 @@ public class EvenementDTO implements Serializable {
             "id=" + getId() +
             ", date='" + getDate() + "'" +
             ", lieu='" + getLieu() + "'" +
-            ", dateFinVote='" + getDateFinVote() + "'" +
             ", nom='" + getNom() + "'" +
+            ", dateFinVote='" + getDateFinVote() + "'" +
             "}";
     }
 }

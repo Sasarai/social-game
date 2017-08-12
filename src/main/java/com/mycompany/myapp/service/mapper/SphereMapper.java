@@ -8,13 +8,18 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Sphere and its DTO SphereDTO.
  */
-@Mapper(componentModel = "spring", uses = {EvenementMapper.class, })
+@Mapper(componentModel = "spring", uses = {EvenementMapper.class, UserMapper.class, })
 public interface SphereMapper extends EntityMapper <SphereDTO, Sphere> {
 
     @Mapping(source = "evenement.id", target = "evenementId")
+
+    @Mapping(source = "administrateur.id", target = "administrateurId")
+    @Mapping(source = "administrateur.login", target = "administrateurLogin")
     SphereDTO toDto(Sphere sphere); 
 
     @Mapping(source = "evenementId", target = "evenement")
+
+    @Mapping(source = "administrateurId", target = "administrateur")
     Sphere toEntity(SphereDTO sphereDTO); 
     default Sphere fromId(Long id) {
         if (id == null) {

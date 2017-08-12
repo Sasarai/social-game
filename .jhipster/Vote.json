@@ -2,28 +2,40 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "jeu",
-            "otherEntityName": "jeu",
+            "relationshipName": "evenement",
+            "otherEntityName": "evenement",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "nom"
+        },
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
             "otherEntityRelationshipName": "vote"
         },
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "evenement",
-            "otherEntityName": "evenement",
-            "otherEntityRelationshipName": "vote"
+            "relationshipName": "jeu",
+            "otherEntityName": "jeu",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "nom"
         }
     ],
-    "fields": [
-        {
-            "fieldName": "nombreVote",
-            "fieldType": "Double"
-        }
-    ],
+    "fields": [],
     "changelogDate": "20170806101542",
-    "entityTableName": "vote",
     "dto": "mapstruct",
-    "pagination": "pagination",
     "service": "serviceImpl",
+    "entityTableName": "vote",
+    "pagination": "pagination",
     "angularJSSuffix": "sg"
 }

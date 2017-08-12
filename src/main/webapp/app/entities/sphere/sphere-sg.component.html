@@ -32,6 +32,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nom"><span jhiTranslate="socialGameApp.sphere.nom">Nom</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="evenementId"><span jhiTranslate="socialGameApp.sphere.evenement">Evenement</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="administrateurLogin"><span jhiTranslate="socialGameApp.sphere.administrateur">Administrateur</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -43,6 +44,9 @@
                     <div *ngIf="sphere.evenementId">
                         <a [routerLink]="['../evenement-sg', sphere.evenementId  ]" >{{sphere.evenementId}}</a>
                     </div>
+                </td>
+                <td>
+                    {{sphere.administrateurLogin}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

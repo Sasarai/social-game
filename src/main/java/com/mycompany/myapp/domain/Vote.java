@@ -1,14 +1,12 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -27,18 +25,17 @@ public class Vote implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "nombre_vote")
-    private Double nombreVote;
+    @ManyToOne(optional = false)
+    @NotNull
+    private Evenement evenement;
 
-    @OneToMany(mappedBy = "vote")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Jeu> jeus = new HashSet<>();
+    @ManyToOne(optional = false)
+    @NotNull
+    private User user;
 
-    @OneToMany(mappedBy = "vote")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Evenement> evenements = new HashSet<>();
+    @ManyToOne(optional = false)
+    @NotNull
+    private Jeu jeu;
 
     public Long getId() {
         return id;
@@ -48,67 +45,43 @@ public class Vote implements Serializable {
         this.id = id;
     }
 
-    public Double getNombreVote() {
-        return nombreVote;
+    public Evenement getEvenement() {
+        return evenement;
     }
 
-    public Vote nombreVote(Double nombreVote) {
-        this.nombreVote = nombreVote;
+    public Vote evenement(Evenement evenement) {
+        this.evenement = evenement;
         return this;
     }
 
-    public void setNombreVote(Double nombreVote) {
-        this.nombreVote = nombreVote;
+    public void setEvenement(Evenement evenement) {
+        this.evenement = evenement;
     }
 
-    public Set<Jeu> getJeus() {
-        return jeus;
+    public User getUser() {
+        return user;
     }
 
-    public Vote jeus(Set<Jeu> jeus) {
-        this.jeus = jeus;
+    public Vote user(User user) {
+        this.user = user;
         return this;
     }
 
-    public Vote addJeu(Jeu jeu) {
-        this.jeus.add(jeu);
-        jeu.setVote(this);
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Jeu getJeu() {
+        return jeu;
+    }
+
+    public Vote jeu(Jeu jeu) {
+        this.jeu = jeu;
         return this;
     }
 
-    public Vote removeJeu(Jeu jeu) {
-        this.jeus.remove(jeu);
-        jeu.setVote(null);
-        return this;
-    }
-
-    public void setJeus(Set<Jeu> jeus) {
-        this.jeus = jeus;
-    }
-
-    public Set<Evenement> getEvenements() {
-        return evenements;
-    }
-
-    public Vote evenements(Set<Evenement> evenements) {
-        this.evenements = evenements;
-        return this;
-    }
-
-    public Vote addEvenement(Evenement evenement) {
-        this.evenements.add(evenement);
-        evenement.setVote(this);
-        return this;
-    }
-
-    public Vote removeEvenement(Evenement evenement) {
-        this.evenements.remove(evenement);
-        evenement.setVote(null);
-        return this;
-    }
-
-    public void setEvenements(Set<Evenement> evenements) {
-        this.evenements = evenements;
+    public void setJeu(Jeu jeu) {
+        this.jeu = jeu;
     }
 
     @Override
@@ -135,7 +108,6 @@ public class Vote implements Serializable {
     public String toString() {
         return "Vote{" +
             "id=" + getId() +
-            ", nombreVote='" + getNombreVote() + "'" +
             "}";
     }
 }

@@ -5,10 +5,11 @@ export class EvenementSg implements BaseEntity {
         public id?: number,
         public date?: any,
         public lieu?: string,
-        public dateFinVote?: any,
         public nom?: string,
+        public dateFinVote?: any,
         public spheres?: BaseEntity[],
-        public voteId?: number,
+        public jeuxes?: BaseEntity[],
+        public votes?: BaseEntity[],
     ) {
     }
 }

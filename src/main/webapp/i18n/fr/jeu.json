@@ -23,7 +23,9 @@
             "description": "Description",
             "image": "Image",
             "genre": "Genre",
-            "vote": "Vote"
+            "evenements": "Evenements",
+            "votes": "Votes",
+            "proprietaire": "Proprietaire"
         }
     }
 }

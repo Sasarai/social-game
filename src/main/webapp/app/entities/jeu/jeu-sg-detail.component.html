@@ -1,13 +1,9 @@
 
 <div *ngIf="jeu">
-    <h2><span jhiTranslate="socialGameApp.jeu.detail.title">Jeu</span> {{jeu.id}}</h2>
+    <h2>{{jeu.nom}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="socialGameApp.jeu.nom">Nom</span></dt>
-        <dd>
-            <span>{{jeu.nom}}</span>
-        </dd>
         <dt><span jhiTranslate="socialGameApp.jeu.nombreJoueurMin">Nombre Joueur Min</span></dt>
         <dd>
             <span>{{jeu.nombreJoueurMin}}</span>
@@ -18,7 +14,7 @@
         </dd>
         <dt><span jhiTranslate="socialGameApp.jeu.dureeMoyenne">Duree Moyenne</span></dt>
         <dd>
-            <span>{{jeu.dureeMoyenne}}</span>
+            <span>{{jeu.dureeMoyenne}} <span jhiTranslate="commun.minute">minutes</span></span>
         </dd>
         <dt><span jhiTranslate="socialGameApp.jeu.description">Description</span></dt>
         <dd>
@@ -27,19 +23,14 @@
         <dt><span jhiTranslate="socialGameApp.jeu.image">Image</span></dt>
         <dd>
             <div *ngIf="jeu.image">
-                <a (click)="openFile(jeu.imageContentType, jeu.image)" jhiTranslate="entity.action.open">open</a>
-                {{jeu.imageContentType}}, {{byteSize(jeu.image)}}
+                <a (click)="openFile(jeu.imageContentType, jeu.image)">
+                    <img [src]="'data:'+ jeu.imageContentType + ';base64,' + jeu.image" style="max-height: 100%;" alt="jeu image"/>
+                </a>
             </div>
         </dd>
         <dt><span jhiTranslate="socialGameApp.jeu.genre">Genre</span></dt>
         <dd>
             <span jhiTranslate="{{'socialGameApp.GenreJeu.' + jeu.genre}}">{{jeu.genre}}</span>
-        </dd>
-        <dt><span jhiTranslate="socialGameApp.jeu.vote">Vote</span></dt>
-        <dd>
-            <div *ngIf="jeu.voteId">
-                <a [routerLink]="['/vote-sg', jeu.voteId]">{{jeu.voteId}}</a>
-            </div>
         </dd>
     </dl>
 

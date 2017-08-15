@@ -6,6 +6,7 @@ import com.mycompany.myapp.domain.Jeu;
 import com.mycompany.myapp.repository.JeuRepository;
 import com.mycompany.myapp.service.JeuService;
 import com.mycompany.myapp.repository.search.JeuSearchRepository;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.dto.JeuDTO;
 import com.mycompany.myapp.service.mapper.JeuMapper;
 import com.mycompany.myapp.web.rest.errors.ExceptionTranslator;
@@ -76,6 +77,9 @@ public class JeuResourceIntTest {
     private JeuService jeuService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private JeuSearchRepository jeuSearchRepository;
 
     @Autowired
@@ -97,7 +101,7 @@ public class JeuResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        JeuResource jeuResource = new JeuResource(jeuService);
+        JeuResource jeuResource = new JeuResource(jeuService, userService);
         this.restJeuMockMvc = MockMvcBuilders.standaloneSetup(jeuResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

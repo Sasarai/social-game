@@ -2,14 +2,14 @@
     "socialGameApp": {
         "jeu" : {
             "home": {
-                "title": "Jeus",
+                "title": "Jeux",
                 "createLabel": "Créer un nouveau Jeu",
                 "createOrEditLabel": "Créer ou éditer un Jeu",
                 "search": "Recherche pour Jeu"
             },
-            "created": "Un nouveau Jeu a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Jeu avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Jeu avec l'identifiant {{ param }} a été supprimé",
+            "created": "Le jeu {{ param }} a été créé",
+            "updated": "Le jeu {{ param }} a été mis à jour",
+            "deleted": "Le jeu {{ param }} a été supprimé",
             "delete": {
                 "question": "Etes-vous certain de vouloir supprimer le Jeu {{ id }} ?"
             },

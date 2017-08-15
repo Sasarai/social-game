@@ -107,4 +107,10 @@ public class JeuServiceImpl implements JeuService{
         Page<Jeu> result = jeuSearchRepository.search(queryStringQuery(query), pageable);
         return result.map(jeuMapper::toDto);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<JeuDTO> findJeuUtilisateur(Pageable pageable){
+        return jeuRepository.findByProprietaireIsCurrentUser(pageable).map(jeuMapper::toDto);
+    }
 }

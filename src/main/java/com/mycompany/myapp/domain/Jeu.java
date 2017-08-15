@@ -60,7 +60,7 @@ public class Jeu implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Evenement> evenements = new HashSet<>();
 
-    @OneToMany(mappedBy = "jeux")
+    @OneToMany(mappedBy = "jeu")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Vote> votes = new HashSet<>();

@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.service.JeuService;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.web.rest.util.PaginationUtil;
 import com.mycompany.myapp.service.dto.JeuDTO;
@@ -38,8 +39,12 @@ public class JeuResource {
 
     private final JeuService jeuService;
 
-    public JeuResource(JeuService jeuService) {
+    private final UserService userService;
+
+    public JeuResource(JeuService jeuService,
+                       UserService userService) {
         this.jeuService = jeuService;
+        this.userService = userService;
     }
 
     /**
@@ -56,6 +61,11 @@ public class JeuResource {
         if (jeuDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new jeu cannot already have an ID")).body(null);
         }
+
+        if(jeuDTO.getProprietaireId() == null){
+            jeuDTO.setProprietaireId(userService.getUserWithAuthorities().getId());
+        }
+
         JeuDTO result = jeuService.save(jeuDTO);
         return ResponseEntity.created(new URI("/api/jeus/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -94,7 +104,15 @@ public class JeuResource {
     @Timed
     public ResponseEntity<List<JeuDTO>> getAllJeus(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Jeus");
-        Page<JeuDTO> page = jeuService.findAll(pageable);
+
+        Page<JeuDTO> page = null;
+        if (userService.getUserWithAuthorities().isAdmin()) {
+            page = jeuService.findAll(pageable);
+        }
+        else{
+            page = jeuService.findJeuUtilisateur(pageable);
+        }
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/jeus");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

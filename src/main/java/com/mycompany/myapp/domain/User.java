@@ -201,6 +201,16 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
+    public Boolean isAdmin(){
+        for(Authority authority : this.getAuthorities()){
+            if(authority.getName().equalsIgnoreCase("ROLE_ADMIN")){
+                return Boolean.TRUE;
+            }
+        }
+
+        return Boolean.FALSE;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

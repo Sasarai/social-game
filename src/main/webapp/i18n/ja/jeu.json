@@ -25,7 +25,8 @@
             "genre": "Genre",
             "evenements": "Evenements",
             "votes": "Votes",
-            "proprietaire": "Proprietaire"
+            "proprietaire": "Proprietaire",
+            "minutes": "Minutes"
         }
     }
 }

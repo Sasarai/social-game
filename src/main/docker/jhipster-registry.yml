@@ -15,4 +15,4 @@ services:
             # - GIT_URI=https://github.com/jhipster/jhipster-registry/
             # - GIT_SEARCH_PATHS=central-config
         ports:
-            8761:8761
+            - 8761:8761

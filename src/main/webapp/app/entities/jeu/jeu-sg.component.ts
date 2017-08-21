@@ -14,7 +14,7 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 })
 export class JeuSgComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     jeux: JeuSg[];
     error: any;
     success: any;

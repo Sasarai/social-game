@@ -1,22 +1,18 @@
 
 <div *ngIf="sphere">
-    <h2><span jhiTranslate="socialGameApp.sphere.detail.title">Sphere</span> {{sphere.id}}</h2>
+    <h2>{{sphere.nom}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="socialGameApp.sphere.nom">Nom</span></dt>
-        <dd>
-            <span>{{sphere.nom}}</span>
-        </dd>
-        <dt><span jhiTranslate="socialGameApp.sphere.evenement">Evenement</span></dt>
-        <dd>
-            <div *ngIf="sphere.evenementId">
-                <a [routerLink]="['/evenement-sg', sphere.evenementId]">{{sphere.evenementId}}</a>
-            </div>
-        </dd>
         <dt><span jhiTranslate="socialGameApp.sphere.administrateur">Administrateur</span></dt>
         <dd>
             {{sphere.administrateurLogin}}
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.sphere.abonnes">Abonnes</span></dt>
+        <dd>
+            <span *ngFor="let abonnes of sphere.abonnes; let last = last">
+                {{abonnes.login}}{{last ? '' : ', '}}
+            </span>
         </dd>
     </dl>
 

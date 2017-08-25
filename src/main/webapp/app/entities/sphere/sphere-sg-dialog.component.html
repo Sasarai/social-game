@@ -17,21 +17,6 @@
             <input type="text" class="form-control" name="nom" id="field_nom"
                 [(ngModel)]="sphere.nom"  />
         </div>
-
-        <div class="form-group">
-            <label jhiTranslate="socialGameApp.sphere.evenement" for="field_evenement">Evenement</label>
-            <select class="form-control" id="field_evenement" name="evenement" [(ngModel)]="sphere.evenementId" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="evenementOption.id" *ngFor="let evenementOption of evenements; trackBy: trackEvenementById">{{evenementOption.id}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label jhiTranslate="socialGameApp.sphere.administrateur" for="field_administrateur">Administrateur</label>
-            <select class="form-control" id="field_administrateur" name="administrateur" [(ngModel)]="sphere.administrateurId" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">

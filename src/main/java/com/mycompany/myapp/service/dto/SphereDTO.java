@@ -15,11 +15,11 @@ public class SphereDTO implements Serializable {
 
     private String nom;
 
-    private Long evenementId;
-
     private Long administrateurId;
 
     private String administrateurLogin;
+
+    private Set<UserDTO> abonnes = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -37,14 +37,6 @@ public class SphereDTO implements Serializable {
         this.nom = nom;
     }
 
-    public Long getEvenementId() {
-        return evenementId;
-    }
-
-    public void setEvenementId(Long evenementId) {
-        this.evenementId = evenementId;
-    }
-
     public Long getAdministrateurId() {
         return administrateurId;
     }
@@ -59,6 +51,14 @@ public class SphereDTO implements Serializable {
 
     public void setAdministrateurLogin(String userLogin) {
         this.administrateurLogin = userLogin;
+    }
+
+    public Set<UserDTO> getAbonnes() {
+        return abonnes;
+    }
+
+    public void setAbonnes(Set<UserDTO> users) {
+        this.abonnes = users;
     }
 
     @Override

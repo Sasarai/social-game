@@ -8,17 +8,22 @@
     -->
     <changeSet id="20170806101541-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="evenement_id"
-                                 baseTableName="sphere"
-                                 constraintName="fk_sphere_evenement_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="evenement"/>
-
         <addForeignKeyConstraint baseColumnNames="administrateur_id"
                                  baseTableName="sphere"
                                  constraintName="fk_sphere_administrateur_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="spheres_id"
+                                 baseTableName="sphere_abonnes"
+                                 constraintName="fk_sphere_abonnes_spheres_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sphere"/>
+        <addForeignKeyConstraint baseColumnNames="abonnes_id"
+                                 baseTableName="sphere_abonnes"
+                                 constraintName="fk_sphere_abonnes_abonnes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
     </changeSet>
 </databaseChangeLog>

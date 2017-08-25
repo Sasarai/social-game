@@ -29,22 +29,14 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nom"><span jhiTranslate="socialGameApp.sphere.nom">Nom</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="evenementId"><span jhiTranslate="socialGameApp.sphere.evenement">Evenement</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="administrateurLogin"><span jhiTranslate="socialGameApp.sphere.administrateur">Administrateur</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let sphere of spheres ;trackBy: trackId">
-                <td><a [routerLink]="['../sphere-sg', sphere.id ]">{{sphere.id}}</a></td>
-                <td>{{sphere.nom}}</td>
-                <td>
-                    <div *ngIf="sphere.evenementId">
-                        <a [routerLink]="['../evenement-sg', sphere.evenementId  ]" >{{sphere.evenementId}}</a>
-                    </div>
-                </td>
+                <td><a [routerLink]="['../sphere-sg', sphere.id ]">{{sphere.nom}}</a></td>
                 <td>
                     {{sphere.administrateurLogin}}
                 </td>
@@ -59,6 +51,7 @@
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'sphere-sg/'+ sphere.id + '/edit'} }]"
                                 replaceUrl="true"
+                                *ngIf="currentAccount.login === sphere.administrateurLogin"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
@@ -66,6 +59,7 @@
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'sphere-sg/'+ sphere.id + '/delete'} }]"
                                 replaceUrl="true"
+                                *ngIf="currentAccount.login === sphere.administrateurLogin"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
                             <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>

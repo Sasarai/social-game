@@ -20,9 +20,9 @@
             "lieu": "Lieu",
             "nom": "Nom",
             "dateFinVote": "Date Fin Vote",
-            "sphere": "Sphere",
             "jeux": "Jeux",
-            "votes": "Votes"
+            "votes": "Votes",
+            "sphere": "Sphere"
         }
     }
 }

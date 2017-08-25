@@ -26,6 +26,12 @@
                 <a [routerLink]="['/jeu-sg', jeux?.id ]">{{jeux.nom}}</a>{{last ? '' : ', '}}
             </span>
         </dd>
+        <dt><span jhiTranslate="socialGameApp.evenement.sphere">Sphere</span></dt>
+        <dd>
+            <div *ngIf="evenement.sphereId">
+                <a [routerLink]="['/sphere-sg', evenement.sphereId]">{{evenement.sphereNom}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

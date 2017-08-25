@@ -63,7 +63,9 @@ public class JeuResource {
         }
 
         if(jeuDTO.getProprietaireId() == null){
-            jeuDTO.setProprietaireId(userService.getUserWithAuthorities().getId());
+            if (userService.getUserWithAuthorities() != null) {
+                jeuDTO.setProprietaireId(userService.getUserWithAuthorities().getId());
+            }
         }
 
         JeuDTO result = jeuService.save(jeuDTO);
@@ -106,7 +108,7 @@ public class JeuResource {
         log.debug("REST request to get a page of Jeus");
 
         Page<JeuDTO> page = null;
-        if (userService.getUserWithAuthorities().isAdmin()) {
+        if (userService.getUserWithAuthorities() == null || userService.getUserWithAuthorities().isAdmin()) {
             page = jeuService.findAll(pageable);
         }
         else{

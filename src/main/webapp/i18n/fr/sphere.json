@@ -17,8 +17,9 @@
                 "title": "Sphere"
             },
             "nom": "Nom",
-            "evenement": "Evenement",
-            "administrateur": "Administrateur"
+            "administrateur": "Administrateur",
+            "evenements": "Evenements",
+            "abonnes": "Abonnes"
         }
     }
 }

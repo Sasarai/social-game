@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
@@ -40,11 +41,6 @@ public class Evenement implements Serializable {
     @Column(name = "date_fin_vote")
     private ZonedDateTime dateFinVote;
 
-    @OneToMany(mappedBy = "evenement")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Sphere> spheres = new HashSet<>();
-
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "evenement_jeux",
@@ -56,6 +52,10 @@ public class Evenement implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Vote> votes = new HashSet<>();
+
+    @ManyToOne(optional = false)
+    @NotNull
+    private Sphere sphere;
 
     public Long getId() {
         return id;
@@ -117,31 +117,6 @@ public class Evenement implements Serializable {
         this.dateFinVote = dateFinVote;
     }
 
-    public Set<Sphere> getSpheres() {
-        return spheres;
-    }
-
-    public Evenement spheres(Set<Sphere> spheres) {
-        this.spheres = spheres;
-        return this;
-    }
-
-    public Evenement addSphere(Sphere sphere) {
-        this.spheres.add(sphere);
-        sphere.setEvenement(this);
-        return this;
-    }
-
-    public Evenement removeSphere(Sphere sphere) {
-        this.spheres.remove(sphere);
-        sphere.setEvenement(null);
-        return this;
-    }
-
-    public void setSpheres(Set<Sphere> spheres) {
-        this.spheres = spheres;
-    }
-
     public Set<Jeu> getJeuxes() {
         return jeuxes;
     }
@@ -190,6 +165,19 @@ public class Evenement implements Serializable {
 
     public void setVotes(Set<Vote> votes) {
         this.votes = votes;
+    }
+
+    public Sphere getSphere() {
+        return sphere;
+    }
+
+    public Evenement sphere(Sphere sphere) {
+        this.sphere = sphere;
+        return this;
+    }
+
+    public void setSphere(Sphere sphere) {
+        this.sphere = sphere;
     }
 
     @Override

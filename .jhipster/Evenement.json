@@ -2,12 +2,6 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "sphere",
-            "otherEntityName": "sphere",
-            "otherEntityRelationshipName": "evenement"
-        },
-        {
             "relationshipName": "jeux",
             "otherEntityName": "jeu",
             "relationshipType": "many-to-many",
@@ -20,6 +14,15 @@
             "otherEntityName": "vote",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "evenement"
+        },
+        {
+            "relationshipName": "sphere",
+            "otherEntityName": "sphere",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "nom"
         }
     ],
     "fields": [

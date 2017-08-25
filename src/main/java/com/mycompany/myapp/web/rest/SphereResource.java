@@ -1,7 +1,9 @@
 package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mycompany.myapp.domain.Sphere;
 import com.mycompany.myapp.service.SphereService;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.web.rest.util.PaginationUtil;
 import com.mycompany.myapp.service.dto.SphereDTO;
@@ -38,8 +40,14 @@ public class SphereResource {
 
     private final SphereService sphereService;
 
-    public SphereResource(SphereService sphereService) {
+    private final UserService userService;
+
+    public SphereResource(
+        SphereService sphereService,
+        UserService userService
+    ) {
         this.sphereService = sphereService;
+        this.userService = userService;
     }
 
     /**
@@ -56,6 +64,11 @@ public class SphereResource {
         if (sphereDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new sphere cannot already have an ID")).body(null);
         }
+
+        if(userService.getUserWithAuthorities() != null){
+            sphereDTO.setAdministrateurId(userService.getUserWithAuthorities().getId());
+        }
+
         SphereDTO result = sphereService.save(sphereDTO);
         return ResponseEntity.created(new URI("/api/spheres/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -123,7 +136,15 @@ public class SphereResource {
     @Timed
     public ResponseEntity<Void> deleteSphere(@PathVariable Long id) {
         log.debug("REST request to delete Sphere : {}", id);
+
+        SphereDTO sphereDTO = sphereService.findOne(id);
+
+        if (userService.getUserWithAuthorities() != null && !userService.getUserWithAuthorities().getId().equals(sphereDTO.getAdministrateurId())) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new sphere cannot already have an ID")).body(null);
+        }
+
         sphereService.delete(id);
+
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 

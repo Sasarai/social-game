@@ -19,5 +19,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jeu"/>
         
+        <addForeignKeyConstraint baseColumnNames="sphere_id"
+                                 baseTableName="evenement"
+                                 constraintName="fk_evenement_sphere_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sphere"/>
+
     </changeSet>
 </databaseChangeLog>

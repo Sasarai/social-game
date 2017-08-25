@@ -34,6 +34,7 @@
             <th jhiSortBy="lieu"><span jhiTranslate="socialGameApp.evenement.lieu">Lieu</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nom"><span jhiTranslate="socialGameApp.evenement.nom">Nom</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dateFinVote"><span jhiTranslate="socialGameApp.evenement.dateFinVote">Date Fin Vote</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="sphereNom"><span jhiTranslate="socialGameApp.evenement.sphere">Sphere</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -44,6 +45,11 @@
                 <td>{{evenement.lieu}}</td>
                 <td>{{evenement.nom}}</td>
                 <td>{{evenement.dateFinVote | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="evenement.sphereId">
+                        <a [routerLink]="['../sphere-sg', evenement.sphereId  ]" >{{evenement.sphereNom}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

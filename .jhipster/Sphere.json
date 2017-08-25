@@ -2,15 +2,23 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "evenement",
-            "otherEntityName": "evenement",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipName": "administrateur",
             "otherEntityName": "user",
             "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "sphere"
+        },
+        {
+            "relationshipName": "evenements",
+            "otherEntityName": "evenement",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "sphere"
+        },
+        {
+            "relationshipName": "abonnes",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-many",
             "otherEntityField": "login",
             "ownerSide": true,
             "otherEntityRelationshipName": "sphere"

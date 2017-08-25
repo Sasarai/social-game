@@ -5,7 +5,7 @@ import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, 
 
 import { SphereSg } from './sphere-sg.model';
 import { SphereSgService } from './sphere-sg.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
+import { Account, ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 @Component({
@@ -14,7 +14,7 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 })
 export class SphereSgComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+currentAccount: Account;
     spheres: SphereSg[];
     error: any;
     success: any;

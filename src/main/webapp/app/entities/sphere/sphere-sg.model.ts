@@ -1,11 +1,12 @@
-import { BaseEntity } from './../../shared';
+import { BaseEntity, User } from './../../shared';
 
 export class SphereSg implements BaseEntity {
     constructor(
         public id?: number,
         public nom?: string,
-        public evenementId?: number,
         public administrateurId?: number,
+        public evenements?: BaseEntity[],
+        public abonnes?: User[],
     ) {
     }
 }

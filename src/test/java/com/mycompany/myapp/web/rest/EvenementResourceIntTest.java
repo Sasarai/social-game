@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.SocialGameApp;
 
 import com.mycompany.myapp.domain.Evenement;
+import com.mycompany.myapp.domain.Sphere;
 import com.mycompany.myapp.repository.EvenementRepository;
 import com.mycompany.myapp.service.EvenementService;
 import com.mycompany.myapp.repository.search.EvenementSearchRepository;
@@ -108,6 +109,11 @@ public class EvenementResourceIntTest {
             .lieu(DEFAULT_LIEU)
             .nom(DEFAULT_NOM)
             .dateFinVote(DEFAULT_DATE_FIN_VOTE);
+        // Add required entity
+        Sphere sphere = SphereResourceIntTest.createEntity(em);
+        em.persist(sphere);
+        em.flush();
+        evenement.setSphere(sphere);
         return evenement;
     }
 

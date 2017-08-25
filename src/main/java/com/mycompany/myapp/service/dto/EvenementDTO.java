@@ -2,6 +2,7 @@ package com.mycompany.myapp.service.dto;
 
 
 import java.time.ZonedDateTime;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +24,10 @@ public class EvenementDTO implements Serializable {
     private ZonedDateTime dateFinVote;
 
     private Set<JeuDTO> jeuxes = new HashSet<>();
+
+    private Long sphereId;
+
+    private String sphereNom;
 
     public Long getId() {
         return id;
@@ -70,6 +75,22 @@ public class EvenementDTO implements Serializable {
 
     public void setJeuxes(Set<JeuDTO> jeus) {
         this.jeuxes = jeus;
+    }
+
+    public Long getSphereId() {
+        return sphereId;
+    }
+
+    public void setSphereId(Long sphereId) {
+        this.sphereId = sphereId;
+    }
+
+    public String getSphereNom() {
+        return sphereNom;
+    }
+
+    public void setSphereNom(String sphereNom) {
+        this.sphereNom = sphereNom;
     }
 
     @Override

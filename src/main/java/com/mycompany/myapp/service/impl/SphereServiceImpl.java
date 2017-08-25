@@ -77,7 +77,7 @@ public class SphereServiceImpl implements SphereService{
     @Transactional(readOnly = true)
     public SphereDTO findOne(Long id) {
         log.debug("Request to get Sphere : {}", id);
-        Sphere sphere = sphereRepository.findOne(id);
+        Sphere sphere = sphereRepository.findOneWithEagerRelationships(id);
         return sphereMapper.toDto(sphere);
     }
 

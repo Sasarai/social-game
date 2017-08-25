@@ -7,9 +7,9 @@ export class EvenementSg implements BaseEntity {
         public lieu?: string,
         public nom?: string,
         public dateFinVote?: any,
-        public spheres?: BaseEntity[],
         public jeuxes?: BaseEntity[],
         public votes?: BaseEntity[],
+        public sphereId?: number,
     ) {
     }
 }

@@ -6,6 +6,7 @@ import com.mycompany.myapp.domain.Sphere;
 import com.mycompany.myapp.repository.SphereRepository;
 import com.mycompany.myapp.service.SphereService;
 import com.mycompany.myapp.repository.search.SphereSearchRepository;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.dto.SphereDTO;
 import com.mycompany.myapp.service.mapper.SphereMapper;
 import com.mycompany.myapp.web.rest.errors.ExceptionTranslator;
@@ -54,6 +55,9 @@ public class SphereResourceIntTest {
     private SphereService sphereService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private SphereSearchRepository sphereSearchRepository;
 
     @Autowired
@@ -75,7 +79,7 @@ public class SphereResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        SphereResource sphereResource = new SphereResource(sphereService);
+        SphereResource sphereResource = new SphereResource(sphereService, userService);
         this.restSphereMockMvc = MockMvcBuilders.standaloneSetup(sphereResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

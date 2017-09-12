@@ -22,6 +22,7 @@ export * from './model/request-util';
 export * from './model/base-entity';
 export * from './social/social.service';
 export * from './social/social.component';
+export * from './pipes/element-present-dans-liste.pipe'
 export * from './shared-libs.module';
 export * from './shared-common.module';
 export * from './shared.module';

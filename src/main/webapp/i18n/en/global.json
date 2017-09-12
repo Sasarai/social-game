@@ -100,7 +100,8 @@
             "edit": "Edit",
             "open": "Open",
             "save": "Save",
-            "view": "View"
+            "view": "View",
+            "rejoindre": "Join"
         },
         "detail": {
             "field": "Field",

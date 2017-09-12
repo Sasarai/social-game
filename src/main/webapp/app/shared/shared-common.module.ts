@@ -6,7 +6,8 @@ import {
     JhiLanguageHelper,
     FindLanguageFromKeyPipe,
     JhiAlertComponent,
-    JhiAlertErrorComponent
+    JhiAlertErrorComponent,
+    ElementPresentDansListePipe
 } from './';
 
 @NgModule({
@@ -16,7 +17,8 @@ import {
     declarations: [
         FindLanguageFromKeyPipe,
         JhiAlertComponent,
-        JhiAlertErrorComponent
+        JhiAlertErrorComponent,
+        ElementPresentDansListePipe
     ],
     providers: [
         JhiLanguageHelper,
@@ -30,7 +32,8 @@ import {
         SocialGameSharedLibsModule,
         FindLanguageFromKeyPipe,
         JhiAlertComponent,
-        JhiAlertErrorComponent
+        JhiAlertErrorComponent,
+        ElementPresentDansListePipe
     ]
 })
 export class SocialGameSharedCommonModule {}

@@ -10,6 +10,8 @@
             "created": "Un nouveau Sphere a été créé avec l'identifiant {{ param }}",
             "updated": "Le Sphere avec l'identifiant {{ param }} a été mis à jour",
             "deleted": "Le Sphere avec l'identifiant {{ param }} a été supprimé",
+            "joined": "Vous avez rejoint {{param}}",
+            "quit": "Vous avez quitté {{param}}",
             "delete": {
                 "question": "Etes-vous certain de vouloir supprimer le Sphere {{ id }} ?"
             },

@@ -44,9 +44,13 @@ public interface SphereService {
      * Search for the sphere corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
     Page<SphereDTO> search(String query, Pageable pageable);
+
+    SphereDTO abonnement(SphereDTO sphereDTO, String loginUtilisateur);
+
+    SphereDTO desabonnement(SphereDTO sphereDTO, String loginUtilisateur);
 }

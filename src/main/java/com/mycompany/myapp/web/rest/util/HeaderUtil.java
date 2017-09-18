@@ -34,6 +34,14 @@ public final class HeaderUtil {
         return createAlert(APPLICATION_NAME + "." + entityName + ".deleted", param);
     }
 
+    public static HttpHeaders createEntityJoinAlert(String entityName, String param) {
+        return createAlert(APPLICATION_NAME + "." + entityName + ".joined", param);
+    }
+
+    public static HttpHeaders createEntityQuitAlert(String entityName, String param) {
+        return createAlert(APPLICATION_NAME + "." + entityName + ".quit", param);
+    }
+
     public static HttpHeaders createFailureAlert(String entityName, String errorKey, String defaultMessage) {
         log.error("Entity processing failed, {}", defaultMessage);
         HttpHeaders headers = new HttpHeaders();

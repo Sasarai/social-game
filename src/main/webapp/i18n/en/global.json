@@ -101,7 +101,8 @@
             "open": "Open",
             "save": "Save",
             "view": "View",
-            "rejoindre": "Join"
+            "rejoindre": "Join",
+            "quitter": "Leave"
         },
         "detail": {
             "field": "Field",

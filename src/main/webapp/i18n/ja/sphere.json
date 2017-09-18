@@ -10,6 +10,8 @@
             "created": "A new Sphere is created with identifier {{ param }}",
             "updated": "A Sphere is updated with identifier {{ param }}",
             "deleted": "A Sphere is deleted with identifier {{ param }}",
+            "joined": "あなたは {{param}} に参加しました",
+            "quit": "あなたは {{param}} を去った",
             "delete": {
                 "question": "Sphere {{ id }}を削除してもよろしいですか？"
             },

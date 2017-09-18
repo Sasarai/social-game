@@ -137,8 +137,23 @@ currentAccount: Account;
         return result;
     }
 
-    abonnementSphere() {
+    abonnementSphere(sphere: SphereSg) {
         console.log('Abonnement !');
+        this.sphereService.abonnement(sphere, this.currentAccount.login).subscribe((response) => {
+            this.eventManager.broadcast({
+                name: 'sphereListModification',
+                content: 'Join a sphere'
+            });
+        })
+    }
+
+    desabonnementSphere(sphere: SphereSg) {
+        this.sphereService.desabonnement(sphere, this.currentAccount.login).subscribe((response) => {
+            this.eventManager.broadcast({
+                name: 'sphereListModification',
+                content: 'Quit a sphere'
+            })
+        });
     }
 
     private onSuccess(data, headers) {

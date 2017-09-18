@@ -10,6 +10,8 @@ export class SphereSgService {
 
     private resourceUrl = 'api/spheres';
     private resourceSearchUrl = 'api/_search/spheres';
+    private resourceJoinUrl = 'api/join/sphere';
+    private resourceQuitUrl = 'api/quit/sphere';
 
     constructor(private http: Http) { }
 
@@ -25,6 +27,20 @@ export class SphereSgService {
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
+    }
+
+    abonnement(sphere: SphereSg, loginUtilisateur: string): Observable<SphereSg> {
+        const copy = this.convert(sphere);
+        return this.http.put(`${this.resourceJoinUrl}/${loginUtilisateur}`, copy).map((res: Response) => {
+            return res.json();
+        })
+    }
+
+    desabonnement(sphere: SphereSg, loginUtilisateur: string): Observable<SphereSg> {
+        const copy = this.convert(sphere);
+        return this.http.put(`${this.resourceQuitUrl}/${loginUtilisateur}`, copy).map((res: Response) => {
+            return res.json();
+        })
     }
 
     find(id: number): Observable<SphereSg> {

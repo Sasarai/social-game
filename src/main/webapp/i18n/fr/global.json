@@ -104,7 +104,8 @@
             "open": "Ouvrir",
             "save": "Sauvegarder",
             "view": "Voir",
-            "rejoindre": "Rejoindre"
+            "rejoindre": "Rejoindre",
+            "quitter": "Quitter"
         },
         "detail": {
             "field": "Champs",

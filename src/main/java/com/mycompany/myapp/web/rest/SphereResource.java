@@ -71,7 +71,7 @@ public class SphereResource {
 
         SphereDTO result = sphereService.save(sphereDTO);
         return ResponseEntity.created(new URI("/api/spheres/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getNom()))
             .body(result);
     }
 
@@ -93,8 +93,34 @@ public class SphereResource {
         }
         SphereDTO result = sphereService.save(sphereDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, sphereDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, sphereDTO.getNom()))
             .body(result);
+    }
+
+    @PutMapping("/join/sphere/{loginUtilisateur}")
+    @Timed
+    public ResponseEntity<SphereDTO> joinSphere(@RequestBody SphereDTO sphereDTO, @PathVariable("loginUtilisateur") String loginUtilisateur) throws URISyntaxException {
+        log.debug("REST request to join sphere : {}", sphereDTO);
+
+        SphereDTO result = sphereService.abonnement(sphereDTO, loginUtilisateur);
+
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityJoinAlert(ENTITY_NAME, sphereDTO.getNom()))
+            .body(result);
+
+    }
+
+    @PutMapping("/quit/sphere/{loginUtilisateur}")
+    @Timed
+    public ResponseEntity<SphereDTO> quitSphere(@RequestBody SphereDTO sphereDTO, @PathVariable("loginUtilisateur") String loginUtilisateur) throws URISyntaxException {
+        log.debug("REST request to join sphere : {}", sphereDTO);
+
+        SphereDTO result = sphereService.desabonnement(sphereDTO, loginUtilisateur);
+
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityQuitAlert(ENTITY_NAME, sphereDTO.getNom()))
+            .body(result);
+
     }
 
     /**

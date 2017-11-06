@@ -65,11 +65,18 @@
                             <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                         <button type="submit"
-                                (click)="abonnementSphere()"
-                                *ngIf="currentAccount.login !== sphere.administrateurLogin && (currentAccount.login | elementPresentDansListe:sphere.abonnes)"
+                                (click)="abonnementSphere(sphere)"
+                                *ngIf="currentAccount.login !== sphere.administrateurLogin && !(currentAccount.login | elementPresentDansListe:sphere.abonnes:'login')"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-plus-circle"></span>
                             <span class="hidden-md-down" jhiTranslate="entity.action.rejoindre">Rejoindre</span>
+                        </button>
+                        <button type="submit"
+                                (click)="desabonnementSphere(sphere)"
+                                *ngIf="currentAccount.login !== sphere.administrateurLogin && (currentAccount.login | elementPresentDansListe:sphere.abonnes:'login')"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-minus-circle"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.quitter">Quitter</span>
                         </button>
                     </div>
                 </td>

@@ -1,9 +1,11 @@
 package com.mycompany.myapp.service.impl;
 
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.service.SphereService;
 import com.mycompany.myapp.domain.Sphere;
 import com.mycompany.myapp.repository.SphereRepository;
 import com.mycompany.myapp.repository.search.SphereSearchRepository;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.dto.SphereDTO;
 import com.mycompany.myapp.service.mapper.SphereMapper;
 import org.slf4j.Logger;
@@ -13,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -31,10 +35,13 @@ public class SphereServiceImpl implements SphereService{
 
     private final SphereSearchRepository sphereSearchRepository;
 
-    public SphereServiceImpl(SphereRepository sphereRepository, SphereMapper sphereMapper, SphereSearchRepository sphereSearchRepository) {
+    private final UserService userService;
+
+    public SphereServiceImpl(SphereRepository sphereRepository, SphereMapper sphereMapper, SphereSearchRepository sphereSearchRepository, UserService userService) {
         this.sphereRepository = sphereRepository;
         this.sphereMapper = sphereMapper;
         this.sphereSearchRepository = sphereSearchRepository;
+        this.userService = userService;
     }
 
     /**
@@ -106,5 +113,35 @@ public class SphereServiceImpl implements SphereService{
         log.debug("Request to search for a page of Spheres for query {}", query);
         Page<Sphere> result = sphereSearchRepository.search(queryStringQuery(query), pageable);
         return result.map(sphereMapper::toDto);
+    }
+
+    @Override
+    public SphereDTO abonnement(SphereDTO sphereDTO, String loginUtilisateur) {
+        Sphere sphere = sphereMapper.toEntity(sphereDTO);
+        Optional<User> user = userService.getUserWithAuthoritiesByLogin(loginUtilisateur);
+
+        if (user.isPresent()) {
+            sphere.addAbonnes(user.get());
+            sphere = sphereRepository.save(sphere);
+
+            sphereSearchRepository.save(sphere);
+        }
+
+        return sphereMapper.toDto(sphere);
+    }
+
+    @Override
+    public SphereDTO desabonnement(SphereDTO sphereDTO, String loginUtilisateur) {
+        Sphere sphere = sphereMapper.toEntity(sphereDTO);
+        Optional<User> user = userService.getUserWithAuthoritiesByLogin(loginUtilisateur);
+
+        if (user.isPresent()) {
+            sphere.removeAbonnes(user.get());
+            sphere = sphereRepository.save(sphere);
+
+            sphereSearchRepository.save(sphere);
+        }
+
+        return sphereMapper.toDto(sphere);
     }
 }

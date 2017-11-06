@@ -101,7 +101,8 @@
             "open": "Open",
             "save": "保存",
             "view": "表示",
-            "rejoindre": "会います"
+            "rejoindre": "会います",
+            "quitter": "去ります"
         },
         "detail": {
             "field": "フィールド",

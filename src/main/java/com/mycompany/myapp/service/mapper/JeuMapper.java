@@ -13,12 +13,13 @@ public interface JeuMapper extends EntityMapper <JeuDTO, Jeu> {
 
     @Mapping(source = "proprietaire.id", target = "proprietaireId")
     @Mapping(source = "proprietaire.login", target = "proprietaireLogin")
-    JeuDTO toDto(Jeu jeu); 
+    JeuDTO toDto(Jeu jeu);
+
     @Mapping(target = "evenements", ignore = true)
     @Mapping(target = "votes", ignore = true)
-
     @Mapping(source = "proprietaireId", target = "proprietaire")
-    Jeu toEntity(JeuDTO jeuDTO); 
+    Jeu toEntity(JeuDTO jeuDTO);
+
     default Jeu fromId(Long id) {
         if (id == null) {
             return null;

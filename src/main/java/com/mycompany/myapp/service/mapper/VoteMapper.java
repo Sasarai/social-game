@@ -13,20 +13,17 @@ public interface VoteMapper extends EntityMapper <VoteDTO, Vote> {
 
     @Mapping(source = "evenement.id", target = "evenementId")
     @Mapping(source = "evenement.nom", target = "evenementNom")
-
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.login", target = "userLogin")
-
     @Mapping(source = "jeu.id", target = "jeuId")
     @Mapping(source = "jeu.nom", target = "jeuNom")
-    VoteDTO toDto(Vote vote); 
+    VoteDTO toDto(Vote vote);
 
     @Mapping(source = "evenementId", target = "evenement")
-
     @Mapping(source = "userId", target = "user")
-
     @Mapping(source = "jeuId", target = "jeu")
-    Vote toEntity(VoteDTO voteDTO); 
+    Vote toEntity(VoteDTO voteDTO);
+
     default Vote fromId(Long id) {
         if (id == null) {
             return null;

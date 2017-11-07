@@ -57,6 +57,14 @@
                             <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'evenement-sg-new/' + sphere.id } }]"
+                                replaceUrl="true"
+                                *ngIf="currentAccount.login === sphere.administrateurLogin"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-calendar"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.event">Organiser évenement</span>
+                        </button>
+                        <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'sphere-sg/'+ sphere.id + '/delete'} }]"
                                 replaceUrl="true"
                                 *ngIf="currentAccount.login === sphere.administrateurLogin"

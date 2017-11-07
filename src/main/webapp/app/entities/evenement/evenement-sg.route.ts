@@ -60,6 +60,16 @@ export const evenementPopupRoute: Routes = [
         outlet: 'popup'
     },
     {
+        path: 'evenement-sg-new/:idSphere',
+        component: EvenementSgPopupComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'socialGameApp.evenement.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
         path: 'evenement-sg/:id/edit',
         component: EvenementSgPopupComponent,
         data: {

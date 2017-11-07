@@ -84,6 +84,10 @@ export class EvenementSgDialogComponent implements OnInit {
         this.alertService.error(error.message, null, null);
     }
 
+    toto() {
+        const i = 0;
+    }
+
     trackJeuById(index: number, item: JeuSg) {
         return item.id;
     }
@@ -122,6 +126,9 @@ export class EvenementSgPopupComponent implements OnInit, OnDestroy {
             if ( params['id'] ) {
                 this.evenementPopupService
                     .open(EvenementSgDialogComponent as Component, params['id']);
+            } else if ( params['idSphere'] ) {
+                this.evenementPopupService
+                    .open(EvenementSgDialogComponent as Component, undefined, params['idSphere']);
             } else {
                 this.evenementPopupService
                     .open(EvenementSgDialogComponent as Component);

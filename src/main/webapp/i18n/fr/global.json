@@ -105,7 +105,8 @@
             "save": "Sauvegarder",
             "view": "Voir",
             "rejoindre": "Rejoindre",
-            "quitter": "Quitter"
+            "quitter": "Quitter",
+            "event": "Organiser évènement"
         },
         "detail": {
             "field": "Champs",

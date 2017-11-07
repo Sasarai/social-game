@@ -102,7 +102,8 @@
             "save": "Save",
             "view": "View",
             "rejoindre": "Join",
-            "quitter": "Leave"
+            "quitter": "Leave",
+            "event": "Plan event"
         },
         "detail": {
             "field": "Field",

@@ -19,7 +19,7 @@ export class EvenementSgPopupService {
         this.ngbModalRef = null;
     }
 
-    open(component: Component, id?: number | any, idSphere?: number ): Promise<NgbModalRef> {
+    open(component: Component, id?: number | any, idSphere?: number | any ): Promise<NgbModalRef> {
         return new Promise<NgbModalRef>((resolve, reject) => {
             const isOpen = this.ngbModalRef !== null;
             if (isOpen) {
@@ -38,7 +38,7 @@ export class EvenementSgPopupService {
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {
-                    this.ngbModalRef = this.evenementModalRef(component, new EvenementSg({sphereId: idSphere}));
+                    this.ngbModalRef = this.evenementModalRef(component, new EvenementSg({sphereId: Number(idSphere)}));
                     resolve(this.ngbModalRef);
                 }, 0);
             }

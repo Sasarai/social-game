@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager  } from 'ng-jhipster';
+import {JhiEventManager, JhiLanguageService} from 'ng-jhipster';
 
 import { EvenementSg } from './evenement-sg.model';
 import { EvenementSgService } from './evenement-sg.service';
 
 @Component({
     selector: 'jhi-evenement-sg-detail',
-    templateUrl: './evenement-sg-detail.component.html'
+    templateUrl: './evenement-sg-detail.component.html',
 })
 export class EvenementSgDetailComponent implements OnInit, OnDestroy {
 

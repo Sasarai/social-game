@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import {JhiEventManager, JhiAlertService, JhiLanguageService} from 'ng-jhipster';
 
 import { EvenementSg } from './evenement-sg.model';
 import { EvenementSgPopupService } from './evenement-sg-popup.service';
@@ -12,10 +12,13 @@ import { EvenementSgService } from './evenement-sg.service';
 import { JeuSg, JeuSgService } from '../jeu';
 import { SphereSg, SphereSgService } from '../sphere';
 import { ResponseWrapper } from '../../shared';
+import {NgbDatepickerI18n} from '@ng-bootstrap/ng-bootstrap';
+import {CustomDatepickerI18n} from '../../shared/language/datepicker-i18n';
 
 @Component({
     selector: 'jhi-evenement-sg-dialog',
-    templateUrl: './evenement-sg-dialog.component.html'
+    templateUrl: './evenement-sg-dialog.component.html',
+    providers: [JhiLanguageService, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}]
 })
 export class EvenementSgDialogComponent implements OnInit {
 

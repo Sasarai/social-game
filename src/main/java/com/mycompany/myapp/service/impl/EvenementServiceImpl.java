@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -64,6 +66,13 @@ public class EvenementServiceImpl implements EvenementService{
     public Page<EvenementDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Evenements");
         return evenementRepository.findAll(pageable)
+            .map(evenementMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<EvenementDTO> findAll(){
+        return evenementRepository.findAll()
             .map(evenementMapper::toDto);
     }
 

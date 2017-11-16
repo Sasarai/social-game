@@ -7,17 +7,10 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" [hidden]="!evenement.id">
-            <label for="id" jhiTranslate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="evenement.id" readonly />
-        </div>
-        <!--<div class="form-group">-->
-            <!--<label class="form-control-label" jhiTranslate="socialGameApp.evenement.date" for="field_date">Date</label>-->
-            <!--<div class="d-flex">-->
-                <!--<input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="evenement.date"-->
-                  <!--/>-->
-            <!--</div>-->
+        <!--<div class="form-group" [hidden]="!evenement.id">-->
+            <!--<label for="id" jhiTranslate="global.field.id">ID</label>-->
+            <!--<input type="text" class="form-control" id="id" name="id"-->
+                   <!--[(ngModel)]="evenement.id" readonly />-->
         <!--</div>-->
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="socialGameApp.evenement.nom" for="field_nom">Nom</label>
@@ -29,17 +22,8 @@
             <div class="d-flex">
                 <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="evenement.date"
                   />
-                <div class="input-group">
-                    <input id="field_date" class="form-control" placeholder="dd/MM/yyyy"
-                        name="dp" [(ngModel)]="evenement.date" ngbDatepicker #d="ngbDatepicker">
-                    <button class="input-group-addon" (click)="d.toggle()" type="button">
-                        <i class="fa fa-calendar"></i>
-                    </button>
-                </div>
             </div>
         </div>
-
-
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="socialGameApp.evenement.lieu" for="field_lieu">Lieu</label>
             <input type="text" class="form-control" name="lieu" id="field_lieu"

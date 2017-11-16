@@ -17,6 +17,7 @@ import {
     SocialService,
     JhiLoginModalComponent
 } from './';
+import {CalendrierComponent} from './component/calendrier.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import {
     declarations: [
         JhiSocialComponent,
         JhiLoginModalComponent,
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        CalendrierComponent
     ],
     providers: [
         LoginService,
@@ -46,7 +48,8 @@ import {
         JhiSocialComponent,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
-        DatePipe
+        DatePipe,
+        CalendrierComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

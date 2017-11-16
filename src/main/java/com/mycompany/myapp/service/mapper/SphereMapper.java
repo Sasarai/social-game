@@ -13,11 +13,12 @@ public interface SphereMapper extends EntityMapper <SphereDTO, Sphere> {
 
     @Mapping(source = "administrateur.id", target = "administrateurId")
     @Mapping(source = "administrateur.login", target = "administrateurLogin")
-    SphereDTO toDto(Sphere sphere); 
+    SphereDTO toDto(Sphere sphere);
 
     @Mapping(source = "administrateurId", target = "administrateur")
     @Mapping(target = "evenements", ignore = true)
-    Sphere toEntity(SphereDTO sphereDTO); 
+    Sphere toEntity(SphereDTO sphereDTO);
+
     default Sphere fromId(Long id) {
         if (id == null) {
             return null;

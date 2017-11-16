@@ -3,6 +3,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { Account, LoginModalService, Principal } from '../shared';
+import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 
 @Component({
     selector: 'jhi-home',
@@ -15,6 +16,8 @@ import { Account, LoginModalService, Principal } from '../shared';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
+    options: GridsterConfig;
+    dashboard: Array<GridsterItem>;
 
     constructor(
         private principal: Principal,
@@ -28,6 +31,22 @@ export class HomeComponent implements OnInit {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+
+        this.options = {
+            itemChangeCallback: this.itemChange,
+            // draggable: {
+            //     enabled: true
+            // },
+            // resizable: {
+            //     enabled: true
+            // }
+        };
+
+        this.dashboard = [
+            {
+                cols: 2, rows: 2, y: 0, x: 0, 'type': 'calendrier'
+            }
+        ];
     }
 
     registerAuthenticationSuccess() {
@@ -44,5 +63,9 @@ export class HomeComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
+    }
+
+    itemChange(item, itemComponent) {
+        // console.info('change', item, itemComponent);
     }
 }

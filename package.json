@@ -18,6 +18,7 @@
     "@angular/router": "4.2.6",
     "@ng-bootstrap/ng-bootstrap": "1.0.0-beta.5",
     "@types/jquery": "3.2.16",
+    "angular-gridster2": "4.0.1",
     "bootstrap": "4.0.0-beta.2",
     "core-js": "2.4.1",
     "font-awesome": "4.7.0",

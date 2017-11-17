@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -72,8 +73,7 @@ public class EvenementServiceImpl implements EvenementService{
     @Override
     @Transactional(readOnly = true)
     public List<EvenementDTO> findAll(){
-        return evenementRepository.findAll()
-            .map(evenementMapper::toDto);
+        return evenementRepository.findAll().stream().map(evenementMapper::toDto).collect(Collectors.toList());
     }
 
     /**

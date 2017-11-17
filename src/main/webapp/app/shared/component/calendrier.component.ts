@@ -32,7 +32,8 @@ export class CalendrierComponent implements OnInit, AfterViewInit {
             locale: this.i18n.currentLang,
             weekend: false,
             timeFormat: 'H(:mm)',
-            columnFormat: 'dddd'
+            columnFormat: 'dddd',
+            height: 470
         })
     }
 }

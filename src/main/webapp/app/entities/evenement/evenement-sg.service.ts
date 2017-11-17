@@ -11,6 +11,7 @@ export class EvenementSgService {
 
     private resourceUrl = 'api/evenements';
     private resourceSearchUrl = 'api/_search/evenements';
+    private resourceUserUrl = 'api/_user/evenements';
 
     constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
@@ -54,6 +55,14 @@ export class EvenementSgService {
         const options = createRequestOption(req);
         return this.http.get(this.resourceSearchUrl, options)
             .map((res: any) => this.convertResponse(res));
+    }
+
+    evenementUtilisateur(loginUtilisateur: String): Observable<Response> {
+        return this.http.get(`${this.resourceUserUrl}/${loginUtilisateur}`).map((res: Response) => {
+            const jsonReponse = res.json();
+            this.convertItemFromServer(jsonReponse);
+            return jsonReponse;
+        })
     }
 
     private convertResponse(res: Response): ResponseWrapper {

@@ -128,11 +128,11 @@ public class EvenementResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    @GetMapping("/_user/evenements/{idUtilisateur}")
+    @GetMapping("/_user/evenements/{loginUtilisateur}")
     @Timed
-    public ResponseEntity<List<EvenementDTO>> getEvenementUtilisateur(@PathVariable Long idUtilisateur){
+    public List<EvenementDTO> getEvenementUtilisateur(@PathVariable String loginUtilisateur){
         log.debug("REST request to get user's events");
-        List<EvenementDTO> evenements = evenementService.findAll();
+        return evenementService.findAll();
     }
 
     /**

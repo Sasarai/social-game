@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
 import { Account, LoginModalService, Principal } from '../shared';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
+import {EvenementSgService} from '../entities/evenement/evenement-sg.service';
+import {ResponseWrapper} from '../shared/model/response-wrapper.model';
+import {ElementCalendrier} from '../shared/component/element-calendrier.model';
+import {elementAt} from 'rxjs/operator/elementAt';
 
 @Component({
     selector: 'jhi-home',
@@ -18,17 +22,28 @@ export class HomeComponent implements OnInit {
     modalRef: NgbModalRef;
     options: GridsterConfig;
     dashboard: Array<GridsterItem>;
+    evenementsUtilisateur: ElementCalendrier[];
 
     constructor(
         private principal: Principal,
         private loginModalService: LoginModalService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private serviceEvenement: EvenementSgService,
+        private alertService: JhiAlertService
     ) {
     }
 
     ngOnInit() {
+
         this.principal.identity().then((account) => {
             this.account = account;
+
+            if (this.account !== null) {
+                this.serviceEvenement.evenementUtilisateur(this.account.login).subscribe(
+                    (res: ResponseWrapper) => this.recupererEvenementUtilisateur(res),
+                    (res: ResponseWrapper) => this.onError(res)
+                );
+            }
         });
         this.registerAuthenticationSuccess();
 
@@ -44,7 +59,25 @@ export class HomeComponent implements OnInit {
 
         this.dashboard = [
             {
-                cols: 2, rows: 2, y: 0, x: 0, 'type': 'calendrier'
+                cols: 2,
+                rows: 2,
+                y: 0,
+                x: 0,
+                'type': 'calendrier'
+            },
+            {
+                cols: 1,
+                rows: 2,
+                y: 0,
+                x: 2,
+                'type': 'messages'
+            },
+            {
+                cols: 3,
+                rows: 1,
+                y: 2,
+                x: 0,
+                'type': 'nouveaute'
             }
         ];
     }
@@ -53,6 +86,13 @@ export class HomeComponent implements OnInit {
         this.eventManager.subscribe('authenticationSuccess', (message) => {
             this.principal.identity().then((account) => {
                 this.account = account;
+
+                if (this.account !== null) {
+                    this.serviceEvenement.evenementUtilisateur(this.account.login).subscribe(
+                        (res: ResponseWrapper) => this.recupererEvenementUtilisateur(res),
+                        (res: ResponseWrapper) => this.onError(res)
+                    );
+                }
             });
         });
     }
@@ -67,5 +107,21 @@ export class HomeComponent implements OnInit {
 
     itemChange(item, itemComponent) {
         // console.info('change', item, itemComponent);
+    }
+
+    private recupererEvenementUtilisateur(data) {
+
+        for (const evenement of data) {
+            const element = new ElementCalendrier();
+            element.fromEvenement(evenement);
+
+            this.evenementsUtilisateur.push(element);
+        }
+
+        console.log(this.evenementsUtilisateur);
+    }
+
+    private onError(error) {
+        this.alertService.error(error.message, null, null);
     }
 }

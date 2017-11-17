@@ -14,11 +14,11 @@
             <!--<h4>Mon agenda</h4>-->
             <!--<jhi-calendrier-sg (elements)="[]" *ngSwitchCase="true" ></jhi-calendrier-sg>-->
 
-            <div class="grille" *ngSwitchCase="true">
+            <div class="grille" *ngIf="isAuthenticated()">
                 <gridster [options]="options">
                     <gridster-item [item]="item" *ngFor="let item of dashboard" [ngSwitch]="item['type']">
                         <div *ngSwitchCase="'calendrier'" style="height: 100%; position: relative;">
-                            <jhi-calendrier-sg (elements)="evenementsUtilisateur"></jhi-calendrier-sg>
+                            <jhi-calendrier-sg [elements]="evenementsUtilisateur"></jhi-calendrier-sg>
                         </div>
 
                         <div *ngSwitchCase="'messages'">

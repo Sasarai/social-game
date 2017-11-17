@@ -3,9 +3,9 @@ import {DatePipe} from '@angular/common';
 
 export class ElementCalendrier {
 
-    titre: String;
-    debut: String;
-    fin: String;
+    titre: string;
+    debut: string;
+    fin: string;
     groupe: any;
 
     constructor() {}

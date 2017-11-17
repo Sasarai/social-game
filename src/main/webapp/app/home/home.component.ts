@@ -60,23 +60,23 @@ export class HomeComponent implements OnInit {
         this.dashboard = [
             {
                 cols: 2,
-                rows: 4,
+                rows: 8,
                 y: 0,
                 x: 0,
                 'type': 'calendrier'
             },
             {
-                cols: 1,
-                rows: 4,
+                cols: 2,
+                rows: 5,
                 y: 0,
                 x: 2,
                 'type': 'messages'
             },
             {
-                cols: 3,
-                rows: 1,
-                y: 4,
-                x: 0,
+                cols: 2,
+                rows: 3,
+                y: 5,
+                x: 2,
                 'type': 'nouveaute'
             }
         ];

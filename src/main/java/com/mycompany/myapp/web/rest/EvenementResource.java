@@ -132,7 +132,7 @@ public class EvenementResource {
     @Timed
     public List<EvenementDTO> getEvenementUtilisateur(@PathVariable String loginUtilisateur){
         log.debug("REST request to get user's events");
-        return evenementService.findAll();
+        return evenementService.recupererParUtilisateurAyantAcces(loginUtilisateur);
     }
 
     /**

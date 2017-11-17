@@ -116,4 +116,10 @@ public class EvenementServiceImpl implements EvenementService{
         Page<Evenement> result = evenementSearchRepository.search(queryStringQuery(query), pageable);
         return result.map(evenementMapper::toDto);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<EvenementDTO> recupererParUtilisateurAyantAcces(String login){
+        return evenementRepository.findByUtilisateurAyantAcces(login).stream().map(evenementMapper::toDto).collect(Collectors.toList());
+    }
 }

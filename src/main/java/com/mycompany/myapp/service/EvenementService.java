@@ -53,4 +53,6 @@ public interface EvenementService {
      *  @return the list of entities
      */
     Page<EvenementDTO> search(String query, Pageable pageable);
+
+    List<EvenementDTO> recupererParUtilisateurAyantAcces(String login);
 }

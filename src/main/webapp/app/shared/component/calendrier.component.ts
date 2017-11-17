@@ -17,6 +17,7 @@ export class CalendrierComponent implements OnInit, AfterViewInit {
     constructor(private i18n: TranslateService) {
         i18n.onLangChange.subscribe((event: LangChangeEvent) => {
             this.calendrier.fullCalendar('option', 'locale', this.i18n.currentLang);
+            this.calendrier.fullCalendar('option', 'aspectRatio', 2);
         })
     }
 
@@ -32,8 +33,9 @@ export class CalendrierComponent implements OnInit, AfterViewInit {
             locale: this.i18n.currentLang,
             weekend: false,
             timeFormat: 'H(:mm)',
-            columnFormat: 'dddd',
-            height: 470
-        })
+            columnFormat: 'dddd'
+        });
+
+        this.calendrier.fullCalendar('option', 'contentHeight', 'auto');
     }
 }

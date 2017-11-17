@@ -60,14 +60,14 @@ export class HomeComponent implements OnInit {
         this.dashboard = [
             {
                 cols: 2,
-                rows: 2,
+                rows: 4,
                 y: 0,
                 x: 0,
                 'type': 'calendrier'
             },
             {
                 cols: 1,
-                rows: 2,
+                rows: 4,
                 y: 0,
                 x: 2,
                 'type': 'messages'
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
             {
                 cols: 3,
                 rows: 1,
-                y: 2,
+                y: 4,
                 x: 0,
                 'type': 'nouveaute'
             }
@@ -111,6 +111,8 @@ export class HomeComponent implements OnInit {
 
     private recupererEvenementUtilisateur(data) {
 
+        this.evenementsUtilisateur = [];
+
         for (const evenement of data) {
             const element = new ElementCalendrier();
             element.fromEvenement(evenement);
@@ -118,7 +120,6 @@ export class HomeComponent implements OnInit {
             this.evenementsUtilisateur.push(element);
         }
 
-        console.log(this.evenementsUtilisateur);
     }
 
     private onError(error) {

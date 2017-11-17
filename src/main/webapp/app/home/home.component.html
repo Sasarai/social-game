@@ -17,7 +17,9 @@
             <div class="grille" *ngSwitchCase="true">
                 <gridster [options]="options">
                     <gridster-item [item]="item" *ngFor="let item of dashboard" [ngSwitch]="item['type']">
-                        <jhi-calendrier-sg (elements)="evenementsUtilisateur" *ngSwitchCase="'calendrier'" ></jhi-calendrier-sg>
+                        <div *ngSwitchCase="'calendrier'" style="height: 100%; position: relative;">
+                            <jhi-calendrier-sg (elements)="evenementsUtilisateur"></jhi-calendrier-sg>
+                        </div>
 
                         <div *ngSwitchCase="'messages'">
                             <h4>Messages</h4>

@@ -8,6 +8,7 @@ import {EvenementSgService} from '../entities/evenement/evenement-sg.service';
 import {ResponseWrapper} from '../shared/model/response-wrapper.model';
 import {ElementCalendrier} from '../shared/component/element-calendrier.model';
 import {elementAt} from 'rxjs/operator/elementAt';
+import {isNullOrUndefined} from 'util';
 
 @Component({
     selector: 'jhi-home',
@@ -45,7 +46,10 @@ export class HomeComponent implements OnInit {
                 );
             }
         });
+
         this.registerAuthenticationSuccess();
+
+        this.registerLogOutSuccess();
 
         this.options = {
             itemChangeCallback: this.itemChange,
@@ -82,12 +86,20 @@ export class HomeComponent implements OnInit {
         ];
     }
 
+    registerLogOutSuccess() {
+        this.eventManager.subscribe('logoutSuccessfull', (message) => {
+            this.evenementsUtilisateur = undefined;
+        })
+    }
+
     registerAuthenticationSuccess() {
         this.eventManager.subscribe('authenticationSuccess', (message) => {
             this.principal.identity().then((account) => {
                 this.account = account;
 
-                if (this.account !== null) {
+                console.log(account);
+
+                if (!isNullOrUndefined(this.account)) {
                     this.serviceEvenement.evenementUtilisateur(this.account.login).subscribe(
                         (res: ResponseWrapper) => this.recupererEvenementUtilisateur(res),
                         (res: ResponseWrapper) => this.onError(res)

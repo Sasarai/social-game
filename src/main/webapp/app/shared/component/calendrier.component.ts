@@ -18,7 +18,7 @@ enum CouleurElement {
     selector: 'jhi-calendrier-sg',
     templateUrl: './calendrier.component.html'
 })
-export class CalendrierComponent implements OnInit, AfterViewInit {
+export class CalendrierComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private _elements: ElementCalendrier[];
     @ViewChild('calendrier') el: ElementRef;
@@ -51,6 +51,11 @@ export class CalendrierComponent implements OnInit, AfterViewInit {
         ];
     }
 
+    ngOnDestroy() {
+        this.calendrier.fullCalendar('destroy');
+        console.log('Destroy !');
+    }
+
     ngAfterViewInit() {
 
         this.calendrier = $(this.el.nativeElement);
@@ -64,15 +69,7 @@ export class CalendrierComponent implements OnInit, AfterViewInit {
                 left: 'title',
                 center: '',
                 right: ''
-            },
-            // events: [
-            //     {
-            //         color: "#721817",
-            //         end: "2017-11-29T13:00:00Z",
-            //         start: "2017-11-29T12:00:00Z",
-            //         title: "Midi",
-            //     }
-            // ]
+            }
         });
 
         this.calendrier.fullCalendar('option', 'aspectRatio', 8);
@@ -81,6 +78,15 @@ export class CalendrierComponent implements OnInit, AfterViewInit {
     }
 
     ajouterElementsAuCalendrier(elems: ElementCalendrier[]) {
+
+        if(isNullOrUndefined(this.couleurs)){
+            this.ngOnInit();
+        }
+
+        if(isNullOrUndefined(this.calendrier)){
+            this.ngAfterViewInit();
+        }
+
         const events = [];
 
         const idsSpheresPlaces = [];

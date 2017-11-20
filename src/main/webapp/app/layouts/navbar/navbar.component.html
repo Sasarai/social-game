@@ -16,45 +16,70 @@
                     <span jhiTranslate="global.menu.home">Home</span>
                 </a>
             </li>
-            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="game-menu">
                     <span>
-                        <i class="fa fa-th-list" aria-hidden="true"></i>
-                        <span jhiTranslate="global.menu.entities.main">
-                            Entities
+                        <i class="fa fa-gamepad" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.games.main">
+                            Games
                         </span>
                         <b class="caret"></b>
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <li>
-                        <a class="dropdown-item" routerLink="evenement-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.evenementSg">Evenement Sg</span>
+                        <a class="dropdown-item" routerLink="mes-jeux-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.games.ludotheque.user">Ma ludothèque</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="jeu-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.jeuSg">Jeu Sg</span>
+                        <a class="dropdown-item" routerLink="jeux-sphere-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.games.ludotheque.communaute">Ludothèque de ma communauté</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="sphere-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.sphereSg">Sphere Sg</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="vote-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.voteSg">Vote Sg</span>
-                        </a>
-                    </li>
-                    <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
+            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+            <!--<li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+                <!--<a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">-->
+                    <!--<span>-->
+                        <!--<i class="fa fa-th-list" aria-hidden="true"></i>-->
+                        <!--<span jhiTranslate="global.menu.entities.main">-->
+                            <!--Entities-->
+                        <!--</span>-->
+                        <!--<b class="caret"></b>-->
+                    <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu" ngbDropdownMenu>-->
+                    <!--<li>-->
+                        <!--<a class="dropdown-item" routerLink="evenement-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                            <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                            <!--<span jhiTranslate="global.menu.entities.evenementSg">Evenement Sg</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a class="dropdown-item" routerLink="jeu-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                            <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                            <!--<span jhiTranslate="global.menu.entities.jeuSg">Jeu Sg</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a class="dropdown-item" routerLink="sphere-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                            <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                            <!--<span jhiTranslate="global.menu.entities.sphereSg">Sphere Sg</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a class="dropdown-item" routerLink="vote-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                            <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                            <!--<span jhiTranslate="global.menu.entities.voteSg">Vote Sg</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--&lt;!&ndash; jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here &ndash;&gt;-->
+                <!--</ul>-->
+            <!--</li>-->
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>

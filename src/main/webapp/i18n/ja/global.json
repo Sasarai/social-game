@@ -4,6 +4,13 @@
         "browsehappy": "<strong>古い</strong>ブラウザーが使われています。より良い体験を得るために<a href=\"http://browsehappy.com/?locale=en\">ブラウザをアップデート</a>してください。",
         "menu": {
             "home": "ホーム",
+            "games": {
+                "main": "ゲーム",
+                "ludotheque": {
+                    "user": "私のゲームライブラリ",
+                    "communaute": "私のコミュニティのゲームライブラリ"
+                }
+            },
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "エンティティ",

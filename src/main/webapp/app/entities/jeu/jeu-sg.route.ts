@@ -36,7 +36,18 @@ export const jeuRoute: Routes = [
             authorities: ['ROLE_USER'],
             pageTitle: 'socialGameApp.jeu.home.title'
         },
-        canActivate: [UserRouteAccessService]
+        canActivate: [UserRouteAccessService],
+    }, {
+        path: 'jeu-sg/:type',
+        component: JeuSgComponent,
+        resolve: {
+            'pagingParams': JeuSgResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'socialGameApp.jeu.home.title.main'
+        },
+        canActivate: [UserRouteAccessService],
     }, {
         path: 'jeu-sg/:id',
         component: JeuSgDetailComponent,

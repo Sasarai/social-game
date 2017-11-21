@@ -2,7 +2,11 @@
     "socialGameApp": {
         "jeu" : {
             "home": {
-                "title": "Jeus",
+                "title": {
+                    "main": "Games",
+                    "USER": "My game library",
+                    "SPHERE": "My community's game library"
+                },
                 "createLabel": "Create a new Jeu",
                 "createOrEditLabel": "Create or edit a Jeu",
                 "search": "Search for Jeu"

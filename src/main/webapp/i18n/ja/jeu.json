@@ -2,7 +2,11 @@
     "socialGameApp": {
         "jeu" : {
             "home": {
-                "title": "Jeus",
+                "title": {
+                    "main": "ゲーム",
+                    "USER": "私のゲームライブラリ",
+                    "SPHERE": "私のコミュニティのゲームライブラリ"
+                },
                 "createLabel": "Jeu を追加",
                 "createOrEditLabel": "Jeuを追加または編集",
                 "search": "Search for Jeu"

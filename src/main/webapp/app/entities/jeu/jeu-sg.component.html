@@ -1,6 +1,6 @@
 <div>
     <h2>
-        <span jhiTranslate="socialGameApp.jeu.home.title">Jeus</span>
+        <span jhiTranslate="socialGameApp.jeu.home.title.{{typeVisu}}">Jeus</span>
         <button class="btn btn-primary float-right jh-create-entity create-jeu-sg" [routerLink]="['/', { outlets: { popup: ['jeu-sg-new'] } }]">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down"  jhiTranslate="socialGameApp.jeu.home.createLabel">
@@ -58,6 +58,7 @@
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'jeu-sg/'+ jeu.id + '/edit'} }]"
                                 replaceUrl="true"
+                                *ngIf="currentAccount.login === jeu.proprietaireLogin"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
@@ -65,6 +66,7 @@
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'jeu-sg/'+ jeu.id + '/delete'} }]"
                                 replaceUrl="true"
+                                *ngIf="currentAccount.login === jeu.proprietaireLogin"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
                             <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>

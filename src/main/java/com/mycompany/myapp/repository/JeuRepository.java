@@ -21,4 +21,39 @@ public interface JeuRepository extends JpaRepository<Jeu,Long> {
     @Query("select jeu from Jeu jeu where jeu.proprietaire.login = ?#{principal.username}")
     Page<Jeu> findByProprietaireIsCurrentUser(Pageable pageable);
 
+    @Query("select distinct jeu from Jeu jeu where jeu.id in (" +
+        "   select j.id from Sphere s " +
+        "   join s.abonnes a " +
+        "   join a.jeux j " +
+        "   where s.id in (" +
+        "       select s.id from Sphere s " +
+        "       join s.abonnes a " +
+        "       where a.login = ?#{principal.username}" +
+        "   )" +
+        "   or " +
+        "   s.id in (" +
+        "       select s.id from Sphere s " +
+        "       join s.administrateur a " +
+        "       where a.login = ?#{principal.username}" +
+        "   )" +
+        ")" +
+        "or " +
+        "jeu.id in (" +
+        "   select j.id from Sphere s " +
+        "   join s.administrateur a " +
+        "   join a.jeux j " +
+        "   where s.id in (" +
+        "       select s.id from Sphere s " +
+        "       join s.abonnes a " +
+        "       where a.login = ?#{principal.username}" +
+        "   )" +
+        "   or " +
+        "   s.id in (" +
+        "       select s.id from Sphere s " +
+        "       join s.administrateur a " +
+        "       where a.login = ?#{principal.username}" +
+        "   )" +
+        ")")
+    Page<Jeu> findByUserAuthorise(Pageable pageable);
+
 }

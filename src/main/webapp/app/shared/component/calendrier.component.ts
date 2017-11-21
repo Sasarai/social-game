@@ -79,11 +79,11 @@ export class CalendrierComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ajouterElementsAuCalendrier(elems: ElementCalendrier[]) {
 
-        if(isNullOrUndefined(this.couleurs)){
+        if (isNullOrUndefined(this.couleurs)) {
             this.ngOnInit();
         }
 
-        if(isNullOrUndefined(this.calendrier)){
+        if (isNullOrUndefined(this.calendrier)) {
             this.ngAfterViewInit();
         }
 

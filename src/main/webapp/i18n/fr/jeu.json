@@ -2,7 +2,11 @@
     "socialGameApp": {
         "jeu" : {
             "home": {
-                "title": "Jeux",
+                "title": {
+                    "main": "Jeux",
+                    "USER": "Ma ludothèque",
+                    "SPHERE": "La ludothèque de ma communauté"
+                },
                 "createLabel": "Créer un nouveau Jeu",
                 "createOrEditLabel": "Créer ou éditer un Jeu",
                 "search": "Recherche pour Jeu"

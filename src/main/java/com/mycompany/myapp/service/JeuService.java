@@ -51,4 +51,6 @@ public interface JeuService {
     Page<JeuDTO> search(String query, Pageable pageable);
 
     Page<JeuDTO> findJeuUtilisateur(Pageable pageable);
+
+    Page<JeuDTO> findJeuAuthorisesUtilisateur(Pageable pageable);
 }

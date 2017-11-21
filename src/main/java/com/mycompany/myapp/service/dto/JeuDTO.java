@@ -32,7 +32,6 @@ public class JeuDTO implements Serializable {
     private GenreJeu genre;
 
     private Long proprietaireId;
-
     private String proprietaireLogin;
 
     public Long getId() {

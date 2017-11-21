@@ -28,13 +28,13 @@
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <li>
-                        <a class="dropdown-item" routerLink="mes-jeux-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" [routerLink]="['jeu-sg', 'USER']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.games.ludotheque.user">Ma ludothèque</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="jeux-sphere-sg" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" [routerLink]="['jeu-sg', 'SPHERE']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.games.ludotheque.communaute">Ludothèque de ma communauté</span>
                         </a>

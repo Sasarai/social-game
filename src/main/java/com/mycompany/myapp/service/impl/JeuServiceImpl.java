@@ -113,4 +113,10 @@ public class JeuServiceImpl implements JeuService{
     public Page<JeuDTO> findJeuUtilisateur(Pageable pageable){
         return jeuRepository.findByProprietaireIsCurrentUser(pageable).map(jeuMapper::toDto);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<JeuDTO> findJeuAuthorisesUtilisateur(Pageable pageable){
+        return jeuRepository.findByUserAuthorise(pageable).map(jeuMapper::toDto);
+    }
 }

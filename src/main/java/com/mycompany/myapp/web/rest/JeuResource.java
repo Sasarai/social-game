@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -104,15 +105,18 @@ public class JeuResource {
      */
     @GetMapping("/jeus")
     @Timed
-    public ResponseEntity<List<JeuDTO>> getAllJeus(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<JeuDTO>> getAllJeus(@ApiParam Pageable pageable, @Param("type") String type) {
         log.debug("REST request to get a page of Jeus");
 
         Page<JeuDTO> page = null;
         if (userService.getUserWithAuthorities() == null || userService.getUserWithAuthorities().isAdmin()) {
             page = jeuService.findAll(pageable);
         }
-        else{
+        else if(type.equals("USER")){
             page = jeuService.findJeuUtilisateur(pageable);
+        }
+        else {
+            page = jeuService.findJeuAuthorisesUtilisateur(pageable);
         }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/jeus");

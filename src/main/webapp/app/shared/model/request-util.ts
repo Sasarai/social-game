@@ -1,4 +1,5 @@
 import { URLSearchParams, BaseRequestOptions } from '@angular/http';
+import {type} from 'os';
 
 export const createRequestOption = (req?: any): BaseRequestOptions => {
     const options: BaseRequestOptions = new BaseRequestOptions();
@@ -10,6 +11,15 @@ export const createRequestOption = (req?: any): BaseRequestOptions => {
             params.paramsMap.set('sort', req.sort);
         }
         params.set('query', req.query);
+
+        if (req.filtre) {
+
+            let keyArray: any[] = Object.keys(req.filtre);
+
+            keyArray.forEach((key: any) => {
+                params.set(key, req.filtre[key]);
+            })
+        }
 
         options.params = params;
     }

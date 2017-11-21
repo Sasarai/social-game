@@ -15,10 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.time.Instant;
 
 /**
@@ -96,6 +93,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    @OneToMany(mappedBy = "proprietaire", fetch = FetchType.LAZY)
+    private List<Jeu> jeux;
 
     public Long getId() {
         return id;
@@ -199,6 +199,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public List<Jeu> getJeux() {
+        return jeux;
+    }
+
+    public void setJeux(List<Jeu> jeux) {
+        this.jeux = jeux;
     }
 
     public Boolean isAdmin(){

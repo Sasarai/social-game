@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Injectable} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
@@ -21,6 +21,7 @@ export class JeuSgComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     currentSearch: string;
     routeData: any;
+    routeParams: any;
     links: any;
     totalItems: any;
     queryCount: any;
@@ -29,6 +30,7 @@ export class JeuSgComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    typeVisu: any;
 
     constructor(
         private jeuService: JeuSgService,
@@ -49,6 +51,14 @@ export class JeuSgComponent implements OnInit, OnDestroy {
             this.reverse = data['pagingParams'].ascending;
             this.predicate = data['pagingParams'].predicate;
         });
+        this.routeParams = this.activatedRoute.params.subscribe((param) => {
+            this.typeVisu = param['type'];
+
+            if (this.jeux) {
+                this.loadAll();
+            }
+
+        });
         this.currentSearch = activatedRoute.snapshot.params['search'] ? activatedRoute.snapshot.params['search'] : '';
     }
 
@@ -57,7 +67,9 @@ export class JeuSgComponent implements OnInit, OnDestroy {
             this.jeuService.search({
                 query: this.currentSearch,
                 size: this.itemsPerPage,
-                sort: this.sort()}).subscribe(
+                sort: this.sort(),
+                typeVisu: this.typeVisu
+            }).subscribe(
                     (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
                     (res: ResponseWrapper) => this.onError(res.json)
                 );
@@ -66,7 +78,11 @@ export class JeuSgComponent implements OnInit, OnDestroy {
         this.jeuService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+            sort: this.sort(),
+            filtre: {
+                type: this.typeVisu
+            }
+        }).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
@@ -98,6 +114,7 @@ export class JeuSgComponent implements OnInit, OnDestroy {
         }]);
         this.loadAll();
     }
+
     search(query) {
         if (!query) {
             return this.clear();
@@ -111,6 +128,7 @@ export class JeuSgComponent implements OnInit, OnDestroy {
         }]);
         this.loadAll();
     }
+
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then((account) => {
@@ -120,6 +138,7 @@ export class JeuSgComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        console.log('Destroy !');
         this.eventManager.destroy(this.eventSubscriber);
     }
 

@@ -49,7 +49,7 @@ export const jeuRoute: Routes = [
         },
         canActivate: [UserRouteAccessService],
     }, {
-        path: 'jeu-sg/:id',
+        path: 'jeu-sg/:id/details',
         component: JeuSgDetailComponent,
         data: {
             authorities: ['ROLE_USER'],

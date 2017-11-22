@@ -1,7 +1,7 @@
 <div>
     <h2>
         <span jhiTranslate="socialGameApp.jeu.home.title.{{typeVisu}}">Jeus</span>
-        <button class="btn btn-primary float-right jh-create-entity create-jeu-sg" [routerLink]="['/', { outlets: { popup: ['jeu-sg-new'] } }]">
+        <button class="btn btn-primary float-right jh-create-entity create-jeu-sg" *ngIf="typeVisu === 'USER'" [routerLink]="['/', { outlets: { popup: ['jeu-sg-new'] } }]">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down"  jhiTranslate="socialGameApp.jeu.home.createLabel">
             Create new Jeu
@@ -41,7 +41,7 @@
             <tr *ngFor="let jeu of jeux ;trackBy: trackId">
                 <td>
                     <img [src]="'data:'+ jeu.imageContentType + ';base64,' + jeu.image" style="max-height: 30px;" alt="jeu image"/>
-                    <a [routerLink]="['../jeu-sg', jeu.id ]">{{jeu.nom}}</a>
+                    <a [routerLink]="['/jeu-sg/' + jeu.id + '/details']">{{jeu.nom}}</a>
                 </td>
                 <td>{{jeu.nombreJoueurMin}}</td>
                 <td>{{jeu.nombreJoueurMax}}</td>
@@ -50,7 +50,7 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../jeu-sg', jeu.id ]"
+                                [routerLink]="['/jeu-sg/' + jeu.id + '/details']"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>

@@ -5,7 +5,7 @@
     <div class="col-md-9">
         <!--<p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>-->
 
-        <div [ngSwitch]="isAuthenticated()">
+        <div [ngSwitch]="isAuthenticated() && account !== undefined">
             <h1 class="display-4" *ngSwitchCase="true" jhiTranslate="home.title" translateValues="{username: '{{account.login}}'}">Welcome, {{account.login}} !</h1>
             <!--<div class="alert alert-success" *ngSwitchCase="true">-->
                 <!--<span *ngIf="account" jhiTranslate="home.logged.message"-->

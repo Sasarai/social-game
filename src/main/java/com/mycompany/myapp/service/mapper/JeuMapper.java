@@ -15,6 +15,13 @@ public interface JeuMapper extends EntityMapper <JeuDTO, Jeu> {
     @Mapping(source = "proprietaire.login", target = "proprietaireLogin")
     JeuDTO toDto(Jeu jeu);
 
+    @Named("WithoutImageMapper")
+    @Mapping(source = "proprietaire.id", target = "proprietaireId")
+    @Mapping(source = "proprietaire.login", target = "proprietaireLogin")
+    @Mapping(target = "image", ignore = true)
+    @Mapping(target = "imageContentType", ignore = true)
+    JeuDTO toDtoWithoutImage(Jeu jeu);
+
     @Mapping(target = "evenements", ignore = true)
     @Mapping(target = "votes", ignore = true)
     @Mapping(source = "proprietaireId", target = "proprietaire")

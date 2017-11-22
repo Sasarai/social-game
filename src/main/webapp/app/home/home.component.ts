@@ -97,8 +97,6 @@ export class HomeComponent implements OnInit {
             this.principal.identity().then((account) => {
                 this.account = account;
 
-                console.log(account);
-
                 if (!isNullOrUndefined(this.account)) {
                     this.serviceEvenement.evenementUtilisateur(this.account.login).subscribe(
                         (res: ResponseWrapper) => this.recupererEvenementUtilisateur(res),

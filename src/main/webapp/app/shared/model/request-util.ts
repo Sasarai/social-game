@@ -14,7 +14,7 @@ export const createRequestOption = (req?: any): BaseRequestOptions => {
 
         if (req.filtre) {
 
-            let keyArray: any[] = Object.keys(req.filtre);
+            const keyArray: any[] = Object.keys(req.filtre);
 
             keyArray.forEach((key: any) => {
                 params.set(key, req.filtre[key]);

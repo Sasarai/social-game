@@ -13,6 +13,7 @@ public interface EvenementMapper extends EntityMapper <EvenementDTO, Evenement> 
 
     @Mapping(source = "sphere.id", target = "sphereId")
     @Mapping(source = "sphere.nom", target = "sphereNom")
+    @Mapping(target = "jeuxes", qualifiedByName = {"WithoutImageMapper"})
     EvenementDTO toDto(Evenement evenement);
 
     @Mapping(target = "votes", ignore = true)

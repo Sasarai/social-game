@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -118,5 +121,11 @@ public class JeuServiceImpl implements JeuService{
     @Transactional(readOnly = true)
     public Page<JeuDTO> findJeuAuthorisesUtilisateur(Pageable pageable){
         return jeuRepository.findByUserAuthorise(pageable).map(jeuMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<JeuDTO> recupererJeuxParIdSphere(Long idSphere){
+        return jeuRepository.findByIdSphere(idSphere).stream().map(jeuMapper::toDtoWithoutImage).collect(Collectors.toList());
     }
 }

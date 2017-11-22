@@ -10,6 +10,7 @@ export class JeuSgService {
 
     private resourceUrl = 'api/jeus';
     private resourceSearchUrl = 'api/_search/jeus';
+    private resourceSphereUrl = 'api/_sphere/jeus';
 
     constructor(private http: Http) { }
 
@@ -37,6 +38,12 @@ export class JeuSgService {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
+    }
+
+    getJeuSphere(idSphere: number): Observable<Response> {
+        return this.http.get(`${this.resourceSphereUrl}/${idSphere}`).map((res: Response) => {
+            return res.json()
+        })
     }
 
     delete(id: number): Observable<Response> {

@@ -38,10 +38,19 @@ export class EvenementSgDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.jeuService.query()
-            .subscribe((res: ResponseWrapper) => { this.jeus = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.jeuService.getJeuSphere(this.evenement.sphereId).subscribe(
+            (res: ResponseWrapper) => this.initJeux(res),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
         this.sphereService.query()
             .subscribe((res: ResponseWrapper) => { this.spheres = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+    }
+
+    initJeux(data) {
+
+        console.log(data);
+
+        this.jeus = data;
     }
 
     clear() {

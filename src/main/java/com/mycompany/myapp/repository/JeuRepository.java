@@ -3,6 +3,7 @@ package com.mycompany.myapp.repository;
 import com.mycompany.myapp.domain.Jeu;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -55,5 +56,22 @@ public interface JeuRepository extends JpaRepository<Jeu,Long> {
         "   )" +
         ")")
     Page<Jeu> findByUserAuthorise(Pageable pageable);
+
+    @Query(
+        "select jeu from Jeu jeu where jeu.id in (" +
+            "   select j.id from Sphere s " +
+            "   join s.abonnes a" +
+            "   join a.jeux j " +
+            "   where s.id = :idSphere" +
+        ") " +
+        "or " +
+        "jeu.id in (" +
+            "   select j.id from Sphere s " +
+            "   join s.administrateur a " +
+            "   join a.jeux j " +
+            "   where s.id = :idSphere" +
+        ")"
+    )
+    List<Jeu> findByIdSphere(@Param("idSphere") Long idSphere);
 
 }

@@ -4,6 +4,8 @@ import com.mycompany.myapp.service.dto.JeuDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing Jeu.
  */
@@ -53,4 +55,6 @@ public interface JeuService {
     Page<JeuDTO> findJeuUtilisateur(Pageable pageable);
 
     Page<JeuDTO> findJeuAuthorisesUtilisateur(Pageable pageable);
+
+    List<JeuDTO> recupererJeuxParIdSphere(Long idSphere);
 }

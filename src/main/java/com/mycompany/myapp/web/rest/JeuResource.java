@@ -109,14 +109,14 @@ public class JeuResource {
         log.debug("REST request to get a page of Jeus");
 
         Page<JeuDTO> page = null;
-        if (userService.getUserWithAuthorities() == null || userService.getUserWithAuthorities().isAdmin()) {
+        if (type == null && (userService.getUserWithAuthorities() == null || userService.getUserWithAuthorities().isAdmin())) {
             page = jeuService.findAll(pageable);
         }
-        else if(type.equals("USER")){
-            page = jeuService.findJeuUtilisateur(pageable);
+        else if("SPHERE".equals(type)) {
+            page = jeuService.findJeuAuthorisesUtilisateur(pageable);
         }
         else {
-            page = jeuService.findJeuAuthorisesUtilisateur(pageable);
+            page = jeuService.findJeuUtilisateur(pageable);
         }
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/jeus");
@@ -135,6 +135,13 @@ public class JeuResource {
         log.debug("REST request to get Jeu : {}", id);
         JeuDTO jeuDTO = jeuService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(jeuDTO));
+    }
+
+    @GetMapping("_sphere/jeus/{idSphere}")
+    @Timed
+    public List<JeuDTO> getJeuxSphere(@PathVariable Long idSphere){
+        log.debug("REST request to get sphere's games");
+        return jeuService.recupererJeuxParIdSphere(idSphere);
     }
 
     /**

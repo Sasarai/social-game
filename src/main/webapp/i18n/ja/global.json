@@ -11,6 +11,13 @@
                     "communaute": "私のコミュニティのゲームライブラリ"
                 }
             },
+            "sphere": {
+                "main": "区域",
+                "communaute": {
+                    "user": "私の区域",
+                    "all": "区域を検索する"
+                }
+            },
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "エンティティ",

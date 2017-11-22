@@ -2,7 +2,11 @@
     "socialGameApp": {
         "sphere" : {
             "home": {
-                "title": "Spheres",
+                "title": {
+                    "main": "Sphères",
+                    "USER": "Mes sphères",
+                    "ALL": "Explorer"
+                },
                 "createLabel": "Créer un nouveau Sphere",
                 "createOrEditLabel": "Créer ou éditer un Sphere",
                 "search": "Recherche pour Sphere"

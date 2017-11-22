@@ -34,7 +34,7 @@ export const jeuRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'socialGameApp.jeu.home.title'
+            pageTitle: 'socialGameApp.jeu.home.title.main'
         },
         canActivate: [UserRouteAccessService],
     }, {
@@ -53,7 +53,7 @@ export const jeuRoute: Routes = [
         component: JeuSgDetailComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'socialGameApp.jeu.home.title'
+            pageTitle: 'socialGameApp.jeu.home.title.main'
         },
         canActivate: [UserRouteAccessService]
     }

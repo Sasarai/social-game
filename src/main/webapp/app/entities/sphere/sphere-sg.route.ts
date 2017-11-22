@@ -34,15 +34,26 @@ export const sphereRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'socialGameApp.sphere.home.title'
+            pageTitle: 'socialGameApp.sphere.home.title.main'
         },
         canActivate: [UserRouteAccessService]
     }, {
-        path: 'sphere-sg/:id',
+        path: 'sphere-sg/:type',
+        component: SphereSgComponent,
+        resolve: {
+            'pagingParams': SphereSgResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'socialGameApp.sphere.home.title.main'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'sphere-sg/:id/details',
         component: SphereSgDetailComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'socialGameApp.sphere.home.title'
+            pageTitle: 'socialGameApp.sphere.home.title.main'
         },
         canActivate: [UserRouteAccessService]
     }

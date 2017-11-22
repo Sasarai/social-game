@@ -1,6 +1,6 @@
 <div>
     <h2>
-        <span jhiTranslate="socialGameApp.sphere.home.title">Spheres</span>
+        <span jhiTranslate="socialGameApp.sphere.home.title.{{typeVisu}}">Spheres</span>
         <button class="btn btn-primary float-right jh-create-entity create-sphere-sg" [routerLink]="['/', { outlets: { popup: ['sphere-sg-new'] } }]">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down"  jhiTranslate="socialGameApp.sphere.home.createLabel">
@@ -36,14 +36,14 @@
             </thead>
             <tbody>
             <tr *ngFor="let sphere of spheres ;trackBy: trackId">
-                <td><a [routerLink]="['../sphere-sg', sphere.id ]">{{sphere.nom}}</a></td>
+                <td><a [routerLink]="['/sphere-sg/' + sphere.id + '/details']">{{sphere.nom}}</a></td>
                 <td>
                     {{sphere.administrateurLogin}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../sphere-sg', sphere.id ]"
+                                [routerLink]="['/sphere-sg/' + sphere.id + '/details']"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>

@@ -144,4 +144,10 @@ public class SphereServiceImpl implements SphereService{
 
         return sphereMapper.toDto(sphere);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<SphereDTO> findSpheresPourUtilisateur(Pageable pageable){
+        return sphereRepository.findByUtilisateurInteresse(pageable).map(sphereMapper::toDto);
+    }
 }

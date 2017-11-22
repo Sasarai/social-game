@@ -21,6 +21,7 @@ currentAccount: Account;
     eventSubscriber: Subscription;
     currentSearch: string;
     routeData: any;
+    routeParams: any;
     links: any;
     totalItems: any;
     queryCount: any;
@@ -29,6 +30,7 @@ currentAccount: Account;
     predicate: any;
     previousPage: any;
     reverse: any;
+    typeVisu: any;
 
     constructor(
         private sphereService: SphereSgService,
@@ -48,6 +50,13 @@ currentAccount: Account;
             this.reverse = data['pagingParams'].ascending;
             this.predicate = data['pagingParams'].predicate;
         });
+        this.routeParams = this.activatedRoute.params.subscribe((param) => {
+            this.typeVisu = param['type'];
+
+            if (this.spheres) {
+                this.loadAll();
+            }
+        });
         this.currentSearch = activatedRoute.snapshot.params['search'] ? activatedRoute.snapshot.params['search'] : '';
     }
 
@@ -56,7 +65,11 @@ currentAccount: Account;
             this.sphereService.search({
                 query: this.currentSearch,
                 size: this.itemsPerPage,
-                sort: this.sort()}).subscribe(
+                sort: this.sort(),
+                filtre: {
+                    type: this.typeVisu
+                }
+            }).subscribe(
                     (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
                     (res: ResponseWrapper) => this.onError(res.json)
                 );
@@ -65,7 +78,11 @@ currentAccount: Account;
         this.sphereService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+            sort: this.sort(),
+            filtre: {
+                type: this.typeVisu
+            }
+        }).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );

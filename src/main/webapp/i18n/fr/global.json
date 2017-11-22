@@ -11,6 +11,13 @@
                     "communaute": "Ludothèque de ma communauté"
                 }
             },
+            "sphere": {
+                "main": "Sphères",
+                "communaute": {
+                    "user": "Mes sphères",
+                    "all": "Explorer"
+                }
+            },
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entités",

@@ -68,7 +68,9 @@ export class JeuSgComponent implements OnInit, OnDestroy {
                 query: this.currentSearch,
                 size: this.itemsPerPage,
                 sort: this.sort(),
-                typeVisu: this.typeVisu
+                filtre: {
+                    type: this.typeVisu
+                }
             }).subscribe(
                     (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
                     (res: ResponseWrapper) => this.onError(res.json)

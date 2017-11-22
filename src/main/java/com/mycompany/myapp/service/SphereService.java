@@ -53,4 +53,6 @@ public interface SphereService {
     SphereDTO abonnement(SphereDTO sphereDTO, String loginUtilisateur);
 
     SphereDTO desabonnement(SphereDTO sphereDTO, String loginUtilisateur);
+
+    Page<SphereDTO> findSpheresPourUtilisateur(Pageable pageable);
 }

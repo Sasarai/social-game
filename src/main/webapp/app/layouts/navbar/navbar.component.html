@@ -41,6 +41,32 @@
                     </li>
                 </ul>
             </li>
+
+            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="sphere-menu">
+                    <span>
+                        <i class="fa fa-ravelry" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.sphere.main">
+                            Spheres
+                        </span>
+                        <b class="caret"></b>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li>
+                        <a class="dropdown-item" [routerLink]="['sphere-sg', 'USER']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.sphere.communaute.user">Mes sphères</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" [routerLink]="['sphere-sg', 'ALL']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.sphere.communaute.all">Explorer</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <!--<li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
                 <!--<a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">-->

@@ -2,7 +2,11 @@
     "socialGameApp": {
         "sphere" : {
             "home": {
-                "title": "Spheres",
+                "title": {
+                    "main": "区域",
+                    "USER": "私の区域",
+                    "ALL": "探る"
+                },
                 "createLabel": "Sphere を追加",
                 "createOrEditLabel": "Sphereを追加または編集",
                 "search": "Search for Sphere"

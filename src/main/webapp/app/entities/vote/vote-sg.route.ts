@@ -8,6 +8,7 @@ import { VoteSgComponent } from './vote-sg.component';
 import { VoteSgDetailComponent } from './vote-sg-detail.component';
 import { VoteSgPopupComponent } from './vote-sg-dialog.component';
 import { VoteSgDeletePopupComponent } from './vote-sg-delete-dialog.component';
+import { VoteAttenteSgComponent } from './vote-attente-sg.component';
 
 @Injectable()
 export class VoteSgResolvePagingParams implements Resolve<any> {
@@ -29,6 +30,17 @@ export const voteRoute: Routes = [
     {
         path: 'vote-sg',
         component: VoteSgComponent,
+        resolve: {
+            'pagingParams': VoteSgResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'socialGameApp.vote.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'vote-sg/attente',
+        component: VoteAttenteSgComponent,
         resolve: {
             'pagingParams': VoteSgResolvePagingParams
         },

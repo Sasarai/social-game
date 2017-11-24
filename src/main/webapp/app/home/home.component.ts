@@ -7,7 +7,6 @@ import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import {EvenementSgService} from '../entities/evenement/evenement-sg.service';
 import {ResponseWrapper} from '../shared/model/response-wrapper.model';
 import {ElementCalendrier} from '../shared/component/element-calendrier.model';
-import {elementAt} from 'rxjs/operator/elementAt';
 import {isNullOrUndefined} from 'util';
 
 @Component({
@@ -24,6 +23,7 @@ export class HomeComponent implements OnInit {
     options: GridsterConfig;
     dashboard: Array<GridsterItem>;
     evenementsUtilisateur: ElementCalendrier[];
+    nombreEvenementAVoter: number;
 
     constructor(
         private principal: Principal,
@@ -36,12 +36,19 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
 
+        this.nombreEvenementAVoter = 0;
+
         this.principal.identity().then((account) => {
             this.account = account;
 
             if (this.account !== null) {
                 this.serviceEvenement.evenementUtilisateur(this.account.login).subscribe(
                     (res: ResponseWrapper) => this.recupererEvenementUtilisateur(res),
+                    (res: ResponseWrapper) => this.onError(res)
+                );
+
+                this.serviceEvenement.nombreEvenementUtilisateurAVoter().subscribe(
+                    (res: ResponseWrapper) => this.recupererNombreEvenementAVoterUtilisateur(res),
                     (res: ResponseWrapper) => this.onError(res)
                 );
             }
@@ -74,14 +81,14 @@ export class HomeComponent implements OnInit {
                 rows: 5,
                 y: 0,
                 x: 2,
-                'type': 'messages'
+                'type': 'nouveaute'
             },
             {
                 cols: 2,
                 rows: 3,
                 y: 5,
                 x: 2,
-                'type': 'nouveaute'
+                'type': 'votes'
             }
         ];
     }
@@ -100,6 +107,11 @@ export class HomeComponent implements OnInit {
                 if (!isNullOrUndefined(this.account)) {
                     this.serviceEvenement.evenementUtilisateur(this.account.login).subscribe(
                         (res: ResponseWrapper) => this.recupererEvenementUtilisateur(res),
+                        (res: ResponseWrapper) => this.onError(res)
+                    );
+
+                    this.serviceEvenement.nombreEvenementUtilisateurAVoter().subscribe(
+                        (res: ResponseWrapper) => this.recupererNombreEvenementAVoterUtilisateur(res),
                         (res: ResponseWrapper) => this.onError(res)
                     );
                 }
@@ -130,6 +142,10 @@ export class HomeComponent implements OnInit {
             this.evenementsUtilisateur.push(element);
         }
 
+    }
+
+    private recupererNombreEvenementAVoterUtilisateur(data) {
+        this.nombreEvenementAVoter = data;
     }
 
     private onError(error) {

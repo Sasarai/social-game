@@ -65,6 +65,18 @@ export class EvenementSgService {
         })
     }
 
+    nombreEvenementUtilisateurAVoter(): Observable<Response> {
+        return this.http.get(`${this.resourceUserUrl}/nombre_a_vote`).map((res: Response) => {
+            return res.json();
+        })
+    }
+
+    evenementSansVoteUtilisateur(req?: any): Observable<ResponseWrapper> {
+        const options = createRequestOption(req);
+        return this.http.get(this.resourceUserUrl + '/evenement_a_vote', options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         for (let i = 0; i < jsonResponse.length; i++) {

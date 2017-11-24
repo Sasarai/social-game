@@ -1,5 +1,6 @@
 package com.mycompany.myapp.service.impl;
 
+import com.mycompany.myapp.domain.Vote;
 import com.mycompany.myapp.service.EvenementService;
 import com.mycompany.myapp.domain.Evenement;
 import com.mycompany.myapp.repository.EvenementRepository;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -121,5 +123,11 @@ public class EvenementServiceImpl implements EvenementService{
     @Transactional(readOnly = true)
     public List<EvenementDTO> recupererParUtilisateurAyantAcces(String login){
         return evenementRepository.findByUtilisateurAyantAcces(login).stream().map(evenementMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<EvenementDTO> recupererEvenementsPourUtilisateurCourantPourVoter(){
+        return evenementRepository.findEvenementsParUtilisateurNonVotant().stream().map(evenementMapper::toDto).collect(Collectors.toList());
     }
 }

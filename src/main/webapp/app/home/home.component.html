@@ -17,16 +17,22 @@
             <div class="grille" *ngSwitchCase="true">
                 <gridster [options]="options">
                     <gridster-item [item]="item" *ngFor="let item of dashboard" [ngSwitch]="item['type']">
+                        <h4 jhiTranslate="home.section.{{item['type']}}.titre">Titre</h4>
                         <div *ngSwitchCase="'calendrier'" style="height: 100%; position: relative;">
                             <jhi-calendrier-sg *ngIf="isAuthenticated()" [elements]="evenementsUtilisateur"></jhi-calendrier-sg>
                         </div>
 
-                        <div *ngSwitchCase="'messages'">
-                            <h4>Messages</h4>
+                        <div *ngSwitchCase="'nouveaute'">
                         </div>
 
-                        <div *ngSwitchCase="'nouveaute'">
-                            <h4>Nouveautés</h4>
+                        <div *ngSwitchCase="'votes'">
+                            <div jhiTranslate="home.section.votes.message" translateValues="{nombreEvenement: '{{nombreEvenementAVoter}}'}">
+                                Vous avez {{nombreEvenementAVoter}} vote(s) en attente
+                            </div>
+                            <button type="button" class="btn btn-link" *ngIf="nombreEvenementAVoter > 0" routerLink="vote-sg">
+                                <i class="fa fa-envelope-open-o"></i>
+                                <span jhiTranslate="home.section.votes.bouton"></span>
+                            </button>
                         </div>
 
                     </gridster-item>

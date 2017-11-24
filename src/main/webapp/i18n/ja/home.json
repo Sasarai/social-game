@@ -3,7 +3,7 @@
         "title": "ようこそ, {{username}} !",
         "subtitle": "ここはトップページです。",
         "logged": {
-            "message": "\"{{username}}\"としてログインしています。"
+            "message": "{{username}}としてログインしています。"
         },
         "question": "JHipsterに関して質問があれば:",
         "link": {
@@ -14,6 +14,19 @@
             "follow": "Twitterの @java_hipster"
         },
         "like": "JHipsterを気に入ったら、是非スターをつけてください。",
-        "github": "GitHub"
+        "github": "GitHub",
+        "section": {
+            "calendrier": {
+                "titre": "私の月の出来事"
+            },
+            "nouveaute": {
+                "titre": "ニュース"
+            },
+            "votes": {
+                "titre": "投票",
+                "message": "{{nombreEvenement}} つの投票が保留中",
+                "bouton": "投票に行く"
+            }
+        }
     }
 }

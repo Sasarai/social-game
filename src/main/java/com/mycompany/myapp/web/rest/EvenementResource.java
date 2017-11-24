@@ -135,6 +135,14 @@ public class EvenementResource {
         return evenementService.recupererParUtilisateurAyantAcces(loginUtilisateur);
     }
 
+    @GetMapping("_user/evenements/nombre_a_vote")
+    @Timed
+    public Integer getNombreEvenementAVoter(){
+        log.debug("REST request to get number of user's vote that missing");
+        List<EvenementDTO> evenement = evenementService.recupererEvenementsPourUtilisateurCourantPourVoter();
+        return evenement.size();
+    }
+
     /**
      * SEARCH  /_search/evenements?query=:query : search for the evenement corresponding
      * to the query.

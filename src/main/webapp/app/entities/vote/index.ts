@@ -6,3 +6,4 @@ export * from './vote-sg-delete-dialog.component';
 export * from './vote-sg-detail.component';
 export * from './vote-sg.component';
 export * from './vote-sg.route';
+export * from './vote-attente-sg.component';

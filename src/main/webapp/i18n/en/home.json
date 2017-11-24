@@ -3,7 +3,7 @@
         "title": "Welcome, {{username}} !",
         "subtitle": "This is your homepage",
         "logged": {
-            "message": "You are logged in as user \"{{username}}\"."
+            "message": "You are logged in as user {{username}}."
         },
         "question": "If you have any question on JHipster:",
         "link": {
@@ -14,6 +14,19 @@
             "follow": "follow @java_hipster on Twitter"
         },
         "like": "If you like JHipster, don't forget to give us a star on",
-        "github": "GitHub"
+        "github": "GitHub",
+        "section": {
+            "calendrier": {
+                "titre": "My month's events"
+            },
+            "nouveaute": {
+                "titre": "News"
+            },
+            "votes": {
+                "titre": "Votes",
+                "message": "{{nombreEvenement}} vote(s) pending",
+                "bouton": "Go vote !"
+            }
+        }
     }
 }

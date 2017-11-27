@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.VoteService;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.web.rest.util.PaginationUtil;
@@ -39,7 +40,10 @@ public class VoteResource {
 
     private final VoteService voteService;
 
-    public VoteResource(VoteService voteService) {
+    private final UserService userService;
+
+    public VoteResource(VoteService voteService, UserService userService) {
+        this.userService = userService;
         this.voteService = voteService;
     }
 
@@ -57,6 +61,11 @@ public class VoteResource {
         if (voteDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new vote cannot already have an ID")).body(null);
         }
+
+        Long userId = userService.getUserWithAuthorities().getId();
+
+        voteDTO.setUserId(userId);
+
         VoteDTO result = voteService.save(voteDTO);
         return ResponseEntity.created(new URI("/api/votes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

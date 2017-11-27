@@ -5,7 +5,8 @@
                 "title": "Votes en cours",
                 "createLabel": "Créer un nouveau Vote",
                 "createOrEditLabel": "Créer ou éditer un Vote",
-                "search": "Recherche pour Vote"
+                "search": "Recherche pour Vote",
+                "voter": "Mon vote"
             },
             "created": "Un nouveau Vote a été créé avec l'identifiant {{ param }}",
             "updated": "Le Vote avec l'identifiant {{ param }} a été mis à jour",
@@ -19,7 +20,10 @@
             "evenement": "Evenement",
             "user": "User",
             "jeu": "Jeu",
-            "dateFin": "Votez avant le"
+            "dateFin": "Votez avant le",
+            "message": {
+                "aucun": "Aucun vote en attente"
+            }
         }
     }
 }

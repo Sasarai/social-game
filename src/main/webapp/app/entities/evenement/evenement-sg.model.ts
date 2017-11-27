@@ -1,4 +1,5 @@
 import { BaseEntity } from './../../shared';
+import {JeuSg} from '../jeu/jeu-sg.model';
 
 interface EvenementInterface {
     id?: number;
@@ -6,7 +7,7 @@ interface EvenementInterface {
     lieu?: string;
     nom?: string;
     dateFinVote?: any;
-    jeuxes?: BaseEntity[];
+    jeuxes?: JeuSg[];
     votes?: BaseEntity[];
     sphereId?: number;
 }
@@ -18,7 +19,7 @@ export class EvenementSg implements BaseEntity {
     public lieu?: string;
     public nom?: string;
     public dateFinVote?: any;
-    public jeuxes?: BaseEntity[];
+    public jeuxes?: JeuSg[];
     public votes?: BaseEntity[];
     public sphereId?: number;
 

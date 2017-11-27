@@ -5,7 +5,8 @@
                 "title": "Current votes",
                 "createLabel": "Create a new Vote",
                 "createOrEditLabel": "Create or edit a Vote",
-                "search": "Search for Vote"
+                "search": "Search for Vote",
+                "voter": "My vote"
             },
             "created": "A new Vote is created with identifier {{ param }}",
             "updated": "A Vote is updated with identifier {{ param }}",
@@ -19,7 +20,10 @@
             "evenement": "Evenement",
             "user": "User",
             "jeu": "Jeu",
-            "dateFin": "Vote until"
+            "dateFin": "Vote until",
+            "message": {
+                "aucun": "No vote pending"
+            }
         }
     }
 }

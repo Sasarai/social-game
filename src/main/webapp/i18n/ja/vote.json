@@ -5,7 +5,8 @@
                 "title": "現在の投票数",
                 "createLabel": "Vote を追加",
                 "createOrEditLabel": "Voteを追加または編集",
-                "search": "Search for Vote"
+                "search": "Search for Vote",
+                "voter": "私の投票"
             },
             "created": "A new Vote is created with identifier {{ param }}",
             "updated": "A Vote is updated with identifier {{ param }}",
@@ -19,7 +20,10 @@
             "evenement": "Evenement",
             "user": "User",
             "jeu": "Jeu",
-            "dateFin": "投票まで"
+            "dateFin": "投票まで",
+            "message": {
+                "aucun": "投票が保留されていない"
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ import com.mycompany.myapp.domain.Evenement;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.domain.Jeu;
 import com.mycompany.myapp.repository.VoteRepository;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.VoteService;
 import com.mycompany.myapp.repository.search.VoteSearchRepository;
 import com.mycompany.myapp.service.dto.VoteDTO;
@@ -68,6 +69,9 @@ public class VoteResourceIntTest {
     @Autowired
     private EntityManager em;
 
+    @Autowired
+    private UserService userService;
+
     private MockMvc restVoteMockMvc;
 
     private Vote vote;
@@ -75,7 +79,7 @@ public class VoteResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        VoteResource voteResource = new VoteResource(voteService);
+        VoteResource voteResource = new VoteResource(voteService, userService);
         this.restVoteMockMvc = MockMvcBuilders.standaloneSetup(voteResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -57,4 +57,6 @@ public interface EvenementService {
     List<EvenementDTO> recupererParUtilisateurAyantAcces(String login);
 
     List<EvenementDTO> recupererEvenementsPourUtilisateurCourantPourVoter();
+
+    Page<EvenementDTO> recupererEvenementsPourUtilisateurCourantPourVoter(Pageable pageable);
 }

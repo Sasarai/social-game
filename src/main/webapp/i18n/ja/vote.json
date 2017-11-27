@@ -2,7 +2,7 @@
     "socialGameApp": {
         "vote" : {
             "home": {
-                "title": "Votes",
+                "title": "現在の投票数",
                 "createLabel": "Vote を追加",
                 "createOrEditLabel": "Voteを追加または編集",
                 "search": "Search for Vote"
@@ -18,7 +18,8 @@
             },
             "evenement": "Evenement",
             "user": "User",
-            "jeu": "Jeu"
+            "jeu": "Jeu",
+            "dateFin": "投票まで"
         }
     }
 }

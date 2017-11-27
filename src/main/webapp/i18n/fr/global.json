@@ -120,7 +120,8 @@
             "view": "Voir",
             "rejoindre": "Rejoindre",
             "quitter": "Quitter",
-            "event": "Organiser évènement"
+            "event": "Organiser évènement",
+            "voter": "Voter !"
         },
         "detail": {
             "field": "Champs",

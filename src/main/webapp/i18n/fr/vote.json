@@ -2,7 +2,7 @@
     "socialGameApp": {
         "vote" : {
             "home": {
-                "title": "Votes",
+                "title": "Votes en cours",
                 "createLabel": "Créer un nouveau Vote",
                 "createOrEditLabel": "Créer ou éditer un Vote",
                 "search": "Recherche pour Vote"
@@ -18,7 +18,8 @@
             },
             "evenement": "Evenement",
             "user": "User",
-            "jeu": "Jeu"
+            "jeu": "Jeu",
+            "dateFin": "Votez avant le"
         }
     }
 }

@@ -122,6 +122,7 @@ export class VoteAttenteSgComponent implements OnInit, OnDestroy {
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
+        console.log(data);
         this.evenements = data;
     }
 

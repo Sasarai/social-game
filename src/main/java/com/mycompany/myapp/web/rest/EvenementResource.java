@@ -143,6 +143,15 @@ public class EvenementResource {
         return evenement.size();
     }
 
+    @GetMapping("_user/evenements/evenement_a_vote")
+    @Timed
+    public ResponseEntity<List<EvenementDTO>> getEvenementsNonVotesPourUtilisateur(@ApiParam Pageable pageable) {
+        log.debug("REST request to get a page of Evenements");
+        Page<EvenementDTO> page = evenementService.recupererEvenementsPourUtilisateurCourantPourVoter(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/evenements");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
     /**
      * SEARCH  /_search/evenements?query=:query : search for the evenement corresponding
      * to the query.

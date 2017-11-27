@@ -29,7 +29,7 @@
                             <div jhiTranslate="home.section.votes.message" translateValues="{nombreEvenement: '{{nombreEvenementAVoter}}'}">
                                 Vous avez {{nombreEvenementAVoter}} vote(s) en attente
                             </div>
-                            <button type="button" class="btn btn-link" *ngIf="nombreEvenementAVoter > 0" routerLink="vote-sg">
+                            <button type="button" class="btn btn-link" *ngIf="nombreEvenementAVoter > 0" routerLink="vote-sg/attente">
                                 <i class="fa fa-envelope-open-o"></i>
                                 <span jhiTranslate="home.section.votes.bouton"></span>
                             </button>

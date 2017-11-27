@@ -130,4 +130,11 @@ public class EvenementServiceImpl implements EvenementService{
     public List<EvenementDTO> recupererEvenementsPourUtilisateurCourantPourVoter(){
         return evenementRepository.findEvenementsParUtilisateurNonVotant().stream().map(evenementMapper::toDto).collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<EvenementDTO> recupererEvenementsPourUtilisateurCourantPourVoter(Pageable pageable){
+        Page<Evenement> result = evenementRepository.findEvenementsParUtilisateurNonVotant(pageable);
+        return result.map(evenementMapper::toDto);
+    }
 }

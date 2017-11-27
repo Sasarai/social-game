@@ -117,7 +117,8 @@
             "view": "View",
             "rejoindre": "Join",
             "quitter": "Leave",
-            "event": "Plan event"
+            "event": "Plan event",
+            "voter": "Vote !"
         },
         "detail": {
             "field": "Field",

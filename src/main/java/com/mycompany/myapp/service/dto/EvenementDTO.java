@@ -4,9 +4,7 @@ package com.mycompany.myapp.service.dto;
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * A DTO for the Evenement entity.
@@ -28,6 +26,8 @@ public class EvenementDTO implements Serializable {
     private Long sphereId;
 
     private String sphereNom;
+
+    private List<String> votants = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -91,6 +91,14 @@ public class EvenementDTO implements Serializable {
 
     public void setSphereNom(String sphereNom) {
         this.sphereNom = sphereNom;
+    }
+
+    public List<String> getVotants() {
+        return votants;
+    }
+
+    public void setVotants(List<String> votants) {
+        this.votants = votants;
     }
 
     @Override

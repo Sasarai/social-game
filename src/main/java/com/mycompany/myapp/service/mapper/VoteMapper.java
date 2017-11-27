@@ -32,4 +32,12 @@ public interface VoteMapper extends EntityMapper <VoteDTO, Vote> {
         vote.setId(id);
         return vote;
     }
+
+    default String toString(Vote vote){
+        if(vote.getUser() == null){
+            return null;
+        }
+
+        return vote.getUser().getLogin();
+    }
 }

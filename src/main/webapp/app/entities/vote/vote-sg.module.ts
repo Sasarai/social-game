@@ -16,6 +16,7 @@ import {
     votePopupRoute,
     VoteSgResolvePagingParams,
 } from './';
+import {VoteAttenteSgComponent} from './vote-attente-sg.component';
 
 const ENTITY_STATES = [
     ...voteRoute,
@@ -30,6 +31,7 @@ const ENTITY_STATES = [
     ],
     declarations: [
         VoteSgComponent,
+        VoteAttenteSgComponent,
         VoteSgDetailComponent,
         VoteSgDialogComponent,
         VoteSgDeleteDialogComponent,
@@ -38,6 +40,7 @@ const ENTITY_STATES = [
     ],
     entryComponents: [
         VoteSgComponent,
+        VoteAttenteSgComponent,
         VoteSgDialogComponent,
         VoteSgPopupComponent,
         VoteSgDeleteDialogComponent,

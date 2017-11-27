@@ -117,7 +117,8 @@
             "view": "表示",
             "rejoindre": "会います",
             "quitter": "去ります",
-            "event": "イベントを開催する"
+            "event": "イベントを開催する",
+            "voter": "投票 !"
         },
         "detail": {
             "field": "フィールド",

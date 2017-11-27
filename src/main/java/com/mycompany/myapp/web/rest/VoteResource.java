@@ -154,4 +154,10 @@ public class VoteResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/_evenement/votes/{idEvenement}")
+    @Timed
+    public List<VoteDTO> getVotesPourEvenement(@PathVariable Long idEvenement){
+        return voteService.getVotesPourEvenement(idEvenement);
+    }
+
 }

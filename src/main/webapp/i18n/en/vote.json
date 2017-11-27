@@ -23,6 +23,10 @@
             "dateFin": "Vote until",
             "message": {
                 "aucun": "No vote pending"
+            },
+            "popup": {
+                "titre": "Votes' summary",
+                "aucun": "No vote"
             }
         }
     }

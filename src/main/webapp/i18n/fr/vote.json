@@ -23,6 +23,10 @@
             "dateFin": "Votez avant le",
             "message": {
                 "aucun": "Aucun vote en attente"
+            },
+            "popup": {
+                "titre": "Résumé des votes",
+                "aucun": "Aucun vote"
             }
         }
     }

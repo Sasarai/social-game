@@ -10,6 +10,7 @@ export class VoteSgService {
 
     private resourceUrl = 'api/votes';
     private resourceSearchUrl = 'api/_search/votes';
+    private resourceEvenementUrl = 'api/_evenement/votes';
 
     constructor(private http: Http) { }
 
@@ -47,6 +48,12 @@ export class VoteSgService {
         const options = createRequestOption(req);
         return this.http.get(this.resourceSearchUrl, options)
             .map((res: any) => this.convertResponse(res));
+    }
+
+    getDetailVotesEvenement(idEvenement: number): Observable<Response> {
+        return this.http.get(`${this.resourceEvenementUrl}/${idEvenement}`).map((res: Response) => {
+            return res.json();
+        })
     }
 
     private convertResponse(res: Response): ResponseWrapper {

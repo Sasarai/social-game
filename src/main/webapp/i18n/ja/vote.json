@@ -6,7 +6,8 @@
                 "createLabel": "Vote を追加",
                 "createOrEditLabel": "Voteを追加または編集",
                 "search": "Search for Vote",
-                "voter": "私の投票"
+                "voter": "私の投票",
+                "resume": "投票の要約"
             },
             "created": "A new Vote is created with identifier {{ param }}",
             "updated": "A Vote is updated with identifier {{ param }}",
@@ -23,6 +24,10 @@
             "dateFin": "投票まで",
             "message": {
                 "aucun": "投票が保留されていない"
+            },
+            "popup": {
+                "titre": "投票の要約",
+                "aucun": "投票なし"
             }
         }
     }

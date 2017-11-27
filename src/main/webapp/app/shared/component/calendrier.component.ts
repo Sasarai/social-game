@@ -5,9 +5,10 @@ import * as $ from 'jquery';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {isNullOrUndefined} from 'util';
 import {isDefined} from '@ng-bootstrap/ng-bootstrap/util/util';
+import {JhiEventManager} from 'ng-jhipster';
 
 enum CouleurElement {
-    PRUNE = '#8B4241',
+    PRUNE = '#AF4847',
     ORANGE = '#FA9F42',
     BLEU = '#2B4162',
     VERT = '#0B6E4F',
@@ -25,7 +26,10 @@ export class CalendrierComponent implements OnInit, AfterViewInit, OnDestroy {
     calendrier: any;
     couleurs: CouleurElement[];
 
-    constructor(private i18n: TranslateService) {
+    constructor(
+        private i18n: TranslateService,
+        private eventManager: JhiEventManager
+    ) {
         i18n.onLangChange.subscribe((event: LangChangeEvent) => {
             this.calendrier.fullCalendar('option', 'locale', this.i18n.currentLang);
             this.calendrier.fullCalendar('option', 'aspectRatio', 8);
@@ -69,7 +73,8 @@ export class CalendrierComponent implements OnInit, AfterViewInit, OnDestroy {
                 left: 'title',
                 center: '',
                 right: ''
-            }
+            },
+            eventClick: (calEvent) => this.eventManager.broadcast({name: 'clickElementCalendrier', content: calEvent})
         });
 
         this.calendrier.fullCalendar('option', 'aspectRatio', 8);
@@ -107,7 +112,8 @@ export class CalendrierComponent implements OnInit, AfterViewInit, OnDestroy {
                 title: element.titre,
                 start: element.debut,
                 end: element.fin,
-                color: couleur
+                color: couleur,
+                id: element.id
             });
         }
 

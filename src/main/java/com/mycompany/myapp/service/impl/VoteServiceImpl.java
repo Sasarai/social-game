@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -106,5 +109,11 @@ public class VoteServiceImpl implements VoteService{
         log.debug("Request to search for a page of Votes for query {}", query);
         Page<Vote> result = voteSearchRepository.search(queryStringQuery(query), pageable);
         return result.map(voteMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<VoteDTO> getVotesPourEvenement(Long idEvenement) {
+        return voteRepository.findByIdEvenement(idEvenement).stream().map(voteMapper::toDto).collect(Collectors.toList());
     }
 }

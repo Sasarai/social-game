@@ -6,6 +6,7 @@ import { SocialGameSharedModule } from '../shared';
 import { HOME_ROUTE, HomeComponent } from './';
 
 import { GridsterModule } from 'angular-gridster2'
+import {PopupEventCalendrierComponent} from './home.component';
 
 @NgModule({
     imports: [
@@ -15,8 +16,10 @@ import { GridsterModule } from 'angular-gridster2'
     ],
     declarations: [
         HomeComponent,
+        PopupEventCalendrierComponent
     ],
     entryComponents: [
+        PopupEventCalendrierComponent
     ],
     providers: [
     ],

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
 import { Account, LoginModalService, Principal } from '../shared';
@@ -8,6 +8,8 @@ import {EvenementSgService} from '../entities/evenement/evenement-sg.service';
 import {ResponseWrapper} from '../shared/model/response-wrapper.model';
 import {ElementCalendrier} from '../shared/component/element-calendrier.model';
 import {isNullOrUndefined} from 'util';
+import {VoteSg} from '../entities/vote/vote-sg.model';
+import {VoteSgService} from '../entities/vote/vote-sg.service';
 
 @Component({
     selector: 'jhi-home',
@@ -30,7 +32,8 @@ export class HomeComponent implements OnInit {
         private loginModalService: LoginModalService,
         private eventManager: JhiEventManager,
         private serviceEvenement: EvenementSgService,
-        private alertService: JhiAlertService
+        private alertService: JhiAlertService,
+        private modalService: NgbModal
     ) {
     }
 
@@ -57,6 +60,8 @@ export class HomeComponent implements OnInit {
         this.registerAuthenticationSuccess();
 
         this.registerLogOutSuccess();
+
+        this.registerOnCalendarClickEvent();
 
         this.options = {
             itemChangeCallback: this.itemChange,
@@ -119,6 +124,13 @@ export class HomeComponent implements OnInit {
         });
     }
 
+    registerOnCalendarClickEvent() {
+        this.eventManager.subscribe('clickElementCalendrier', (element) => {
+            const modalRef = this.modalService.open(PopupEventCalendrierComponent);
+            modalRef.componentInstance.idEvenement = element.content.id;
+        })
+    }
+
     isAuthenticated() {
         return this.principal.isAuthenticated();
     }
@@ -151,4 +163,85 @@ export class HomeComponent implements OnInit {
     private onError(error) {
         this.alertService.error(error.message, null, null);
     }
+}
+
+@Component({
+    selector: 'jhi-popup-event-sg',
+    templateUrl: './popup-event-calendrier.component.html'
+})
+export class PopupEventCalendrierComponent implements OnInit, OnDestroy {
+    idEvenement: number;
+    votes: VoteSg[];
+
+    votesResumes: VoteResumeSg[];
+
+    constructor(
+        private voteService: VoteSgService,
+        public activeModal: NgbActiveModal,
+        private alertService: JhiAlertService
+    ) {
+
+    }
+
+    ngOnInit() {
+        this.voteService.getDetailVotesEvenement(this.idEvenement).subscribe(
+            (res: ResponseWrapper) => this.recupererDetailVotes(res),
+            (res: ResponseWrapper) => this.onError(res)
+        )
+    }
+
+    ngOnDestroy() {
+
+    }
+
+    clear() {
+        this.activeModal.dismiss('cancel');
+    }
+
+    private recupererDetailVotes(data) {
+        this.votes = data;
+
+        this.votesResumes = this.getVotesResumes(data);
+
+    }
+
+    private onError(error) {
+        this.alertService.error(error.message, null, null);
+    }
+
+    private getVotesResumes(data) {
+        const resume: any = [];
+        let nombreTotal: any = 0;
+
+        for (const entry of data) {
+            nombreTotal++;
+            if (resume[entry.jeuNom]) {
+                resume[entry.jeuNom] = resume[entry.jeuNom] + 1;
+            } else {
+                resume[entry.jeuNom] = 1;
+            }
+        }
+
+        const retour: VoteResumeSg[] = [];
+
+        for (const nomJeu in resume) {
+
+            let vote: VoteResumeSg = new VoteResumeSg;
+
+            vote.nombreTotalVotant = nombreTotal;
+            vote.nomJeu = nomJeu;
+            vote.nombreVotant = resume[nomJeu];
+
+            retour.push(vote);
+        }
+
+        return retour;
+
+    }
+}
+
+export class VoteResumeSg {
+    nomJeu: string;
+    nombreVotant: number;
+    nombreTotalVotant: number;
 }

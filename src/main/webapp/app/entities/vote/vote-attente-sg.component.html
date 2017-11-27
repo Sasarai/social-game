@@ -4,7 +4,7 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <span ngSwitch="evenements && evenements.length > 0">
+    <span [ngSwitch]="evenements && evenements.length > 0">
         <span *ngSwitchCase="true">
             <div class="table-responsive" >
                 <table class="table table-striped">

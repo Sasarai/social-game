@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -136,5 +138,11 @@ public class EvenementServiceImpl implements EvenementService{
     public Page<EvenementDTO> recupererEvenementsPourUtilisateurCourantPourVoter(Pageable pageable){
         Page<Evenement> result = evenementRepository.findEvenementsParUtilisateurNonVotant(pageable);
         return result.map(evenementMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Evenement> recupererEmailAdministrateurSpherePourEvenementFinDeVote(ZonedDateTime date){
+        return evenementRepository.getEmailEvenementFinDeVote(date);
     }
 }

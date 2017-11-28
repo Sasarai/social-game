@@ -1,9 +1,12 @@
 package com.mycompany.myapp.service;
 
+import com.mycompany.myapp.domain.Evenement;
 import com.mycompany.myapp.service.dto.EvenementDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -59,4 +62,6 @@ public interface EvenementService {
     List<EvenementDTO> recupererEvenementsPourUtilisateurCourantPourVoter();
 
     Page<EvenementDTO> recupererEvenementsPourUtilisateurCourantPourVoter(Pageable pageable);
+
+    List<Evenement> recupererEmailAdministrateurSpherePourEvenementFinDeVote(ZonedDateTime date);
 }

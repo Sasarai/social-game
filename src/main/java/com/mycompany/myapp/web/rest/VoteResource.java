@@ -62,9 +62,10 @@ public class VoteResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new vote cannot already have an ID")).body(null);
         }
 
-        Long userId = userService.getUserWithAuthorities().getId();
-
-        voteDTO.setUserId(userId);
+        if (userService.getUserWithAuthorities() != null) {
+            Long userId = userService.getUserWithAuthorities().getId();
+            voteDTO.setUserId(userId);
+        }
 
         VoteDTO result = voteService.save(voteDTO);
         return ResponseEntity.created(new URI("/api/votes/" + result.getId()))

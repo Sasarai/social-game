@@ -17,6 +17,7 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -30,6 +31,8 @@ public class MailService {
     private final Logger log = LoggerFactory.getLogger(MailService.class);
 
     private static final String USER = "user";
+
+    private static final String SPHERE = "sphere";
 
     private static final String BASE_URL = "baseUrl";
 
@@ -113,6 +116,18 @@ public class MailService {
         context.setVariable("provider", StringUtils.capitalize(provider));
         String content = templateEngine.process("socialRegistrationValidationEmail", context);
         String subject = messageSource.getMessage("email.social.registration.title", null, locale);
+        sendEmail(user.getEmail(), subject, content, false, true);
+    }
+
+    @Async
+    public void sendEndVoteEmail(User user, String libelleSphere){
+        log.debug("Sending end vote email to '{}'", user.getEmail());
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(SPHERE, libelleSphere);
+        context.setVariable(USER, user);
+        String content = templateEngine.process("endVoteEmail", context);
+        String subject = messageSource.getMessage("email.end_vote.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
     }
 }

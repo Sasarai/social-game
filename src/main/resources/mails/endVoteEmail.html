@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{email.end_vote.title(${sphere})}">Fin vote</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="${baseUrl}/favicon.ico" />
+    </head>
+    <body>
+        <p th:text="#{email.end_vote.greeting(${user.login})}">
+            Dear
+        </p>
+        <p>
+            <span th:text="#{email.end_vote.text1(${sphere})}">
+                Les votes pour le prochain évènement de la sphère ... viennent de prendre fin.
+            </span>
+            <br/>
+            <span th:text="#{email.end_vote.text2}">
+                Veuillez vous connecter afin de prendre connaissance des résultats.
+            </span>
+
+        </p>
+        <p>
+
+        </p>
+        <p>
+            <span th:text="#{email.end_vote.text3}">Regards, </span>
+            <br/>
+            <em th:text="#{email.signature}">JHipster.</em>
+        </p>
+    </body>
+</html>

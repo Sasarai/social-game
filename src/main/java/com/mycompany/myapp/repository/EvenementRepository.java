@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -81,5 +83,11 @@ public interface EvenementRepository extends JpaRepository<Evenement,Long> {
             "or u.login != ?#{principal.username})"
     )
     Page<Evenement> findEvenementsParUtilisateurNonVotant(Pageable pageable);
+
+    @Query(
+        value = "select e from Evenement e " +
+            "where e.dateFinVote = :date"
+    )
+    List<Evenement> getEmailEvenementFinDeVote(@Param("date") ZonedDateTime date);
 
 }

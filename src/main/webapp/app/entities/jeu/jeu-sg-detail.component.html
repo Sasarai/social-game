@@ -3,37 +3,44 @@
     <h2>{{jeu.nom}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="socialGameApp.jeu.nombreJoueurMin">Nombre Joueur Min</span></dt>
-        <dd>
-            <span>{{jeu.nombreJoueurMin}}</span>
-        </dd>
-        <dt><span jhiTranslate="socialGameApp.jeu.nombreJoueurMax">Nombre Joueur Max</span></dt>
-        <dd>
-            <span>{{jeu.nombreJoueurMax}}</span>
-        </dd>
-        <dt><span jhiTranslate="socialGameApp.jeu.dureeMoyenne">Duree Moyenne</span></dt>
-        <dd>
-            <span>{{jeu.dureeMoyenne}} <span jhiTranslate="commun.minute">minutes</span></span>
-        </dd>
-        <dt><span jhiTranslate="socialGameApp.jeu.description">Description</span></dt>
-        <dd>
-            <span>{{jeu.description}}</span>
-        </dd>
-        <dt><span jhiTranslate="socialGameApp.jeu.image">Image</span></dt>
-        <dd>
-            <div *ngIf="jeu.image">
-                <a (click)="openFile(jeu.imageContentType, jeu.image)">
-                    <img [src]="'data:'+ jeu.imageContentType + ';base64,' + jeu.image" style="max-height: 100%;" alt="jeu image"/>
-                </a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="socialGameApp.jeu.genre">Genre</span></dt>
-        <dd>
-            <span jhiTranslate="{{'socialGameApp.GenreJeu.' + jeu.genre}}">{{jeu.genre}}</span>
-        </dd>
-    </dl>
-
+    <div class="row">
+        <div class="col-xs-12 col-lg-6">
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="socialGameApp.jeu.nombreJoueurMin">Nombre Joueur Min</span></dt>
+                <dd>
+                    <span>{{jeu.nombreJoueurMin}}</span>
+                </dd>
+                <dt><span jhiTranslate="socialGameApp.jeu.nombreJoueurMax">Nombre Joueur Max</span></dt>
+                <dd>
+                    <span>{{jeu.nombreJoueurMax}}</span>
+                </dd>
+                <dt><span jhiTranslate="socialGameApp.jeu.dureeMoyenne">Duree Moyenne</span></dt>
+                <dd>
+                    <span>{{jeu.dureeMoyenne}} <span jhiTranslate="commun.minute">minutes</span></span>
+                </dd>
+                <dt><span jhiTranslate="socialGameApp.jeu.genre">Genre</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'socialGameApp.GenreJeu.' + jeu.genre}}">{{jeu.genre}}</span>
+                </dd>
+                <dt><span jhiTranslate="socialGameApp.jeu.description">Description</span></dt>
+                <dd>
+                    <span>{{jeu.description}}</span>
+                </dd>
+            </dl>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+            <dl class="row-md jh-entity-details">
+                <!--<dt><span jhiTranslate="socialGameApp.jeu.image">Image</span></dt>-->
+                <dd>
+                    <div *ngIf="jeu.image">
+                        <a (click)="openFile(jeu.imageContentType, jeu.image)">
+                            <img [src]="'data:'+ jeu.imageContentType + ';base64,' + jeu.image" style="max-height: 100%;" alt="jeu image"/>
+                        </a>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+    </div>
     <button type="submit"
             (click)="previousState()"
             class="btn btn-info">
@@ -43,6 +50,7 @@
     <button type="button"
             [routerLink]="['/', { outlets: { popup: 'jeu-sg/'+ jeu.id + '/edit'} }]"
             replaceUrl="true"
+            *ngIf="currentAccount.login === jeu.proprietaireLogin"
             class="btn btn-primary">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>

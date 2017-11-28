@@ -5,6 +5,7 @@ import { JhiEventManager , JhiDataUtils } from 'ng-jhipster';
 
 import { JeuSg } from './jeu-sg.model';
 import { JeuSgService } from './jeu-sg.service';
+import {Principal} from '../../shared/auth/principal.service';
 
 @Component({
     selector: 'jhi-jeu-sg-detail',
@@ -12,6 +13,7 @@ import { JeuSgService } from './jeu-sg.service';
 })
 export class JeuSgDetailComponent implements OnInit, OnDestroy {
 
+    currentAccount: any;
     jeu: JeuSg;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
@@ -20,7 +22,8 @@ export class JeuSgDetailComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private dataUtils: JhiDataUtils,
         private jeuService: JeuSgService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private principal: Principal
     ) {
     }
 
@@ -29,6 +32,10 @@ export class JeuSgDetailComponent implements OnInit, OnDestroy {
             this.load(params['id']);
         });
         this.registerChangeInJeus();
+
+        this.principal.identity().then((account) => {
+            this.currentAccount = account;
+        })
     }
 
     load(id) {

@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
-import { Account, LoginModalService, Principal } from '../shared';
+import { Account, LoginModalService, Principal, StateStorageService } from '../shared';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import {EvenementSgService} from '../entities/evenement/evenement-sg.service';
 import {ResponseWrapper} from '../shared/model/response-wrapper.model';
@@ -10,6 +10,8 @@ import {ElementCalendrier} from '../shared/component/element-calendrier.model';
 import {isNullOrUndefined} from 'util';
 import {VoteSg} from '../entities/vote/vote-sg.model';
 import {VoteSgService} from '../entities/vote/vote-sg.service';
+import {LoginService} from '../shared/login/login.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'jhi-home',
@@ -26,6 +28,9 @@ export class HomeComponent implements OnInit {
     dashboard: Array<GridsterItem>;
     evenementsUtilisateur: ElementCalendrier[];
     nombreEvenementAVoter: number;
+    username: string;
+    password: string;
+    authenticationError: boolean;
 
     constructor(
         private principal: Principal,
@@ -33,7 +38,10 @@ export class HomeComponent implements OnInit {
         private eventManager: JhiEventManager,
         private serviceEvenement: EvenementSgService,
         private alertService: JhiAlertService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private loginService: LoginService,
+        private router: Router,
+        private stateStorageService: StateStorageService
     ) {
     }
 
@@ -136,7 +144,30 @@ export class HomeComponent implements OnInit {
     }
 
     login() {
-        this.modalRef = this.loginModalService.open();
+        this.loginService.login({
+            username: this.username,
+            password: this.password
+        }).then(() => {
+            this.authenticationError = false;
+            if (this.router.url === '/register' || (/activate/.test(this.router.url)) ||
+                this.router.url === '/finishReset' || this.router.url === '/requestReset') {
+                this.router.navigate(['']);
+            }
+
+            this.eventManager.broadcast({
+                name: 'authenticationSuccess',
+                content: 'Sending Authentication Success'
+            });
+
+            // // previousState was set in the authExpiredInterceptor before being redirected to login modal.
+            // // since login is succesful, go to stored previousState and clear previousState
+            const redirect = this.stateStorageService.getUrl();
+            if (redirect) {
+                this.router.navigate([redirect]);
+            }
+        }).catch(() => {
+            this.authenticationError = true;
+        });
     }
 
     itemChange(item, itemComponent) {

@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "SocialGame",
+        "title": "J'peux pas, j'ai licorne !",
         "browsehappy": "<strong>古い</strong>ブラウザーが使われています。より良い体験を得るために<a href=\"http://browsehappy.com/?locale=en\">ブラウザをアップデート</a>してください。",
         "menu": {
             "home": "ホーム",
@@ -150,5 +150,5 @@
         "emailexists": "Email is already in use!",
         "idexists": "A new {{entityName}} cannot already have an ID"
     },
-    "footer": "フッターです"
+    "footer": "J'peux pas, j'ai licorne !@Thomas"
 }

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title th:text="#{email.end_vote.title}">Fin vote</title>
+        <title th:text="#{email.event_creation.title}">Fin vote</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="shortcut icon" href="${baseUrl}/favicon.ico" />
     </head>
     <body>
-        <p th:text="#{email.end_vote.greeting(${user.login})}">
+        <p th:text="#{email.event_creation.greeting(${user.login})}">
             Dear
         </p>
         <p>
-            <span th:text="#{email.end_vote.text1(${sphere})}">
-                Les votes pour le prochain évènement de la sphère ... viennent de prendre fin.
+            <span th:text="#{email.event_creation.text1(${sphere})}">
+                Nouvel event créé
             </span>
             <br/>
-            <span th:text="#{email.end_vote.text2}">
-                Veuillez vous connecter afin de prendre connaissance des résultats.
+            <span th:text="#{email.event_creation.text2}">
+                A vos votes
             </span>
 
         </p>
@@ -23,7 +23,7 @@
 
         </p>
         <p>
-            <span th:text="#{email.end_vote.text3}">Regards, </span>
+            <span th:text="#{email.event_creation.text3}">Regards, </span>
             <br/>
             <em th:text="#{email.signature}">JHipster.</em>
         </p>

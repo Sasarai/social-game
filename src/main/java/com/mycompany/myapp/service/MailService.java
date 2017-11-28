@@ -2,6 +2,7 @@ package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.User;
 
+import com.mycompany.myapp.service.dto.UserDTO;
 import io.github.jhipster.config.JHipsterProperties;
 
 import org.apache.commons.lang3.CharEncoding;
@@ -128,6 +129,18 @@ public class MailService {
         context.setVariable(USER, user);
         String content = templateEngine.process("endVoteEmail", context);
         String subject = messageSource.getMessage("email.end_vote.title", null, locale);
+        sendEmail(user.getEmail(), subject, content, false, true);
+    }
+
+    @Async
+    public void sendEventCreationEmail(UserDTO user, String libelleSphere) {
+        log.debug("Sending event creation email to '{}'", user.getEmail());
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(SPHERE, libelleSphere);
+        context.setVariable(USER, user);
+        String content = templateEngine.process("eventCreationEmail", context);
+        String subject = messageSource.getMessage("email.event_creation.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
     }
 }

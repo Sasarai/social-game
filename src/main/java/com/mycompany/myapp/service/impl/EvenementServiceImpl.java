@@ -1,16 +1,22 @@
 package com.mycompany.myapp.service.impl;
 
+import com.mycompany.myapp.domain.Sphere;
 import com.mycompany.myapp.domain.Vote;
 import com.mycompany.myapp.service.EvenementService;
 import com.mycompany.myapp.domain.Evenement;
 import com.mycompany.myapp.repository.EvenementRepository;
 import com.mycompany.myapp.repository.search.EvenementSearchRepository;
+import com.mycompany.myapp.service.MailService;
+import com.mycompany.myapp.service.SphereService;
 import com.mycompany.myapp.service.dto.EvenementDTO;
+import com.mycompany.myapp.service.dto.SphereDTO;
+import com.mycompany.myapp.service.dto.UserDTO;
 import com.mycompany.myapp.service.mapper.EvenementMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,10 +44,22 @@ public class EvenementServiceImpl implements EvenementService{
 
     private final EvenementSearchRepository evenementSearchRepository;
 
-    public EvenementServiceImpl(EvenementRepository evenementRepository, EvenementMapper evenementMapper, EvenementSearchRepository evenementSearchRepository) {
+    private final SphereService sphereService;
+
+    private final MailService mailService;
+
+    public EvenementServiceImpl(
+        EvenementRepository evenementRepository,
+        EvenementMapper evenementMapper,
+        EvenementSearchRepository evenementSearchRepository,
+        SphereService sphereService,
+        MailService mailService
+    ) {
         this.evenementRepository = evenementRepository;
         this.evenementMapper = evenementMapper;
         this.evenementSearchRepository = evenementSearchRepository;
+        this.sphereService = sphereService;
+        this.mailService = mailService;
     }
 
     /**
@@ -57,6 +75,9 @@ public class EvenementServiceImpl implements EvenementService{
         evenement = evenementRepository.save(evenement);
         EvenementDTO result = evenementMapper.toDto(evenement);
         evenementSearchRepository.save(evenement);
+
+        envoiEmailSphere(evenementDTO);
+
         return result;
     }
 
@@ -144,5 +165,15 @@ public class EvenementServiceImpl implements EvenementService{
     @Transactional(readOnly = true)
     public List<Evenement> recupererEmailAdministrateurSpherePourEvenementFinDeVote(ZonedDateTime date){
         return evenementRepository.getEmailEvenementFinDeVote(date);
+    }
+
+    @Async
+    public void envoiEmailSphere(EvenementDTO evenementDTO){
+        SphereDTO sphere = sphereService.findOne(evenementDTO.getSphereId());
+
+        for(UserDTO userDTO : sphere.getAbonnes()){
+            mailService.sendEventCreationEmail(userDTO, sphere.getNom());
+        }
+
     }
 }

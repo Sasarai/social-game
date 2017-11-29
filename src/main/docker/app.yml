@@ -10,11 +10,11 @@ services:
             - JHIPSTER_SLEEP=30 # gives time for the JHipster Registry to boot before the application
             - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=socialgame-elasticsearch:9300
         ports:
-            - 8080:8080
+            - 8085:8085
     socialgame-postgresql:
         extends:
-            file: postgresql.yml
-            service: socialgame-postgresql
+            file: postgresql-prod.yml
+            service: socialgame-postgresql-prod
     socialgame-elasticsearch:
         extends:
             file: elasticsearch.yml

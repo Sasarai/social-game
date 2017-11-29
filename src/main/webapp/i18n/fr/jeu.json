@@ -7,15 +7,15 @@
                     "USER": "Ma ludothèque",
                     "SPHERE": "La ludothèque de ma communauté"
                 },
-                "createLabel": "Créer un nouveau Jeu",
-                "createOrEditLabel": "Créer ou éditer un Jeu",
+                "createLabel": "Créer un nouveau jeu",
+                "createOrEditLabel": "Créer ou éditer un jeu",
                 "search": "Recherche pour Jeu"
             },
-            "created": "Le jeu {{ param }} a été créé",
-            "updated": "Le jeu {{ param }} a été mis à jour",
-            "deleted": "Le jeu {{ param }} a été supprimé",
+            "created": "Le jeu a été créé",
+            "updated": "Le jeu a été mis à jour",
+            "deleted": "Le jeu a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Jeu {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer le jeu ?"
             },
             "detail": {
                 "title": "Jeu"
@@ -27,9 +27,9 @@
             "description": "Description",
             "image": "Image",
             "genre": "Genre",
-            "evenements": "Evenements",
+            "evenements": "Evènements",
             "votes": "Votes",
-            "proprietaire": "Proprietaire",
+            "proprietaire": "Propriétaire",
             "minutes": "Minutes"
         }
     }

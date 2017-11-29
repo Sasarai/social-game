@@ -7,25 +7,25 @@
                     "USER": "Mes sphères",
                     "ALL": "Explorer"
                 },
-                "createLabel": "Créer un nouveau Sphere",
-                "createOrEditLabel": "Créer ou éditer un Sphere",
-                "search": "Recherche pour Sphere"
+                "createLabel": "Créer une nouvelle sphère",
+                "createOrEditLabel": "Créer ou éditer une sphère",
+                "search": "Recherche pour sphère"
             },
-            "created": "Un nouveau Sphere a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Sphere avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Sphere avec l'identifiant {{ param }} a été supprimé",
+            "created": "Une nouvelle sphère a été créée",
+            "updated": "La sphère a été mise à jour",
+            "deleted": "La sphère a été supprimée",
             "joined": "Vous avez rejoint {{param}}",
             "quit": "Vous avez quitté {{param}}",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Sphere {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer la sphère ?"
             },
             "detail": {
-                "title": "Sphere"
+                "title": "Sphère"
             },
             "nom": "Nom",
             "administrateur": "Administrateur",
-            "evenements": "Evenements",
-            "abonnes": "Abonnes"
+            "evenements": "Evènements",
+            "abonnes": "Abonnés"
         }
     }
 }

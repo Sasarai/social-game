@@ -9,7 +9,7 @@
     <div [ngSwitch]="votesResumes && votesResumes.length > 0">
         <span *ngSwitchCase="true">
             <div *ngFor="let vote of votesResumes" >
-                <label>
+                <label class="label-progressbar">
                     <ngb-progressbar type="success" [value]="vote.nombreVotant" [max]="vote.nombreTotalVotant"> {{vote.nombreVotant}}</ngb-progressbar>
                     {{vote.nomJeu}}
                 </label>

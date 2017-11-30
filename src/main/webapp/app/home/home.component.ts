@@ -12,6 +12,7 @@ import {VoteSg} from '../entities/vote/vote-sg.model';
 import {VoteSgService} from '../entities/vote/vote-sg.service';
 import {LoginService} from '../shared/login/login.service';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-home',
@@ -21,7 +22,7 @@ import {Router} from '@angular/router';
     ]
 
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
     account: Account;
     modalRef: NgbModalRef;
     options: GridsterConfig;
@@ -31,6 +32,9 @@ export class HomeComponent implements OnInit {
     username: string;
     password: string;
     authenticationError: boolean;
+    private eventSubscriberEventUtilisateur: Subscription;
+    private eventSubscriberVoteUtilisateur: Subscription;
+    private eventSubscriberClickCalendrier: Subscription;
 
     constructor(
         private principal: Principal,
@@ -53,12 +57,12 @@ export class HomeComponent implements OnInit {
             this.account = account;
 
             if (this.account !== null) {
-                this.serviceEvenement.evenementUtilisateur(this.account.login).subscribe(
+                this.eventSubscriberEventUtilisateur = this.serviceEvenement.evenementUtilisateur(this.account.login).subscribe(
                     (res: ResponseWrapper) => this.recupererEvenementUtilisateur(res),
                     (res: ResponseWrapper) => this.onError(res)
                 );
 
-                this.serviceEvenement.nombreEvenementUtilisateurAVoter().subscribe(
+                this.eventSubscriberVoteUtilisateur = this.serviceEvenement.nombreEvenementUtilisateurAVoter().subscribe(
                     (res: ResponseWrapper) => this.recupererNombreEvenementAVoterUtilisateur(res),
                     (res: ResponseWrapper) => this.onError(res)
                 );
@@ -106,6 +110,12 @@ export class HomeComponent implements OnInit {
         ];
     }
 
+    ngOnDestroy() {
+        this.eventManager.destroy(this.eventSubscriberEventUtilisateur);
+        this.eventManager.destroy(this.eventSubscriberVoteUtilisateur);
+        this.eventManager.destroy(this.eventSubscriberClickCalendrier);
+    }
+
     registerLogOutSuccess() {
         this.eventManager.subscribe('logoutSuccessfull', (message) => {
             this.evenementsUtilisateur = undefined;
@@ -118,12 +128,12 @@ export class HomeComponent implements OnInit {
                 this.account = account;
 
                 if (!isNullOrUndefined(this.account)) {
-                    this.serviceEvenement.evenementUtilisateur(this.account.login).subscribe(
+                    this.eventSubscriberEventUtilisateur = this.serviceEvenement.evenementUtilisateur(this.account.login).subscribe(
                         (res: ResponseWrapper) => this.recupererEvenementUtilisateur(res),
                         (res: ResponseWrapper) => this.onError(res)
                     );
 
-                    this.serviceEvenement.nombreEvenementUtilisateurAVoter().subscribe(
+                    this.eventSubscriberVoteUtilisateur = this.serviceEvenement.nombreEvenementUtilisateurAVoter().subscribe(
                         (res: ResponseWrapper) => this.recupererNombreEvenementAVoterUtilisateur(res),
                         (res: ResponseWrapper) => this.onError(res)
                     );
@@ -133,7 +143,7 @@ export class HomeComponent implements OnInit {
     }
 
     registerOnCalendarClickEvent() {
-        this.eventManager.subscribe('clickElementCalendrier', (element) => {
+        this.eventSubscriberClickCalendrier = this.eventManager.subscribe('clickElementCalendrier', (element) => {
             const modalRef = this.modalService.open(PopupEventCalendrierComponent);
             modalRef.componentInstance.idEvenement = element.content.id;
         })

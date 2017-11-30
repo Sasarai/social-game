@@ -8,7 +8,7 @@
                 "search": "Recherche pour Vote",
                 "voter": "Mon vote"
             },
-            "created": "Un nouveau Vote a été créé avec l'identifiant {{ param }}",
+            "created": "Votre vote a bien été pris en compte",
             "updated": "Le Vote avec l'identifiant {{ param }} a été mis à jour",
             "deleted": "Le Vote avec l'identifiant {{ param }} a été supprimé",
             "delete": {

@@ -40,47 +40,75 @@ public interface EvenementRepository extends JpaRepository<Evenement,Long> {
     List<Evenement> findByUtilisateurAyantAcces(@Param("login") String login);
 
     @Query(
-        nativeQuery = true,
-        value = "SELECT e.* FROM evenement e " +
-            "LEFT JOIN vote v ON e.id = v.evenement_id " +
-            "LEFT JOIN jhi_user u ON v.user_id = u.id " +
-            "WHERE e.id IN ( " +
-            "SELECT e.id FROM evenement e " +
-            "INNER JOIN sphere s ON e.sphere_id = s.id " +
-            "INNER JOIN jhi_user u ON s.administrateur_id = u.id " +
-            "WHERE u.login = ?#{principal.username} " +
-            "AND e.date_fin_vote > now() " +
-            "UNION " +
-            "SELECT e.id FROM evenement e " +
-            "INNER JOIN sphere s ON e.sphere_id = s.id " +
-            "INNER JOIN sphere_abonnes a ON s.id = a.spheres_id " +
-            "INNER JOIN jhi_user u ON a.abonnes_id = u.id " +
-            "WHERE u.login = ?#{principal.username} " +
-            "AND e.date_fin_vote > now()) " +
-            "AND (v.id IS NULL OR u.login != ?#{principal.username})"
-    )
-    List<Evenement> findEvenementsParUtilisateurNonVotant();
-
-    @Query(
-        value = "select e from Evenement e " +
-            "left join e.votes v " +
-            "left join v.user u " +
+        value = "select distinct e from Evenement e " +
             "where (e.id in (" +
-            "   select e.id from Evenement e" +
+            "   select e.id from Evenement e " +
             "   join e.sphere s " +
             "   join s.administrateur a " +
             "   where a.login = ?#{principal.username}" +
-            ")" +
+            "   )" +
             "or " +
             "e.id in (" +
             "   select e.id from Evenement e " +
             "   join e.sphere s " +
             "   join s.abonnes a " +
             "   where a.login = ?#{principal.username}" +
-            "))" +
-            "and e.dateFinVote > current_timestamp " +
-            "and (v.id is null " +
-            "or u.login != ?#{principal.username})"
+            ")) " +
+            "and (e.id not in ( " +
+            "   select distinct e.id from Evenement e " +
+            "   left join e.votes v " +
+            "   left join v.user u " +
+            "   where (e.id in (" +
+            "       select e.id from Evenement e" +
+            "       join e.sphere s " +
+            "       join s.administrateur a " +
+            "       where a.login = ?#{principal.username}" +
+            "       )" +
+            "   or " +
+            "       e.id in (" +
+            "       select e.id from Evenement e " +
+            "       join e.sphere s " +
+            "       join s.abonnes a " +
+            "       where a.login = ?#{principal.username}" +
+            "       )" +
+            "   ) and u.login = ?#{principal.username}" +
+            ")" +
+            ")"
+    )
+    List<Evenement> findEvenementsParUtilisateurNonVotant();
+
+    @Query(
+        value = "select distinct e from Evenement e " +
+            "where (e.id in (" +
+            "   select e.id from Evenement e " +
+            "   join e.sphere s " +
+            "   join s.administrateur a " +
+            "   where a.login = ?#{principal.username}" +
+            "   )" +
+            "or " +
+            "e.id in (" +
+            "   select e.id from Evenement e " +
+            "   join e.sphere s " +
+            "   join s.abonnes a " +
+            "   where a.login = ?#{principal.username}" +
+            ")) " +
+            "and (e.id not in ( " +
+            "   select distinct e.id from Evenement e " +
+            "   left join e.votes v " +
+            "   left join v.user u " +
+            "   where (e.id in (" +
+            "       select e.id from Evenement e" +
+            "       join e.sphere s " +
+            "       join s.administrateur a " +
+            "       where a.login = ?#{principal.username}" +
+            "   )" +
+            "   or " +
+            "   e.id in (" +
+            "       select e.id from Evenement e " +
+            "       join e.sphere s " +
+            "       join s.abonnes a " +
+            "       where a.login = ?#{principal.username}" +
+            ")) and u.login = ?#{principal.username}))"
     )
     Page<Evenement> findEvenementsParUtilisateurNonVotant(Pageable pageable);
 

@@ -59,7 +59,9 @@
             "confirmpassword": "Confirmation du nouveau mot de passe",
             "confirmpassword.placeholder": "Confirmation du nouveau mot de passe",
             "email": "Email",
-            "email.placeholder": "Votre email"
+            "email.placeholder": "Votre email",
+            "avatar": "Avatar",
+            "avatar.placeholder": "Adresse URL de l'image (http(s)://...)"
         },
         "messages": {
             "info": {

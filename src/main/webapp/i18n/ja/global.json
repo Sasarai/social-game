@@ -59,7 +59,9 @@
             "confirmpassword": "新しいパスワード(確認)",
             "confirmpassword.placeholder": "新しいパスワード(確認)",
             "email": "メールアドレス",
-            "email.placeholder": "あなたのメールアドレス"
+            "email.placeholder": "あなたのメールアドレス",
+            "avatar": "Avatar",
+            "avatar.placeholder": "Image's URL path (http(s)://...)"
         },
         "messages": {
             "info": {

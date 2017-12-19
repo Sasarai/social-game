@@ -39,9 +39,14 @@
 
         <div class="form-group">
             <label jhiTranslate="socialGameApp.evenement.jeux" for="field_jeux">Jeux</label>
-            <select class="form-control" id="field_jeux" multiple name="jeux" [(ngModel)]="evenement.jeuxes">
-                <option [ngValue]="getSelected(evenement.jeuxes, jeuOption)" *ngFor="let jeuOption of jeus; trackBy: trackJeuById">{{jeuOption.nom}}</option>
-            </select>
+            <!--<select class="form-control" id="field_jeux" multiple name="jeux" [(ngModel)]="evenement.jeuxes">-->
+                <!--<option [ngValue]="getSelected(evenement.jeuxes, jeuOption)" *ngFor="let jeuOption of jeus; trackBy: trackJeuById">{{jeuOption.nom}}</option>-->
+            <!--</select>-->
+            <angular2-multiselect id="field_jeux" [data]="jeus"
+                                  name="jeux"
+                                  [(ngModel)]="evenement.jeuxes"
+                                  [settings]="dropdownOptions">
+            </angular2-multiselect>
         </div>
         <div class="form-group">
             <label jhiTranslate="socialGameApp.evenement.sphere" for="field_sphere">Sphere</label>

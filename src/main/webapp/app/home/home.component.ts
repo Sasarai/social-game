@@ -76,13 +76,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.registerOnCalendarClickEvent();
 
         this.options = {
-            itemChangeCallback: this.itemChange,
-            // draggable: {
-            //     enabled: true
-            // },
-            // resizable: {
-            //     enabled: true
-            // }
+            itemChangeCallback: this.itemChange
         };
 
         this.dashboard = [

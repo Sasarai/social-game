@@ -5,6 +5,7 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {JhiEventManager, JhiAlertService} from 'ng-jhipster';
+import {TranslateService} from '@ngx-translate/core';
 
 import { EvenementSg } from './evenement-sg.model';
 import { EvenementSgPopupService } from './evenement-sg-popup.service';
@@ -22,7 +23,9 @@ export class EvenementSgDialogComponent implements OnInit {
     evenement: EvenementSg;
     isSaving: boolean;
 
-    jeus: JeuSg[];
+    dropdownOptions = {};
+
+    jeus: any[] = [];
 
     spheres: SphereSg[];
 
@@ -32,7 +35,8 @@ export class EvenementSgDialogComponent implements OnInit {
         private evenementService: EvenementSgService,
         private jeuService: JeuSgService,
         private sphereService: SphereSgService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private serviceTraduction: TranslateService
     ) {
     }
 
@@ -44,13 +48,26 @@ export class EvenementSgDialogComponent implements OnInit {
         );
         this.sphereService.query()
             .subscribe((res: ResponseWrapper) => { this.spheres = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+
+        this.dropdownOptions = {
+            singleSelection: false,
+            text: this.serviceTraduction.instant('socialGameApp.evenement.dropdown.placeholder'),
+            selectAllText: this.serviceTraduction.instant('socialGameApp.evenement.dropdown.toutSelectionner'),
+            unSelectAllText: this.serviceTraduction.instant('socialGameApp.evenement.dropdown.toutDeselectionner'),
+            enableSearchFilter: true,
+            classes: ""
+        }
     }
 
     initJeux(data) {
 
-        console.log(data);
+        for (const jeu of data) {
+            this.jeus.push({
+                id: jeu.id,
+                itemName: jeu.nom
+            })
+        }
 
-        this.jeus = data;
     }
 
     clear() {

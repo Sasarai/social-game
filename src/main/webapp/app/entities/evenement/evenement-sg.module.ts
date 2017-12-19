@@ -15,6 +15,7 @@ import {
     evenementPopupRoute,
     EvenementSgResolvePagingParams,
 } from './';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 
 const ENTITY_STATES = [
     ...evenementRoute,
@@ -24,6 +25,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         SocialGameSharedModule,
+        AngularMultiSelectModule,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [

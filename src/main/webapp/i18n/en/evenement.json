@@ -22,7 +22,12 @@
             "dateFinVote": "Date Fin Vote",
             "jeux": "Jeux",
             "votes": "Votes",
-            "sphere": "Sphere"
+            "sphere": "Sphere",
+            "dropdown": {
+                "placeholder": "Select a game",
+                "toutSelectionner": "Select all",
+                "toutDeselectionner": "Unselect all"
+            }
         }
     }
 }

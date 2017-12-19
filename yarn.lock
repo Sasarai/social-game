@@ -282,6 +282,12 @@ angular-gridster2@3.16.3:
   version "3.16.3"
   resolved "https://registry.yarnpkg.com/angular-gridster2/-/angular-gridster2-3.16.3.tgz#835739a5d21f22255b25409ea3a6780c0aa625e6"
 
+angular2-multiselect-dropdown@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/angular2-multiselect-dropdown/-/angular2-multiselect-dropdown-2.2.1.tgz#d6a6dcf35052245fb75c27b4c1d4e0ad9f4063eb"
+  dependencies:
+    font-awesome "*"
+
 angular2-template-loader@0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/angular2-template-loader/-/angular2-template-loader-0.6.2.tgz#c0d44e90fff0fac95e8b23f043acda7fd1c51d7c"
@@ -3032,7 +3038,7 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
 
-font-awesome@4.7.0:
+font-awesome@*, font-awesome@4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
 

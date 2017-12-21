@@ -57,6 +57,7 @@ public class CacheConfiguration {
             cm.createCache(com.mycompany.myapp.domain.Jeu.class.getName() + ".votes", jcacheConfiguration);
             cm.createCache(com.mycompany.myapp.domain.Sphere.class.getName() + ".evenements", jcacheConfiguration);
             cm.createCache(com.mycompany.myapp.domain.Sphere.class.getName() + ".abonnes", jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.Note.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

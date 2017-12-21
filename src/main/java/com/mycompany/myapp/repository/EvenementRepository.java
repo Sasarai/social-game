@@ -73,7 +73,8 @@ public interface EvenementRepository extends JpaRepository<Evenement,Long> {
             "       )" +
             "   ) and u.login = ?#{principal.username}" +
             ")" +
-            ")"
+            ")" +
+            "and e.dateFinVote > current_date"
     )
     List<Evenement> findEvenementsParUtilisateurNonVotant();
 
@@ -108,7 +109,7 @@ public interface EvenementRepository extends JpaRepository<Evenement,Long> {
             "       join e.sphere s " +
             "       join s.abonnes a " +
             "       where a.login = ?#{principal.username}" +
-            ")) and u.login = ?#{principal.username}))"
+            ")) and u.login = ?#{principal.username})) and e.dateFinVote > current_date"
     )
     Page<Evenement> findEvenementsParUtilisateurNonVotant(Pageable pageable);
 

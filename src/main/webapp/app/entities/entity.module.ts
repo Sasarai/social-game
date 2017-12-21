@@ -4,6 +4,7 @@ import { SocialGameEvenementSgModule } from './evenement/evenement-sg.module';
 import { SocialGameJeuSgModule } from './jeu/jeu-sg.module';
 import { SocialGameSphereSgModule } from './sphere/sphere-sg.module';
 import { SocialGameVoteSgModule } from './vote/vote-sg.module';
+import { SocialGameNoteModule } from './note/note.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -12,6 +13,7 @@ import { SocialGameVoteSgModule } from './vote/vote-sg.module';
         SocialGameJeuSgModule,
         SocialGameSphereSgModule,
         SocialGameVoteSgModule,
+        SocialGameNoteModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "utilisateur",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "note"
+        },
+        {
+            "relationshipName": "jeu",
+            "otherEntityName": "jeu",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "nom"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "note",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171221162805",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "note",
+    "pagination": "pagination"
+}

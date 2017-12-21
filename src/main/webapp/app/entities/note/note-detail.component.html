@@ -1,0 +1,35 @@
+
+<div *ngIf="note">
+    <h2><span jhiTranslate="socialGameApp.note.detail.title">Note</span> {{note.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="socialGameApp.note.note">Note</span></dt>
+        <dd>
+            <span>{{note.note}}</span>
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.note.utilisateur">Utilisateur</span></dt>
+        <dd>
+            {{note.utilisateurLogin}}
+        </dd>
+        <dt><span jhiTranslate="socialGameApp.note.jeu">Jeu</span></dt>
+        <dd>
+            <div *ngIf="note.jeuId">
+                <a [routerLink]="['/jeu-sg', note.jeuId]">{{note.jeuNom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'note/'+ note.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

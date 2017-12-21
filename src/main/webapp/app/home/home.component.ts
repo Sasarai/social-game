@@ -105,9 +105,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriberEventUtilisateur);
-        this.eventManager.destroy(this.eventSubscriberVoteUtilisateur);
-        this.eventManager.destroy(this.eventSubscriberClickCalendrier);
+        if (this.eventSubscriberEventUtilisateur !== undefined) {
+            this.eventManager.destroy(this.eventSubscriberEventUtilisateur);
+        }
+        if (this.eventSubscriberVoteUtilisateur !== undefined) {
+            this.eventManager.destroy(this.eventSubscriberVoteUtilisateur);
+        }
+        if (this.eventSubscriberClickCalendrier !== undefined) {
+            this.eventManager.destroy(this.eventSubscriberClickCalendrier);
+        }
     }
 
     registerLogOutSuccess() {

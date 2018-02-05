@@ -56,10 +56,13 @@ spring:
                     logs: target/elasticsearch/log
                     data: target/elasticsearch/data
     mail:
-        host: localhost
-        port: 25
+        host: smtp.gmail.com
+        port: 587
         username:
         password:
+        properties:
+            mail.smtp.auth: true
+            mail.smtp.starttls.enable: true
     messages:
         cache-seconds: 1
     thymeleaf:
@@ -92,7 +95,7 @@ liquibase:
 #        keyAlias: socialGame
 # ===================================================================
 server:
-    port: 8080
+    port: 8084
 
 # ===================================================================
 # JHipster specific properties
@@ -123,7 +126,7 @@ jhipster:
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: socialGame@localhost
+        from: jpeuxpasjailicorne@socialgame
         base-url: http://127.0.0.1:8080
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
